@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 16%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #474e5d;
+  color: white;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+<title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+</head>
+<body>
+<div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+    <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+    </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#40e0d0;" href="/about">About Us</a>
+    </div>
+    </nav>
+
+<p></p>
+<h2 style="text-align:center">Our Team</h2>
+<p></p>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="static/images/Adarsh.jpg" style="width:100%">
+      <div class="container">
+        <h2>Adarsh Kumar Sadhukha</h2>
+        <p class="title">MS CS</p>
+        <p>I have 2 cats.</p>
+        <p>asadhukha@gatech.edu</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+        <img src="static/images/Nidhi.jpg" style="width:100%">
+        <div class="container">
+        <h2>Nidhi Koundinya</h2>
+        <p class="title">MS Bioinformatics</p>
+        <p>I like Garlic cat (see left) more.</p>
+        <p>nkoundinya3@gatech.edeu</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+        <img src="static/images/Palak.jpg" style="width:100%">
+        <div class="container">
+        <h2>Palak Aggarwal</h2>
+        <p class="title">MS Bioinformatics</p>
+        <p>I have 1 dog.</p>
+        <p>paggarwal39@gatech.edu</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+        <img src="static/images/Schezeen.jpg" style="width:100%;">
+        <div class="container">
+        <h2>Schezeen Fazulbhoy</h2>
+        <p class="title">MS CS</p>
+        <p>I make cat noises.</p>
+        <p>sfazulbhoy3@gatech.edu</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+        <img src="static/images/Vatsal.jpg" style="width:100%">
+        <div class="container">
+        <h2>Vatsal Goyal</h2>
+        <p class="title">MS Analytics</p>
+        <p>I think I am God.</p>
+        <p>vvatsal6@gatech.edu</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+        <img src="static/images/Upaasana.jpeg" style="width:100%">
+        <div class="container">
+        <h2>Upaasana Krishnan</h2>
+        <p class="title">MS Bioinformatics</p>
+        <p>I have exactly 1 cat.</p>
+        <p>ukrishnan3@gatech.edu</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

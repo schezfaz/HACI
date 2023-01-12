@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+    <style>
+      .btn-month {
+        background-color: #C09C25;
+        border: 1px solid #282c34;
+      }
+
+      .selected-month{
+        background-color: #F8E197;
+      }
+    </style>
+
+
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+    <script type="text/javascript" src="static/js/d3-tip.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#C09C25;" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 align="center" style="color:#C09C25;">Mobility Rates Across The World</h1>
+            <div style="font-size: 16px; color: black; font-weight: 600;">Visualise the various metrics related to the movement of people across <i>retail and recreation spaces,
+              grocercy and pharmacy stores, parks, transit stations, workplaces and residential areas</i> </div>
+          <br/>
+          <!-- <div> <p  style="font-size: 16px; color: black;">Select Timeline: <select id="timeLine"></select> </p>  </div> -->
+          <div> <p  style="font-size: 16px; color: black;">Select Year: <select id="year_dropdown"></select> </p>  </div>
+
+          </div>
+          <div class="btn-group btn-group-md month-buttons" role="group" aria-label="Basic example" style="margin: 3px">
+            <button type="button" class="btn btn-month" id='01' value="01" onclick="setMonth(this.id)">Jan</button>
+            <button type="button" class="btn btn-month selected-month" id='02' value="02" onclick="setMonth(this.id)">Feb</button>
+            <button type="button" class="btn btn-month" id='03' value="03" onclick="setMonth(this.id)">Mar</button>
+            <button type="button" class="btn btn-month" id='04' value="04" onclick="setMonth(this.id)">Apr</button>
+            <button type="button" class="btn btn-month" id='05' value="05" onclick="setMonth(this.id)">May</button>
+            <button type="button" class="btn btn-month" id='06' value="06" onclick="setMonth(this.id)">Jun</button>
+            <button type="button" class="btn btn-month" id='07' value="07" onclick="setMonth(this.id)">Jul</button>
+            <button type="button" class="btn btn-month" id='08' value="08" onclick="setMonth(this.id)">Aug</button>
+            <button type="button" class="btn btn-month" id='09' value="09" onclick="setMonth(this.id)">Sept</button>
+            <button type="button" class="btn btn-month" id='10' value="10" onclick="setMonth(this.id)">Oct</button>
+            <button type="button" class="btn btn-month" id='11' value="11" onclick="setMonth(this.id)">Nov</button>
+            <button type="button" class="btn btn-month" id='12' value="12" onclick="setMonth(this.id)">Dec</button>
+          </div>
+          <div id="world_view" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 650px; border-radius: 21px 21px 0 0;"></div>
+         
+        </div>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+            
+              <div style="color:black; font-size: 22px; margin: 100px 60px;">
+                Here we can visualise the <b>movement of people concerning 6 specific catergories across the various countries of the world</b>. 
+                
+                <br/>
+                <br/>
+  
+                The data shows how visits to public spaces are changing in each geographic region.
+  
+                <br/>
+                <br/>
+  
+                The data displayed is a mean of the data collected for each country between <b>February 2020 and September 2022</b> across the following public spaces:
+                <br/>
+                <br/>
+                <ul style="margin-left: 20px; color: black;">
+                  <li>Retail & Recreation Areas</li>
+                  <li>Grocery and Pharmacy Stores</li>
+                  <li>Parks</li>
+                  <li>Transit Stations</li>
+                  <li>Workplaces</li>
+                  <li>Residential Areas</li>
+                </ul>
+            
+              
+              </div>        
+            </div>
+
+            <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+              <div class="my-1 p-1">
+                  <h1 class="display-5" style="color:#C09C25;">Country Wise Mobility Analysis</h1>
+                  <div style="font-size: 16px; color: white; font-weight: 600;">Visualise the <i>community mobility</i> patterns of various countries</i> </div>
+                <br/>
+                <div> 
+                  <p  style="font-size: 16px; color: white;">Select Country: <select id="countryDropDown"></select> </p>
+                </div>
+              </div>
+    
+              <div id='pie-chart-mobility' class="box-shadow" style="background-color: #282c34; width: 70%;  height: 650px; border-radius: 21px 21px 0 0;"></div>
+            </div>
+        </div>
+        </div>
+
+
+
+       <!---->
+       
+       <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          
+
+            <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+              <div class="my-1 p-1">
+                  <h1 class="display-5" style="color:#C09C25;">Mobility in Various Places Affecting CoVid Severity</h1>
+                  <div style="font-size: 16px; color: white; font-weight: 600;">Community Mobility trends are analysed based on commute, activity and mobility across the following public spaces</i> </div>
+                <br/>
+              </div>
+    
+              <div id='pie-chart' class="box-shadow mx-auto" style="background-color: #282c34; width: 100%;  height: 650px; border-radius: 21px 21px 0 0;"></div>
+            </div>
+
+            <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+            
+              <div style="color:black; font-size: 22px; margin: 100px 60px;">
+                <p>We analyse Community Mobility Trends and their effects on the severity of covid.</p>
+                <p>We see that reducing the mobility in <b>parks</b> was the most efficient in curbing the spread of covid and thus reducing the severity. </p>        
+                <p>Subsequently, the impact of reducing the mobility in <b>residential</b> areas was the least. </p>
+                <div class="covid-sev"></div>        
+    
+              </div>        
+            </div>
+        </div>
+        </div>
+       <!---->
+<!--         
+      <div class="d-flex flex-column">
+          <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden">
+            <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+              <div class="my-1 p-1">
+                <h1 class="display-5" style="color:#C09C25;">Mobility in Various Places Affecting CoVid Severity</h1>
+                <div style="font-size: 16px; color: black; font-weight: 600;">Community Mobility trends are analysed based on commute, activity and mobility across the following public spaces</i> </div>
+              <br/>
+              </div>
+              <div>hi</div>
+              <div id='pie-chart' class="box-shadow mx-auto" style="background-color: #282c34; width: 70%; height: 500px; border-radius: 21px;"></div>
+            </div>
+          </div> -->
+       
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div id="lightbox1" class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #C09C25;" class="display-5">Cross Correlation Function Plot between Mobility Index and COVID Severity</h2>
+          </div>
+          <div id="world_cases" class="box-shadow mx-auto"  style="background-color: #282c34; width: 80%; height: 1000px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script>
+
+    data={{ get_time_series_plot('mobility') | safe }};
+
+      cross_corr = []
+
+      for (var feature in data){
+        cross_corr.push({'lag' : +data[feature][0],
+                      'corr' : +data[feature][1],
+                      'ci' : +data[feature][2],
+                      'neg_ci' : +data[feature][3],})
+      }
+      
+      var svg1 = d3.select("#world_cases").append("svg")
+                   .attr("id", "linechart1")
+                    .attr("width", 1000)
+                    .attr("height", 900)
+                    .style("margin", "auto")
+                    .style("display", "block")
+                .append("g")
+                    .attr("width", innerWidth)
+                    .attr("height", innerHeight)
+                    .attr("id", "g1")
+                    .attr("transform", "translate(" + 60 + "," + 20 + ")");
+      
+      var xScale = d3.scaleLinear()
+                     .range([0, 1000])
+                     .domain([d3.min(cross_corr, function(d) { return d.lag }),d3.max(cross_corr, function(d) { return d.lag })]);
+
+
+
+      // var l3 = {{ylist1}}.concat({{ylist2}}).concat({{ylist3}});
+      var yScale = d3.scaleLinear()
+                     .range([800, 0])
+                     .domain([d3.min(cross_corr, function(d) { return d.corr })-0.05,d3.max(cross_corr, function(d) { return d.corr })+0.05]);
+
+      d3.select("#g1").append("g")
+         .attr("id", "x_axis")
+         .attr("transform", "translate(" + 0 + "," + 800 + ")")
+         .call(d3.axisBottom(xScale))
+
+      d3.select("#g1").append("g")
+        .attr("id", "y_axis")
+        .call(d3.axisLeft(yScale))
+        // .selectAll("text")
+        // .style("stroke", "lightgray")
+
+
+      lineSvg = d3.select('#g1');
+      let g = lineSvg.append('g');
+
+      
+      // Add the lines
+      var line1 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.corr); });
+
+
+      // Add the line 2
+      var line2 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.ci); });
+
+
+      // Add the line 3
+      var line3 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.neg_ci); });
+
+
+      // Line 1
+      g.append("path")
+        .attr("d", function(d) { return line1(cross_corr)})
+        .style("stroke", "#C09C25")
+        .attr("stroke-width","1.5")
+        .attr("fill","none")
+
+      // Line 2, 95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line2(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      // Line 3,95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line3(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      d3.select("#x_axis")
+        .append("text")
+          .text("Lags in Covid Severity")
+          .attr("transform", "translate(500, 30)")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+
+
+      d3.select("#y_axis")
+        .append("text")
+          .text("Cross Correlaton with Mobility Index")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+          .attr("transform", "translate(-40, 300)rotate(-90)")
+
+      // Legend
+      svg1.append("rect")
+          .attr("x", 20)
+          .attr("y", 20)
+          .attr("width", 30)
+          .attr("height", 2)
+          .style("fill", "red")
+
+      svg1.append("text")
+          .text("95% confidence interval")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .attr("x", 60)
+          .attr("y", 25)
+
+      max_corr = d3.max(cross_corr, function(d) { return d.corr })
+      min_corr = d3.min(cross_corr, function(d) { return d.corr })
+
+      cross_corr.forEach(function (item) {
+        if (item["corr"] === max_corr){ max_corr_lag = item["lag"];}
+        if (item["corr"] === min_corr){ min_corr_lag = item["lag"];}
+      });
+
+      d3.select("#x_axis").append("text")
+          .text(`Max correlation at lag of ${max_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 50)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+      d3.select("#x_axis").append("text")
+          .text(`Min correlation at lag of ${min_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 75)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+
+    d3.select("#x_axis").attr("stroke", "white")
+    d3.select("#y_axis").attr("stroke", "white")
+
+d3.select("#x_axis").select(".domain").style("stroke", "white")
+d3.select("#y_axis").select(".domain").style("stroke", "white")
+
+    </script>
+
+    
+        <!-- <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h2 style="color: #282c34;" class="display-5">Graph</h2>
+          </div>
+          <div class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div> -->
+      </div>
+    </div>
+
+      </div>
+    <footer class="container py-1">
+      <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+        <div class="col-md-0 p-lg-0 mx-auto my-0">
+          <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+          <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // // Append visualization svg
+        // var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        // var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        // var outerWidth  = 1600;
+        // var outerHeight = 800;
+        // var innerWidth  = outerWidth - margin.left - margin.right;
+        // var innerHeight = outerHeight - margin.top - margin.bottom;
+        // var width       = innerWidth - padding.left - padding.right;
+        // var height      = innerHeight - padding.top - padding.bottom;
+
+        // // append svg element to the body of the page
+        // // set dimensions and position of the svg element
+        // var svg = d3.select("#world_view").append("svg")
+        //         .attr("id", "choropleth")
+        //         .attr("width", outerWidth)
+        //         .attr("height", outerHeight)
+        //         .style("margin-left", "auto")
+        //         .style("margin-right", "auto")
+        //         .style("display", "block")
+        //     .append("g")
+        //         .attr("width", innerWidth)
+        //         .attr("height", innerHeight)
+        //         .attr("id", "countries")
+        //         .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+
+        // // define any other global variables
+        // var projection = d3.geoNaturalEarth1().translate([(width - 4 * padding.left - padding.right) / 2, (height + padding.top + padding.bottom) / 2]).scale(210);
+        // var path       = d3.geoPath().projection(projection);
+
+        // var worldmap = d3.json("static/graph_data/world_countries.json");
+
+        // Promise.all([worldmap]).then(function(values) {
+        //     // enter code to call ready() with required arguments
+        //     ready(false, values[0]);
+        // });
+        
+        // function ready(error, world) {
+        //     createMapAndLegend(world);
+        // }
+
+        // // this function should create a Choropleth and legend using the world arguments for a selected_index
+        // // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+        // // function createMapAndLegend(world, selected_index) {
+        // function createMapAndLegend(world) {
+        //     index_data = {{ get_world_index_data("CoViD Severity") | safe }}
+        //     color_palette = ["#FBEDC0", "#F8E197", "#F3CF58", "#C09C25"] // Yellow
+
+        //     index_domain = []
+        //     for (var country in index_data) {
+        //         index_domain.push(index_data[country]);
+        //     }
+
+        //     var color_scale = d3.scaleQuantile().domain(index_domain).range(color_palette);
+
+        //     // Clear out the displays from the previous selection
+        //     svg.selectAll("path").remove();
+        //     d3.select("#legend").remove();
+
+        //     // Create the map
+        //     svg.selectAll("path")
+        //         .data(world.features)
+        //         .enter()
+        //         .append("path")
+        //         .attr("class","continent")
+        //         .style("fill", function(d) { 
+        //             if (d.properties.name in index_data) {
+        //                 return color_scale(index_data[d.properties.name]);
+        //             }
+        //             return "grey";
+        //         })
+        //         .style("stroke", "gray")
+        //         .attr("d", path);
+            
+        //     // Create the legend
+        //     var legend = d3.legendColor()
+        //         .labelFormat(d3.format(".2f"))
+        //         .scale(color_scale);
+
+        //     d3.select("#choropleth")
+        //         .append("g")
+        //             .attr("width", width)
+        //             .attr("height", height)
+        //             .attr("id", "legend")
+        //             .attr("transform", "translate(" + (padding.left) + "," + (margin.top + 6 * padding.top) + ")")
+        //         .call(legend)
+        //         .selectAll("text")
+        //           .attr("fill", "gray");
+        // }
+        // Append visualization svg
+        var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth  = 1000;
+        var outerHeight = 650;
+        var innerWidth  = outerWidth - margin.left - margin.right;
+        var innerHeight = outerHeight - margin.top - margin.bottom;
+        var width       = innerWidth - padding.left - padding.right;
+        var height      = innerHeight - padding.top - padding.bottom;
+
+        var mobility_year = '2020';
+        var mobility_month = '1';
+        var mobility_year_month = "2020-1";
+        function setYear(year){
+          console.log("setting year: ", year)
+          var elem = document.getElementById(year).classList.add("active_year");
+          this.mobility_year = year;
+        }
+
+
+        var mobility_year_month = mobility_year+"-"+mobility_month;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        var svg = d3.select("#world_view").append("svg")
+                .attr("id", "choropleth")
+                .attr("width", outerWidth)
+                .attr("height", outerHeight)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block")
+            .append("g")
+                .attr("width", innerWidth)
+                .attr("height", innerHeight)
+                .attr("id", "countries")
+                .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+
+        // define any other global variables
+        var projection = d3.geoNaturalEarth1().translate([(width + 2*padding.left + padding.right) / 2, (height + padding.top + padding.bottom) / 2]).scale(210);
+        var path       = d3.geoPath().projection(projection);
+
+        var worldmap = d3.json("static/graph_data/world_countries.json");
+
+        // enter code to define tooltip
+        /*data: date, location_key, mobility_retail_and_recreation, mobility_grocery_and_pharmacy, mobility_parks,
+        mobility_transit_stations, mobility_workplaces, mobility_residential*/
+        const tip = d3.tip().attr('id', 'tooltip').attr('offset', [-1, 0]).html(function (data) {
+            return `<div style="background: lightgrey; padding: 3px; border: 1px solid black">
+                    <text style="font-weight: bold;">Country: </text><span class='details'>${data.country}<br></span>
+                    <text style="font-weight: bold;">Mobility Index: </text><span class='details'>${data.index}<br/></span></div>`
+        });
+
+        svg.call(tip);
+
+        //end:tooltip
+
+         // Listen to the slider?
+        // d3.select("#mobilitySlider").on("change", function(d){
+        //   selectedValue = this.value
+        //   updateChart(selectedValue)
+        // })
+
+        Promise.all([worldmap]).then(function(values) {
+            // enter code to call ready() with required arguments
+            ready(false, values[0]);
+        });
+
+        
+        function setMonth(month){
+          console.log("month selected: ", month);
+          $(".btn-month").removeClass("selected-month")
+          $("#"+month).addClass("selected-month");
+        }
+        
+        function ready(error, world) {
+            // console.log(data)
+            index_data = {{ get_world_index_data("Mobility") | safe }}
+            index_domain = []
+            for (var country in index_data) {
+                index_domain.push(index_data[country]);
+            }
+
+            // console.log(index_data)
+            // console.log(index_data)
+            mobility_data = {{ get_mobility_data() | safe }}
+            // selected_date = mobility_data['AE'][0]['date']
+            // console.log('mobility_data: ', mobility_data)
+
+            all_dates = []
+            for(i in mobility_data){
+              for (x in mobility_data[i]){
+                if(mobility_data[i][x]!='Country'){
+                  all_dates.push(mobility_data[i][x])
+                }
+              }  
+              break
+            }
+            
+            var unique_dates = [...new Set(all_dates.sort())];
+            console.log('unique_date:',unique_dates);
+
+            for (var i in unique_dates){
+                console.log("uniquedate: ", unique_dates[i])
+            }
+
+            mobility_years = ['2020', '2021', '2022'];
+
+            d3.select("#year_dropdown").selectAll("options").data(mobility_years).enter().append("option").attr("value", data=>data).text(data=>data);
+
+            d3.selectAll(".btn-month").on("click", function() {
+              console.log("here");
+              var selected_month =  $(".selected-month").attr('id');
+              var selected_year = document.getElementById('year_dropdown');
+              var dropdown_year_value = selected_year.options[selected_year.selectedIndex].value;
+              if(selected_month == undefined){
+                selected_month ="01";
+              }
+              var selected_data = (dropdown_year_value + "-" + selected_month).toString().trim();
+              var dropdown_time_value = unique_dates.indexOf(selected_data)-1;
+              var svg = d3.select("svg");
+            svg.selectAll("*").remove();
+          
+              createMapAndLegend(world,mobility_data, selected_data, dropdown_time_value);
+            })
+
+            d3.select("#year_dropdown").on("change",function(){
+              var selected_year = document.getElementById('year_dropdown');
+              var dropdown_year_value = selected_year.options[selected_year.selectedIndex].value;
+              // console.log("year: ", dropdown_year_value);
+              var selected_month =  $(".selected-month").attr('id');
+              if(selected_month == undefined){
+                selected_month ="01";
+              }
+               var selected_data = (dropdown_year_value + "-" + selected_month).toString().trim();
+              //  console.log("selected-data: ", selected_data);
+              //  console.log("unique_date: ", unique_dates)
+              //  console.log(typeof(selected_data))
+              //  console.log(unique_dates.indexOf("2022-03"));
+               var dropdown_time_value = unique_dates.indexOf(selected_data)-1;
+              //  console.log("here: ",unique_dates.indexOf(selected_data)-1);
+              var svg = d3.select("svg");
+            svg.selectAll("*").remove();
+    
+               createMapAndLegend(world,mobility_data, selected_data, dropdown_time_value);
+             
+            });
+
+
+            var default_time = 1;
+            var selected_data = '2020-02';
+
+            var svg = d3.select("svg");
+            svg.selectAll("*").remove();
+            
+            createMapAndLegend(world, mobility_data, selected_data, default_time);
+
+        
+          }
+
+        // this function should create a Choropleth and legend using the world arguments for a selected_index
+        // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+        // function createMapAndLegend(world, selected_index) {
+        function createMapAndLegend(world, mobility_data, selected_data, dropdown_year_value) {
+            var selected_month = $(".selected-month").attr('id');  
+            console.log("momth: ", selected_month)
+            console.log("selected data: ", selected_data)
+
+            color_palette = ["#FBEDC0", "#F8E197", "#F3CF58", "#C09C25"] // Yellow
+            // console.log("mobility: ", mobility_data);
+            console.log("value: ", dropdown_year_value);
+            // var val = dropdown_year_value.split("_")[1];
+
+
+            country_index = []
+            color_index_scale = []
+            mobility_data.forEach( function(data){
+                // console.log("data: ", data[dropdown_year_value])
+                if(data[dropdown_year_value]!='0'){
+                  color_index_scale.push(data[dropdown_year_value]);
+                  country_index[data[0]] = {'index':data[dropdown_year_value]};
+                }
+            });
+
+            console.log("country index: ", country_index);
+            d3.selectAll('#legend').remove();
+
+            var color_scale = d3.scaleQuantile().domain(color_index_scale).range(color_palette);            
+            var legend = d3.legendColor().labelFormat(d3.format(".2f")).scale(color_scale);
+            // console.log('scale: ',color_scale(1.16) )
+            d3.selectAll('#legend').remove();
+
+
+
+            
+
+
+            world.features.forEach(function(data){
+                // console.log("!!! ", country_index[data.properties.name] )
+                // console.log("data:," ,country_index[data.properties.name])
+                if(country_index[data.properties.name] == undefined){
+                  country_index[data.properties.name] =  {"index": 0}
+                } else {
+                  country_index[data.properties.name] = country_index[data.properties.name] 
+                }
+            });
+
+            // console.log("world fea;" , world.features)
+            
+
+            svg.append("g").attr("id", "countries").selectAll("path").data(world.features)
+                .enter().append('path').attr('d', path)
+                .style("fill", function (data) {
+                    if (country_index[data.properties.name]["index"] === 0 || country_index[data.properties.name] == undefined) {
+                        return "gray";
+                    } else {
+                        // console.log("here: ", (country_index[data.properties.name]["index"]*100));
+                        return color_scale(country_index[data.properties.name]["index"]);
+                    }
+                }).style("stroke", "white").on('mouseover', function (data) {
+                    // console.log("data: ", data)
+                    var index = country_index[data.properties.name]["index"];
+                    data.country = [data.properties.name];
+                    // console.log("index: ",index)
+                    if(index > 0){
+                        data.index = parseFloat(index).toFixed(3);
+                    } else {
+                        data.index = "N/A";
+                    }
+                    tip.show(data);
+                    d3.select(this)
+                        .style('stroke-width', 3);
+                    }).on('mouseout', function (data) {
+                    tip.hide(data);
+                    d3.select(this)
+                        .style('stroke-width', 0.3);
+                });
+          
+
+            // Create the map
+            // svg.selectAll("path")
+            //     .data(world.features)
+            //     .enter()
+            //     .append("path")
+            //     .attr("class","continent")
+            //     .style("fill", function(d) { 
+            //         if (d.properties.name in index_data) {
+            //             return color_scale(index_data[d.properties.name]);
+            //         }
+            //         return "grey";
+            //     })
+            //     .style("stroke", "gray")
+            //     .attr("d", path);
+            
+            var legend = d3.legendColor().labelFormat(d3.format(".2f")).scale(color_scale);
+      
+
+            d3.select("#choropleth")
+                .append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("id", "legend")
+                    .attr("transform", "translate(" + (0) + "," + (margin.top + 6 * padding.top) + ")")
+                .call(legend)
+                .selectAll("text")
+                  .attr("fill", "gray");
+
+        }
+
+
+    </script>
+    
+    <script>
+      data = {{ get_mobility_data_feat_pie() | safe }}
+      // console.log("donut data: ",data)
+      // console.log(data)
+      const map = {};
+      for (var feature in data){
+        map[data[feature][0]] = +data[feature][1]
+      }
+
+      color_domain = []
+      for (var feature in data){
+          color_domain.push(+data[feature][1])
+        }
+      color_palette = ["#FBEDC0", "#F8E197", "#F3CF58", "#F8F2B3","#D4C41B", "#C09C25"] // yellow
+      var color = d3.scaleQuantile().domain(color_domain).range(color_palette);
+
+      // set the dimensions and margins of the graph
+      // var width_p = 710
+      //     height_p = 700
+      //     margin_p = 40
+      
+      var width_p = 750;
+      var height_p = 800;
+      var margin_p = 40;
+
+      // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+      var radius = Math.min(width_p-260, height_p-150) / 2 - margin_p
+
+      var svg_p = d3.select("#pie-chart")
+      .append("svg")
+        .attr("width", width_p)
+        .attr("height", height_p)
+        .attr("margin", "auto")
+      .append("g")
+        .attr("id", "donut")
+        .attr("transform", "translate(" + width_p/2.3+ "," + height_p/2.8 + ")");
+      
+      var pie = d3.pie()
+                  .sort(null) // Do not sort group by size
+                  .value(function(d) {return d.value; })
+      var data_ready = pie(d3.entries(map))
+
+      // The arc generator
+      var arc = d3.arc()
+        .innerRadius(radius * 0.5)         // This is the size of the donut hole
+        .outerRadius(radius * 0.8);
+
+      // Another arc that won't be drawn. Just for labels positioning
+      var outerArc = d3.arc()
+        .innerRadius(radius * 0.9)
+        .outerRadius(radius * 0.9);
+
+      div = d3.select("body").append("div").attr("class", "tooltip");
+      // style="background: lightgrey; padding: 3px; border: 1px solid black
+
+      d3.select("#donut")
+        .selectAll('allSlices')
+        .attr("id", "slices")
+        .data(data_ready)
+        .enter()
+        .append('path')
+        .attr('d', arc)
+        .on("mousemove",function(d){
+        	var mouseVal = d3.mouse(this);
+        //	div.style("display","none");
+        	div.html("Severity Coefficient: "+ d.data.value.toFixed(2))
+            .style("left", (d3.event.pageX+15) + "px")
+            .style("top", (d3.event.pageY-15) + "px")
+            .style("opacity", 1)
+            .style("background", "lightgrey")
+            .style("border", "1px solid black")
+            .style("padding", "5px")
+            .style("display","block");
+        })
+        .on("mouseout",function(){div.html(" ").style("display","none");})
+        .on("click", function show_details(d){
+          var category = d.data.key;
+          var coeff = d.data.value;
+          covid_sev = d3.select(".covid_sev").append('div')
+          covid_sev.html("Key: " + category)
+        })
+        .attr('fill', function(d){ return(color(d.data.value)) })
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+
+      // Add the polylines between chart and labels:
+      d3.select("#donut")
+        .selectAll('allPolylines')
+        .data(data_ready)
+        .enter()
+        .append('polyline')
+          .attr("stroke", "lightgray")
+          .style("fill", "none")
+          .attr("stroke-width", 1)
+          .attr('points', function(d) {
+            var posA = arc.centroid(d) // line insertion in the slice
+            var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+            var posC = outerArc.centroid(d); // Label position = almost the same as posB
+            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+            posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+            return [posA, posB, posC]
+          })
+        
+    
+      d3.select("#donut")
+          .selectAll('allLabels')
+          .data(data_ready)
+          .enter()
+          .append('text')
+            .text( function(d) { return d.data.key.slice(9).replaceAll("_", " ") } )
+            .attr('transform', function(d) {
+                var pos = outerArc.centroid(d);
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+                return 'translate(' + pos + ')';
+            })
+            .style('text-anchor', function(d) {
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                return (midangle < Math.PI ? 'start' : 'end')
+            })
+            .attr('fill', function(d){return(color(d.data.value)) });
+
+            pie_data = {{ get_mobility_pie_data() | safe }} 
+            // console.log("acutal: ", pie_data)
+
+            all_countries = []
+            for(i in pie_data){
+              if(pie_data[i][0]!=''){
+                all_countries.push(pie_data[i][0])
+              }
+            }
+
+            var unique_countries = [...new Set(all_countries.sort())];
+
+            d3.select("#countryDropDown").selectAll("options").data(unique_countries).enter().append("option").attr("value", data=>data).text(data=>data);
+
+            d3.select("#countryDropDown").on("change",function(){
+                var select = document.getElementById('countryDropDown');
+                var dropdown_value = select.options[select.selectedIndex].value;
+                var svg = d3.select("#pie-chart-mobility");
+                svg.selectAll("*").remove();
+                generating_data = []
+                for(i in pie_data){
+                  if(pie_data[i][0] == dropdown_value){
+                    generating_data.push(pie_data[i])
+                  }
+                }
+                var element =  document.getElementById('pie_tooltip');
+                if (typeof(element) != 'undefined' && element != null)
+                {
+                  element.remove();
+                }
+                create_pie_chart(generating_data[0], dropdown_value);
+            });
+
+            create_pie_chart(pie_data[2], unique_countries[0]);
+
+            function create_pie_chart(pie_data, country){
+
+
+              /*AE', '0.32072634798063937', 
+              '0.19303478070479926', '0.24546316993823317', '0.5044414339138971', '0.2542856095862802', 
+              '0.37990262709141687', '1.897853969215266*/
+
+              /*['date', 'location_key', 'mobility_retail_and_recreation', 'mobility_grocery_and_pharmacy', 
+              'mobility_parks', 'mobility_transit_stations', 'mobility_workplaces', 'mobility_residential', 'mobility_all'*/
+              // console.log('pie: ', pie_data[1]);
+              // console.log('country: ', country);
+
+              // console.log("Pie Data: ", pie_data)
+      
+              var mobility_all = pie_data[1]
+              var mobility_grocery_and_pharmacy = pie_data[2]
+              var mobility_parks = pie_data[3]
+              var mobility_residential = pie_data[4]
+              var mobility_retail_and_recreation = pie_data[5]
+              var mobility_transit_stations = pie_data[6]
+              var mobility_workplaces = pie_data[7]
+
+              var data = {'Retail & Recreation': +mobility_retail_and_recreation/+mobility_all, 
+                          'Grocery & Pharmacy': +mobility_grocery_and_pharmacy/+mobility_all, 
+                          'Parks' : +mobility_parks/+mobility_all, 
+                          'Transit Stations' : +mobility_transit_stations/+mobility_all, 
+                          'Workplaces': +mobility_workplaces/+mobility_all,
+                          'Residential': +mobility_residential/+mobility_all
+                        }
+              
+
+              //console.log('data: ', data)
+
+              var pie_width = 790;
+              var pie_height = 650;
+              var pie_margin = 40;
+
+              var radius = Math.min(pie_width, pie_height) / 2 - pie_margin;
+              
+              var svg = d3.select("#pie-chart-mobility")
+              .append("svg")
+                .attr("width", pie_width)
+                .attr("height", pie_height)
+              .append("g")
+                .attr("transform", "translate(" + ((pie_width /2.1) + 30)+ "," + pie_height / 2 + ")");
+
+              var color = d3.scaleOrdinal().domain(data).range(["#FBEDC0", "#F8E197", "#F3CF58", "#F8F2B3","#D4C41B", "#C09C25"]);
+              var pie = d3.pie().value(function(d) {return d.value; });
+              var data_ready = pie(d3.entries(data));
+
+              // console.log("value: " , function(data_ready{(d.data.value*100).toFixed(2) ,"%"});
+              
+              div_tip = d3.select("body").append("div").attr("class", "tooltip").attr("id","pie_tooltip");
+              svg.selectAll('slices').data(data_ready).enter().append('path').attr('d', d3.arc().innerRadius(0).outerRadius(radius))
+                .attr('fill', function(d){ return(color(d.data.key)) }).attr("stroke", "#282c34").on("mousemove",function(d){
+                var mouseVal = d3.mouse(this);
+                var text = (d.data.value*100).toFixed(2) +"%" + "</br>" + "Mobility Coefficient: " + ((d.data.value)*(+mobility_all)*100).toFixed(2) + "<br/>"+ "Total Mobility for " + country + ": " +  (+mobility_all*100).toFixed(2) 
+                div_tip.html(d.data.key + " Mobility Index: "+ text)
+                  .style("left", (d3.event.pageX+15) + "px")
+                  .style("top", (d3.event.pageY-15) + "px")
+                  .style("opacity", 1)
+                  .style("background", "darkgrey")
+                  .style("border", "1px solid black")
+                  .style("color","black")
+                  .style("font-weight","bold")
+                  .style("padding", "5px")
+                  .style("display","block");
+        })
+                .style("stroke-width", "2px").style("opacity", 0.7);
+              
+              var arcGenerator = d3.arc().innerRadius(100).outerRadius(radius)
+             
+
+                svg.selectAll('slices').data(data_ready).enter().append('text').text(function(d){ return d.data.key })
+                .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
+                .style("text-anchor", "middle")
+                .style("font-size", 15)
+
+            }
+
+
+
+           
+      
+    </script>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>

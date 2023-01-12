@@ -1,0 +1,820 @@
+Primary school starting age (years), Primary education  duration (years), -0.2473099970553077
+Primary school starting age (years), Lower secondary school starting age (years), 0.37834936383759055
+Primary education  duration (years), Lower secondary school starting age (years), 0.8033388826932168
+Primary school starting age (years), Secondary education  duration (years), 0.11447125311316736
+Primary education  duration (years), Secondary education  duration (years), -0.7155627116494865
+Lower secondary school starting age (years), Secondary education  duration (years), -0.6132493978793757
+Primary school starting age (years), People using at least basic drinking water services (% of population), -0.2442367708158756
+Primary education  duration (years), People using at least basic drinking water services (% of population), -0.20203178572881825
+Lower secondary school starting age (years), People using at least basic drinking water services (% of population), -0.3431202802190314
+Secondary education  duration (years), People using at least basic drinking water services (% of population), 0.04911997257196953
+Primary school starting age (years), People using at least basic sanitation services (% of population), -0.17837180467708086
+Primary education  duration (years), People using at least basic sanitation services (% of population), -0.23930587198721903
+Lower secondary school starting age (years), People using at least basic sanitation services (% of population), -0.3382481247290743
+Secondary education  duration (years), People using at least basic sanitation services (% of population), 0.0506679528583301
+People using at least basic drinking water services (% of population), People using at least basic sanitation services (% of population), 0.8868307878567944
+Primary school starting age (years), Diabetes prevalence (% of population ages 20 to 79), -0.27057933580250987
+Primary education  duration (years), Diabetes prevalence (% of population ages 20 to 79), 0.024378786170765866
+Lower secondary school starting age (years), Diabetes prevalence (% of population ages 20 to 79), -0.14301191602645683
+Secondary education  duration (years), Diabetes prevalence (% of population ages 20 to 79), -0.012909659564542524
+People using at least basic drinking water services (% of population), Diabetes prevalence (% of population ages 20 to 79), 0.3491287117403085
+People using at least basic sanitation services (% of population), Diabetes prevalence (% of population ages 20 to 79), 0.35065113614680976
+Primary school starting age (years), People practicing open defecation (% of population), 0.06272476274269823
+Primary education  duration (years), People practicing open defecation (% of population), 0.14985639944122267
+Lower secondary school starting age (years), People practicing open defecation (% of population), 0.18171521878475938
+Secondary education  duration (years), People practicing open defecation (% of population), 0.006623896016239796
+People using at least basic drinking water services (% of population), People practicing open defecation (% of population), -0.7065842978232336
+People using at least basic sanitation services (% of population), People practicing open defecation (% of population), -0.7504512921425383
+Diabetes prevalence (% of population ages 20 to 79), People practicing open defecation (% of population), -0.26863771176300266
+Primary school starting age (years), Tuberculosis case detection rate (%  all forms), -0.11767638560024178
+Primary education  duration (years), Tuberculosis case detection rate (%  all forms), -0.12267574472575517
+Lower secondary school starting age (years), Tuberculosis case detection rate (%  all forms), -0.18952252781583087
+Secondary education  duration (years), Tuberculosis case detection rate (%  all forms), 0.028682274443638373
+People using at least basic drinking water services (% of population), Tuberculosis case detection rate (%  all forms), 0.6368893103892709
+People using at least basic sanitation services (% of population), Tuberculosis case detection rate (%  all forms), 0.7203140502346713
+Diabetes prevalence (% of population ages 20 to 79), Tuberculosis case detection rate (%  all forms), 0.32988362344650757
+People practicing open defecation (% of population), Tuberculosis case detection rate (%  all forms), -0.502746687352015
+Primary school starting age (years), Incidence of tuberculosis (per 100 000 people), 0.12127421023140196
+Primary education  duration (years), Incidence of tuberculosis (per 100 000 people), 0.1685505591930741
+Lower secondary school starting age (years), Incidence of tuberculosis (per 100 000 people), 0.23555980799523668
+Secondary education  duration (years), Incidence of tuberculosis (per 100 000 people), -0.13937943028165273
+People using at least basic drinking water services (% of population), Incidence of tuberculosis (per 100 000 people), -0.5980783955648106
+People using at least basic sanitation services (% of population), Incidence of tuberculosis (per 100 000 people), -0.6341237083903091
+Diabetes prevalence (% of population ages 20 to 79), Incidence of tuberculosis (per 100 000 people), -0.19842012264857053
+People practicing open defecation (% of population), Incidence of tuberculosis (per 100 000 people), 0.4203028169588445
+Tuberculosis case detection rate (%  all forms), Incidence of tuberculosis (per 100 000 people), -0.6275419406249403
+Primary school starting age (years), Access to electricity  rural (% of rural population), -0.18927752505754486
+Primary education  duration (years), Access to electricity  rural (% of rural population), -0.23496656582369285
+Lower secondary school starting age (years), Access to electricity  rural (% of rural population), -0.3408054272319572
+Secondary education  duration (years), Access to electricity  rural (% of rural population), 0.06059764849455368
+People using at least basic drinking water services (% of population), Access to electricity  rural (% of rural population), 0.8592483135370845
+People using at least basic sanitation services (% of population), Access to electricity  rural (% of rural population), 0.8567405230880383
+Diabetes prevalence (% of population ages 20 to 79), Access to electricity  rural (% of rural population), 0.4166492581170995
+People practicing open defecation (% of population), Access to electricity  rural (% of rural population), -0.6621332774756695
+Tuberculosis case detection rate (%  all forms), Access to electricity  rural (% of rural population), 0.6618806170923631
+Incidence of tuberculosis (per 100 000 people), Access to electricity  rural (% of rural population), -0.5407817439589808
+Primary school starting age (years), Access to electricity  urban (% of urban population), -0.13550696201498244
+Primary education  duration (years), Access to electricity  urban (% of urban population), -0.21986960692421714
+Lower secondary school starting age (years), Access to electricity  urban (% of urban population), -0.29333455542804493
+Secondary education  duration (years), Access to electricity  urban (% of urban population), 0.05177765162813732
+People using at least basic drinking water services (% of population), Access to electricity  urban (% of urban population), 0.7796693146546011
+People using at least basic sanitation services (% of population), Access to electricity  urban (% of urban population), 0.7613160569890589
+Diabetes prevalence (% of population ages 20 to 79), Access to electricity  urban (% of urban population), 0.34415052677486424
+People practicing open defecation (% of population), Access to electricity  urban (% of urban population), -0.6850792185780296
+Tuberculosis case detection rate (%  all forms), Access to electricity  urban (% of urban population), 0.5848856866881355
+Incidence of tuberculosis (per 100 000 people), Access to electricity  urban (% of urban population), -0.48364050000258735
+Access to electricity  rural (% of rural population), Access to electricity  urban (% of urban population), 0.8334464150000156
+Primary school starting age (years), Access to electricity (% of population), -0.19273400783859465
+Primary education  duration (years), Access to electricity (% of population), -0.2435348582314203
+Lower secondary school starting age (years), Access to electricity (% of population), -0.35111545601467403
+Secondary education  duration (years), Access to electricity (% of population), 0.06075867393078812
+People using at least basic drinking water services (% of population), Access to electricity (% of population), 0.8807237187652727
+People using at least basic sanitation services (% of population), Access to electricity (% of population), 0.8607803490216348
+Diabetes prevalence (% of population ages 20 to 79), Access to electricity (% of population), 0.4013073729713503
+People practicing open defecation (% of population), Access to electricity (% of population), -0.68800320466166
+Tuberculosis case detection rate (%  all forms), Access to electricity (% of population), 0.6294075682068875
+Incidence of tuberculosis (per 100 000 people), Access to electricity (% of population), -0.515807729617905
+Access to electricity  rural (% of rural population), Access to electricity (% of population), 0.9660383505422038
+Access to electricity  urban (% of urban population), Access to electricity (% of population), 0.905824997871231
+Primary school starting age (years), Renewable electricity output (% of total electricity output), 0.16892488209830203
+Primary education  duration (years), Renewable electricity output (% of total electricity output), 0.10896599130033724
+Lower secondary school starting age (years), Renewable electricity output (% of total electricity output), 0.2079231217372429
+Secondary education  duration (years), Renewable electricity output (% of total electricity output), -0.038910153481380494
+People using at least basic drinking water services (% of population), Renewable electricity output (% of total electricity output), -0.26471160131510274
+People using at least basic sanitation services (% of population), Renewable electricity output (% of total electricity output), -0.21299575922774341
+Diabetes prevalence (% of population ages 20 to 79), Renewable electricity output (% of total electricity output), -0.2675828995843039
+People practicing open defecation (% of population), Renewable electricity output (% of total electricity output), 0.03257515119912245
+Tuberculosis case detection rate (%  all forms), Renewable electricity output (% of total electricity output), -0.11614667492143481
+Incidence of tuberculosis (per 100 000 people), Renewable electricity output (% of total electricity output), 0.19335826794962568
+Access to electricity  rural (% of rural population), Renewable electricity output (% of total electricity output), -0.17363971651792232
+Access to electricity  urban (% of urban population), Renewable electricity output (% of total electricity output), -0.0979945324329306
+Access to electricity (% of population), Renewable electricity output (% of total electricity output), -0.18749616762939875
+Primary school starting age (years), Renewable energy consumption (% of total final energy consumption), 0.202839111830042
+Primary education  duration (years), Renewable energy consumption (% of total final energy consumption), 0.21538470948328273
+Lower secondary school starting age (years), Renewable energy consumption (% of total final energy consumption), 0.33043325838709775
+Secondary education  duration (years), Renewable energy consumption (% of total final energy consumption), -0.024575054796685196
+People using at least basic drinking water services (% of population), Renewable energy consumption (% of total final energy consumption), -0.7156275110768182
+People using at least basic sanitation services (% of population), Renewable energy consumption (% of total final energy consumption), -0.7458546621914016
+Diabetes prevalence (% of population ages 20 to 79), Renewable energy consumption (% of total final energy consumption), -0.4247614073775421
+People practicing open defecation (% of population), Renewable energy consumption (% of total final energy consumption), 0.5350028218815019
+Tuberculosis case detection rate (%  all forms), Renewable energy consumption (% of total final energy consumption), -0.5551793048917175
+Incidence of tuberculosis (per 100 000 people), Renewable energy consumption (% of total final energy consumption), 0.4775348557415745
+Access to electricity  rural (% of rural population), Renewable energy consumption (% of total final energy consumption), -0.7102931689553876
+Access to electricity  urban (% of urban population), Renewable energy consumption (% of total final energy consumption), -0.6427988495516601
+Access to electricity (% of population), Renewable energy consumption (% of total final energy consumption), -0.7414317053225774
+Renewable electricity output (% of total electricity output), Renewable energy consumption (% of total final energy consumption), 0.5688288088685933
+Primary school starting age (years), Agricultural land (sq. km), 0.03838071687867678
+Primary education  duration (years), Agricultural land (sq. km), -0.039436415066672816
+Lower secondary school starting age (years), Agricultural land (sq. km), -0.014085814021435938
+Secondary education  duration (years), Agricultural land (sq. km), -0.027873605890449522
+People using at least basic drinking water services (% of population), Agricultural land (sq. km), 0.03897473839178061
+People using at least basic sanitation services (% of population), Agricultural land (sq. km), 0.036169311463959464
+Diabetes prevalence (% of population ages 20 to 79), Agricultural land (sq. km), -0.008068900208007617
+People practicing open defecation (% of population), Agricultural land (sq. km), -0.011189771147311806
+Tuberculosis case detection rate (%  all forms), Agricultural land (sq. km), 0.07470088986473447
+Incidence of tuberculosis (per 100 000 people), Agricultural land (sq. km), 0.00681185688398319
+Access to electricity  rural (% of rural population), Agricultural land (sq. km), 0.052600036791311956
+Access to electricity  urban (% of urban population), Agricultural land (sq. km), 0.04562019929792426
+Access to electricity (% of population), Agricultural land (sq. km), 0.048897786743517975
+Renewable electricity output (% of total electricity output), Agricultural land (sq. km), -0.06467347445911992
+Renewable energy consumption (% of total final energy consumption), Agricultural land (sq. km), -0.08121023241655329
+Primary school starting age (years), Agricultural land (% of land area), 0.20363476792672805
+Primary education  duration (years), Agricultural land (% of land area), -0.1170237962363605
+Lower secondary school starting age (years), Agricultural land (% of land area), 0.01335942422041156
+Secondary education  duration (years), Agricultural land (% of land area), 0.13647834246769033
+People using at least basic drinking water services (% of population), Agricultural land (% of land area), -0.20950735540796306
+People using at least basic sanitation services (% of population), Agricultural land (% of land area), -0.22773486134970816
+Diabetes prevalence (% of population ages 20 to 79), Agricultural land (% of land area), -0.2845724665904593
+People practicing open defecation (% of population), Agricultural land (% of land area), 0.11022317754877843
+Tuberculosis case detection rate (%  all forms), Agricultural land (% of land area), -0.20286467954996312
+Incidence of tuberculosis (per 100 000 people), Agricultural land (% of land area), 0.19731941320580715
+Access to electricity  rural (% of rural population), Agricultural land (% of land area), -0.23313710025087261
+Access to electricity  urban (% of urban population), Agricultural land (% of land area), -0.19561524923351709
+Access to electricity (% of population), Agricultural land (% of land area), -0.2435759184620713
+Renewable electricity output (% of total electricity output), Agricultural land (% of land area), 0.05648703457818318
+Renewable energy consumption (% of total final energy consumption), Agricultural land (% of land area), 0.18316954641350378
+Agricultural land (sq. km), Agricultural land (% of land area), 0.1841161362403902
+Primary school starting age (years), Forest area (sq. km), 0.09803778620730058
+Primary education  duration (years), Forest area (sq. km), -0.11048681791382209
+Lower secondary school starting age (years), Forest area (sq. km), -0.04529695780247167
+Secondary education  duration (years), Forest area (sq. km), -0.0040267677255071185
+People using at least basic drinking water services (% of population), Forest area (sq. km), 0.07240368777834007
+People using at least basic sanitation services (% of population), Forest area (sq. km), 0.06259005371432293
+Diabetes prevalence (% of population ages 20 to 79), Forest area (sq. km), -0.02076106385619961
+People practicing open defecation (% of population), Forest area (sq. km), -0.06289059549386702
+Tuberculosis case detection rate (%  all forms), Forest area (sq. km), 0.13571065929433335
+Incidence of tuberculosis (per 100 000 people), Forest area (sq. km), -0.02418156588814794
+Access to electricity  rural (% of rural population), Forest area (sq. km), 0.07376483448848352
+Access to electricity  urban (% of urban population), Forest area (sq. km), 0.06895726200777984
+Access to electricity (% of population), Forest area (sq. km), 0.07532392471066952
+Renewable electricity output (% of total electricity output), Forest area (sq. km), 0.046990992528747194
+Renewable energy consumption (% of total final energy consumption), Forest area (sq. km), -0.05032503992171481
+Agricultural land (sq. km), Forest area (sq. km), 0.6055466997666848
+Agricultural land (% of land area), Forest area (sq. km), -0.10178330674181917
+Primary school starting age (years), Forest area (% of land area), -0.04355523938901545
+Primary education  duration (years), Forest area (% of land area), 0.12623742747770414
+Lower secondary school starting age (years), Forest area (% of land area), 0.09382988306779207
+Secondary education  duration (years), Forest area (% of land area), -0.07788367668818945
+People using at least basic drinking water services (% of population), Forest area (% of land area), 0.03942785053660517
+People using at least basic sanitation services (% of population), Forest area (% of land area), -0.03795679668707713
+Diabetes prevalence (% of population ages 20 to 79), Forest area (% of land area), 0.008151143078929165
+People practicing open defecation (% of population), Forest area (% of land area), -0.019522994015940223
+Tuberculosis case detection rate (%  all forms), Forest area (% of land area), -0.015487344861104342
+Incidence of tuberculosis (per 100 000 people), Forest area (% of land area), 0.10774565199183121
+Access to electricity  rural (% of rural population), Forest area (% of land area), 0.025847831802509786
+Access to electricity  urban (% of urban population), Forest area (% of land area), 0.0357324571791094
+Access to electricity (% of population), Forest area (% of land area), 0.0545737102087539
+Renewable electricity output (% of total electricity output), Forest area (% of land area), 0.16396774180765156
+Renewable energy consumption (% of total final energy consumption), Forest area (% of land area), 0.15190615158094747
+Agricultural land (sq. km), Forest area (% of land area), -0.09299970988398819
+Agricultural land (% of land area), Forest area (% of land area), -0.43543747035046193
+Forest area (sq. km), Forest area (% of land area), 0.14751765454911558
+Primary school starting age (years), Land area (sq. km), 0.08203501940616863
+Primary education  duration (years), Land area (sq. km), -0.08903805074432039
+Lower secondary school starting age (years), Land area (sq. km), -0.034641640087280275
+Secondary education  duration (years), Land area (sq. km), -0.012016135439132405
+People using at least basic drinking water services (% of population), Land area (sq. km), 0.06237379540835166
+People using at least basic sanitation services (% of population), Land area (sq. km), 0.06184272715377878
+Diabetes prevalence (% of population ages 20 to 79), Land area (sq. km), -0.02436342975078476
+People practicing open defecation (% of population), Land area (sq. km), -0.03948432901202952
+Tuberculosis case detection rate (%  all forms), Land area (sq. km), 0.12484260107964631
+Incidence of tuberculosis (per 100 000 people), Land area (sq. km), -0.03493377609222626
+Access to electricity  rural (% of rural population), Land area (sq. km), 0.07140207627457866
+Access to electricity  urban (% of urban population), Land area (sq. km), 0.059645283009622345
+Access to electricity (% of population), Land area (sq. km), 0.06721348237919252
+Renewable electricity output (% of total electricity output), Land area (sq. km), -0.016756940916387186
+Renewable energy consumption (% of total final energy consumption), Land area (sq. km), -0.08710310439271349
+Agricultural land (sq. km), Land area (sq. km), 0.8119552931521145
+Agricultural land (% of land area), Land area (sq. km), -0.021689138435007593
+Forest area (sq. km), Land area (sq. km), 0.9261817325338361
+Forest area (% of land area), Land area (sq. km), 0.006136268419279956
+Primary school starting age (years), Surface area (sq. km), 0.08286116318141731
+Primary education  duration (years), Surface area (sq. km), -0.0881385049262677
+Lower secondary school starting age (years), Surface area (sq. km), -0.033274508995094154
+Secondary education  duration (years), Surface area (sq. km), -0.012634572547691207
+People using at least basic drinking water services (% of population), Surface area (sq. km), 0.06414406584655477
+People using at least basic sanitation services (% of population), Surface area (sq. km), 0.06313248584016884
+Diabetes prevalence (% of population ages 20 to 79), Surface area (sq. km), -0.02414248652674404
+People practicing open defecation (% of population), Surface area (sq. km), -0.04064102284726346
+Tuberculosis case detection rate (%  all forms), Surface area (sq. km), 0.12613692748691674
+Incidence of tuberculosis (per 100 000 people), Surface area (sq. km), -0.03696564945838498
+Access to electricity  rural (% of rural population), Surface area (sq. km), 0.07295723851554226
+Access to electricity  urban (% of urban population), Surface area (sq. km), 0.060839500446419156
+Access to electricity (% of population), Surface area (sq. km), 0.06845187131168211
+Renewable electricity output (% of total electricity output), Surface area (sq. km), -0.013918933339029216
+Renewable energy consumption (% of total final energy consumption), Surface area (sq. km), -0.08580105113827029
+Agricultural land (sq. km), Surface area (sq. km), 0.8035574352198402
+Agricultural land (% of land area), Surface area (sq. km), -0.0262787268914593
+Forest area (sq. km), Surface area (sq. km), 0.9279415280294858
+Forest area (% of land area), Surface area (sq. km), 0.00846021855812001
+Land area (sq. km), Surface area (sq. km), 0.9995212011607723
+Primary school starting age (years), Bird species  threatened, 0.06230626016523424
+Primary education  duration (years), Bird species  threatened, -0.03733750860352689
+Lower secondary school starting age (years), Bird species  threatened, 0.002624334118942097
+Secondary education  duration (years), Bird species  threatened, -0.10122184029007837
+People using at least basic drinking water services (% of population), Bird species  threatened, 0.010282377463611624
+People using at least basic sanitation services (% of population), Bird species  threatened, -0.028569231053203404
+Diabetes prevalence (% of population ages 20 to 79), Bird species  threatened, -0.04472861822914015
+People practicing open defecation (% of population), Bird species  threatened, 0.010412675999669331
+Tuberculosis case detection rate (%  all forms), Bird species  threatened, -0.025684321612502923
+Incidence of tuberculosis (per 100 000 people), Bird species  threatened, 0.16592046041294103
+Access to electricity  rural (% of rural population), Bird species  threatened, 0.05422120605421321
+Access to electricity  urban (% of urban population), Bird species  threatened, 0.06664579519716383
+Access to electricity (% of population), Bird species  threatened, 0.05001040882642244
+Renewable electricity output (% of total electricity output), Bird species  threatened, 0.12284224108039178
+Renewable energy consumption (% of total final energy consumption), Bird species  threatened, 0.05737396765152991
+Agricultural land (sq. km), Bird species  threatened, 0.5214894681767623
+Agricultural land (% of land area), Bird species  threatened, 0.016859711661923533
+Forest area (sq. km), Bird species  threatened, 0.4829629938871159
+Forest area (% of land area), Bird species  threatened, 0.18280339681494034
+Land area (sq. km), Bird species  threatened, 0.47512016306296706
+Surface area (sq. km), Bird species  threatened, 0.47072287829369525
+Primary school starting age (years), Fish species  threatened, -0.058085426783892675
+Primary education  duration (years), Fish species  threatened, 0.10439890996554416
+Lower secondary school starting age (years), Fish species  threatened, 0.06403623182697235
+Secondary education  duration (years), Fish species  threatened, -0.12388131710681265
+People using at least basic drinking water services (% of population), Fish species  threatened, -0.0354485281935949
+People using at least basic sanitation services (% of population), Fish species  threatened, -0.08305750937064492
+Diabetes prevalence (% of population ages 20 to 79), Fish species  threatened, 0.017541340745509577
+People practicing open defecation (% of population), Fish species  threatened, 0.029280784742800308
+Tuberculosis case detection rate (%  all forms), Fish species  threatened, -0.09247583778798946
+Incidence of tuberculosis (per 100 000 people), Fish species  threatened, 0.14996002062808617
+Access to electricity  rural (% of rural population), Fish species  threatened, -0.05192641157632943
+Access to electricity  urban (% of urban population), Fish species  threatened, -0.007494195844133409
+Access to electricity (% of population), Fish species  threatened, -0.028003466342232337
+Renewable electricity output (% of total electricity output), Fish species  threatened, -0.02171001060977576
+Renewable energy consumption (% of total final energy consumption), Fish species  threatened, 0.06155294506837457
+Agricultural land (sq. km), Fish species  threatened, 0.5264561995024204
+Agricultural land (% of land area), Fish species  threatened, 0.07679005770570003
+Forest area (sq. km), Fish species  threatened, 0.3043203667824533
+Forest area (% of land area), Fish species  threatened, 0.13380276385068
+Land area (sq. km), Fish species  threatened, 0.3882029115529336
+Surface area (sq. km), Fish species  threatened, 0.38952858690200587
+Bird species  threatened, Fish species  threatened, 0.6205498195342175
+Primary school starting age (years), Plant species (higher)  threatened, 0.021826973985308765
+Primary education  duration (years), Plant species (higher)  threatened, 0.02584482310240886
+Lower secondary school starting age (years), Plant species (higher)  threatened, 0.03810574103810353
+Secondary education  duration (years), Plant species (higher)  threatened, -0.069885080376209
+People using at least basic drinking water services (% of population), Plant species (higher)  threatened, -0.0831706546309993
+People using at least basic sanitation services (% of population), Plant species (higher)  threatened, -0.08287448903877641
+Diabetes prevalence (% of population ages 20 to 79), Plant species (higher)  threatened, 0.0026554954897762143
+People practicing open defecation (% of population), Plant species (higher)  threatened, 0.04427644595548737
+Tuberculosis case detection rate (%  all forms), Plant species (higher)  threatened, -0.0840394250596695
+Incidence of tuberculosis (per 100 000 people), Plant species (higher)  threatened, 0.08453968793827353
+Access to electricity  rural (% of rural population), Plant species (higher)  threatened, -0.05258454115577981
+Access to electricity  urban (% of urban population), Plant species (higher)  threatened, -0.015769347402592324
+Access to electricity (% of population), Plant species (higher)  threatened, -0.04520112957016546
+Renewable electricity output (% of total electricity output), Plant species (higher)  threatened, 0.09213071815628199
+Renewable energy consumption (% of total final energy consumption), Plant species (higher)  threatened, 0.06812553412615663
+Agricultural land (sq. km), Plant species (higher)  threatened, 0.28704674682881953
+Agricultural land (% of land area), Plant species (higher)  threatened, 0.011966717775508345
+Forest area (sq. km), Plant species (higher)  threatened, 0.20051845208720764
+Forest area (% of land area), Plant species (higher)  threatened, 0.17447572451426002
+Land area (sq. km), Plant species (higher)  threatened, 0.2063647468870161
+Surface area (sq. km), Plant species (higher)  threatened, 0.20432394637724885
+Bird species  threatened, Plant species (higher)  threatened, 0.6014134914670776
+Fish species  threatened, Plant species (higher)  threatened, 0.5597723299077407
+Primary school starting age (years), Mammal species  threatened, 0.07801687817137506
+Primary education  duration (years), Mammal species  threatened, -0.00205052590788671
+Lower secondary school starting age (years), Mammal species  threatened, 0.04599134002825098
+Secondary education  duration (years), Mammal species  threatened, -0.05955721159659686
+People using at least basic drinking water services (% of population), Mammal species  threatened, -0.1550072858634082
+People using at least basic sanitation services (% of population), Mammal species  threatened, -0.19581234075537202
+Diabetes prevalence (% of population ages 20 to 79), Mammal species  threatened, -0.05879432011708434
+People practicing open defecation (% of population), Mammal species  threatened, 0.1614003536001196
+Tuberculosis case detection rate (%  all forms), Mammal species  threatened, -0.1875451219331095
+Incidence of tuberculosis (per 100 000 people), Mammal species  threatened, 0.2558719633504239
+Access to electricity  rural (% of rural population), Mammal species  threatened, -0.11097149779294893
+Access to electricity  urban (% of urban population), Mammal species  threatened, -0.05400128184491849
+Access to electricity (% of population), Mammal species  threatened, -0.10729808615057489
+Renewable electricity output (% of total electricity output), Mammal species  threatened, 0.07993140097953505
+Renewable energy consumption (% of total final energy consumption), Mammal species  threatened, 0.17797965106969094
+Agricultural land (sq. km), Mammal species  threatened, 0.42049890694116093
+Agricultural land (% of land area), Mammal species  threatened, 0.0410287829289483
+Forest area (sq. km), Mammal species  threatened, 0.319993322461509
+Forest area (% of land area), Mammal species  threatened, 0.15199527112151698
+Land area (sq. km), Mammal species  threatened, 0.3540115846552365
+Surface area (sq. km), Mammal species  threatened, 0.35038228383548214
+Bird species  threatened, Mammal species  threatened, 0.7993230195831351
+Fish species  threatened, Mammal species  threatened, 0.7034965610651113
+Plant species (higher)  threatened, Mammal species  threatened, 0.616242717112461
+Primary school starting age (years), Population density (people per sq. km of land area), -0.09228928043417704
+Primary education  duration (years), Population density (people per sq. km of land area), 0.04793834941056271
+Lower secondary school starting age (years), Population density (people per sq. km of land area), -0.0109249285080187
+Secondary education  duration (years), Population density (people per sq. km of land area), -0.2040678797897106
+People using at least basic drinking water services (% of population), Population density (people per sq. km of land area), 0.13092080301931197
+People using at least basic sanitation services (% of population), Population density (people per sq. km of land area), 0.12582172353436008
+Diabetes prevalence (% of population ages 20 to 79), Population density (people per sq. km of land area), 0.037721125759271036
+People practicing open defecation (% of population), Population density (people per sq. km of land area), -0.10661368416639075
+Tuberculosis case detection rate (%  all forms), Population density (people per sq. km of land area), 0.10916220255486972
+Incidence of tuberculosis (per 100 000 people), Population density (people per sq. km of land area), -0.09133658487567688
+Access to electricity  rural (% of rural population), Population density (people per sq. km of land area), 0.10283296740263573
+Access to electricity  urban (% of urban population), Population density (people per sq. km of land area), 0.08364849015529158
+Access to electricity (% of population), Population density (people per sq. km of land area), 0.09232827945439681
+Renewable electricity output (% of total electricity output), Population density (people per sq. km of land area), -0.17485494739315083
+Renewable energy consumption (% of total final energy consumption), Population density (people per sq. km of land area), -0.16458366287003345
+Agricultural land (sq. km), Population density (people per sq. km of land area), -0.08151159253717126
+Agricultural land (% of land area), Population density (people per sq. km of land area), -0.12681488962758966
+Forest area (sq. km), Population density (people per sq. km of land area), -0.06681121096849169
+Forest area (% of land area), Population density (people per sq. km of land area), -0.132542625245241
+Land area (sq. km), Population density (people per sq. km of land area), -0.08525914801168663
+Surface area (sq. km), Population density (people per sq. km of land area), -0.08434190626779033
+Bird species  threatened, Population density (people per sq. km of land area), -0.06197957889982691
+Fish species  threatened, Population density (people per sq. km of land area), -0.055927470671161536
+Plant species (higher)  threatened, Population density (people per sq. km of land area), -0.052872220807704935
+Mammal species  threatened, Population density (people per sq. km of land area), -0.05912400590510021
+Primary school starting age (years), Mobile cellular subscriptions, 0.014876133391302143
+Primary education  duration (years), Mobile cellular subscriptions, -0.061329408155557104
+Lower secondary school starting age (years), Mobile cellular subscriptions, -0.0494472999377784
+Secondary education  duration (years), Mobile cellular subscriptions, 0.0032550592506794237
+People using at least basic drinking water services (% of population), Mobile cellular subscriptions, 0.0702605407520308
+People using at least basic sanitation services (% of population), Mobile cellular subscriptions, 0.01634121406014226
+Diabetes prevalence (% of population ages 20 to 79), Mobile cellular subscriptions, 0.03790787294291541
+People practicing open defecation (% of population), Mobile cellular subscriptions, -0.0024394589421203173
+Tuberculosis case detection rate (%  all forms), Mobile cellular subscriptions, 0.05267260531904967
+Incidence of tuberculosis (per 100 000 people), Mobile cellular subscriptions, 0.03763433767211232
+Access to electricity  rural (% of rural population), Mobile cellular subscriptions, 0.08755017171773771
+Access to electricity  urban (% of urban population), Mobile cellular subscriptions, 0.09073322811827636
+Access to electricity (% of population), Mobile cellular subscriptions, 0.08527593788744643
+Renewable electricity output (% of total electricity output), Mobile cellular subscriptions, -0.06389689350683082
+Renewable energy consumption (% of total final energy consumption), Mobile cellular subscriptions, -0.05027806070842879
+Agricultural land (sq. km), Mobile cellular subscriptions, 0.6922552178398853
+Agricultural land (% of land area), Mobile cellular subscriptions, 0.10627353149035418
+Forest area (sq. km), Mobile cellular subscriptions, 0.3441082826532396
+Forest area (% of land area), Mobile cellular subscriptions, -0.03457288744612698
+Land area (sq. km), Mobile cellular subscriptions, 0.4979341571161565
+Surface area (sq. km), Mobile cellular subscriptions, 0.4955631393521098
+Bird species  threatened, Mobile cellular subscriptions, 0.47926695270030356
+Fish species  threatened, Mobile cellular subscriptions, 0.5344935849927938
+Plant species (higher)  threatened, Mobile cellular subscriptions, 0.2990069381420676
+Mammal species  threatened, Mobile cellular subscriptions, 0.46104017560289634
+Population density (people per sq. km of land area), Mobile cellular subscriptions, 0.00048783762132426566
+Primary school starting age (years), Mobile cellular subscriptions (per 100 people), -0.09403692940864827
+Primary education  duration (years), Mobile cellular subscriptions (per 100 people), -0.1228657000074625
+Lower secondary school starting age (years), Mobile cellular subscriptions (per 100 people), -0.17517485209979589
+Secondary education  duration (years), Mobile cellular subscriptions (per 100 people), 0.0113222286689109
+People using at least basic drinking water services (% of population), Mobile cellular subscriptions (per 100 people), 0.632692258477065
+People using at least basic sanitation services (% of population), Mobile cellular subscriptions (per 100 people), 0.5674226360781175
+Diabetes prevalence (% of population ages 20 to 79), Mobile cellular subscriptions (per 100 people), 0.09938928960240882
+People practicing open defecation (% of population), Mobile cellular subscriptions (per 100 people), -0.4789945996930586
+Tuberculosis case detection rate (%  all forms), Mobile cellular subscriptions (per 100 people), 0.3971114130138111
+Incidence of tuberculosis (per 100 000 people), Mobile cellular subscriptions (per 100 people), -0.3009630292179092
+Access to electricity  rural (% of rural population), Mobile cellular subscriptions (per 100 people), 0.5522140407499035
+Access to electricity  urban (% of urban population), Mobile cellular subscriptions (per 100 people), 0.5342424890263546
+Access to electricity (% of population), Mobile cellular subscriptions (per 100 people), 0.5766479089819914
+Renewable electricity output (% of total electricity output), Mobile cellular subscriptions (per 100 people), -0.1692793867565807
+Renewable energy consumption (% of total final energy consumption), Mobile cellular subscriptions (per 100 people), -0.43568501978029806
+Agricultural land (sq. km), Mobile cellular subscriptions (per 100 people), 0.028246813956050432
+Agricultural land (% of land area), Mobile cellular subscriptions (per 100 people), -0.166827119820375
+Forest area (sq. km), Mobile cellular subscriptions (per 100 people), 0.05452615279624415
+Forest area (% of land area), Mobile cellular subscriptions (per 100 people), 0.018554240253535456
+Land area (sq. km), Mobile cellular subscriptions (per 100 people), 0.04200189725581376
+Surface area (sq. km), Mobile cellular subscriptions (per 100 people), 0.04140956013931226
+Bird species  threatened, Mobile cellular subscriptions (per 100 people), 0.021739571029905064
+Fish species  threatened, Mobile cellular subscriptions (per 100 people), -0.016786313336615993
+Plant species (higher)  threatened, Mobile cellular subscriptions (per 100 people), -0.09555394429973914
+Mammal species  threatened, Mobile cellular subscriptions (per 100 people), -0.09722775518663912
+Population density (people per sq. km of land area), Mobile cellular subscriptions (per 100 people), 0.13675986701100498
+Mobile cellular subscriptions, Mobile cellular subscriptions (per 100 people), 0.030421667979127483
+Primary school starting age (years), Fixed telephone subscriptions, -0.014064726500843484
+Primary education  duration (years), Fixed telephone subscriptions, -0.04550213762345917
+Lower secondary school starting age (years), Fixed telephone subscriptions, -0.052114354798054936
+Secondary education  duration (years), Fixed telephone subscriptions, 0.004383282303684742
+People using at least basic drinking water services (% of population), Fixed telephone subscriptions, 0.14862921114210756
+People using at least basic sanitation services (% of population), Fixed telephone subscriptions, 0.15040579145088487
+Diabetes prevalence (% of population ages 20 to 79), Fixed telephone subscriptions, 0.03556530692607875
+People practicing open defecation (% of population), Fixed telephone subscriptions, -0.12170879759244826
+Tuberculosis case detection rate (%  all forms), Fixed telephone subscriptions, 0.19234251624249657
+Incidence of tuberculosis (per 100 000 people), Fixed telephone subscriptions, -0.11544182789733608
+Access to electricity  rural (% of rural population), Fixed telephone subscriptions, 0.15514115093871955
+Access to electricity  urban (% of urban population), Fixed telephone subscriptions, 0.12921020202302533
+Access to electricity (% of population), Fixed telephone subscriptions, 0.1488666244561966
+Renewable electricity output (% of total electricity output), Fixed telephone subscriptions, -0.06846357241450463
+Renewable energy consumption (% of total final energy consumption), Fixed telephone subscriptions, -0.1616939160372333
+Agricultural land (sq. km), Fixed telephone subscriptions, 0.7435963367389744
+Agricultural land (% of land area), Fixed telephone subscriptions, 0.0402965049738054
+Forest area (sq. km), Fixed telephone subscriptions, 0.43980602279087344
+Forest area (% of land area), Fixed telephone subscriptions, 0.018092395455332894
+Land area (sq. km), Fixed telephone subscriptions, 0.5840215701894877
+Surface area (sq. km), Fixed telephone subscriptions, 0.5810543729341734
+Bird species  threatened, Fixed telephone subscriptions, 0.4009548208940128
+Fish species  threatened, Fixed telephone subscriptions, 0.44805325012810593
+Plant species (higher)  threatened, Fixed telephone subscriptions, 0.26593775807744485
+Mammal species  threatened, Fixed telephone subscriptions, 0.28114374763290084
+Population density (people per sq. km of land area), Fixed telephone subscriptions, -0.018757878809156053
+Mobile cellular subscriptions, Fixed telephone subscriptions, 0.7964130575444611
+Mobile cellular subscriptions (per 100 people), Fixed telephone subscriptions, 0.08974747269388464
+Primary school starting age (years), Fixed telephone subscriptions (per 100 people), -0.2604298065775429
+Primary education  duration (years), Fixed telephone subscriptions (per 100 people), -0.06390198923798651
+Lower secondary school starting age (years), Fixed telephone subscriptions (per 100 people), -0.22111195039379722
+Secondary education  duration (years), Fixed telephone subscriptions (per 100 people), 0.033218982996441875
+People using at least basic drinking water services (% of population), Fixed telephone subscriptions (per 100 people), 0.6050481152136763
+People using at least basic sanitation services (% of population), Fixed telephone subscriptions (per 100 people), 0.6550840376734501
+Diabetes prevalence (% of population ages 20 to 79), Fixed telephone subscriptions (per 100 people), 0.12709657451803882
+People practicing open defecation (% of population), Fixed telephone subscriptions (per 100 people), -0.47736237042295976
+Tuberculosis case detection rate (%  all forms), Fixed telephone subscriptions (per 100 people), 0.5925821629150329
+Incidence of tuberculosis (per 100 000 people), Fixed telephone subscriptions (per 100 people), -0.5394636970420639
+Access to electricity  rural (% of rural population), Fixed telephone subscriptions (per 100 people), 0.5694806577222291
+Access to electricity  urban (% of urban population), Fixed telephone subscriptions (per 100 people), 0.45635728123172065
+Access to electricity (% of population), Fixed telephone subscriptions (per 100 people), 0.5493164401708552
+Renewable electricity output (% of total electricity output), Fixed telephone subscriptions (per 100 people), -0.17187744948004222
+Renewable energy consumption (% of total final energy consumption), Fixed telephone subscriptions (per 100 people), -0.538985924889852
+Agricultural land (sq. km), Fixed telephone subscriptions (per 100 people), 0.018787300815402627
+Agricultural land (% of land area), Fixed telephone subscriptions (per 100 people), -0.18057401049183133
+Forest area (sq. km), Fixed telephone subscriptions (per 100 people), 0.06795609566758826
+Forest area (% of land area), Fixed telephone subscriptions (per 100 people), 0.019459155350809536
+Land area (sq. km), Fixed telephone subscriptions (per 100 people), 0.06325112996127036
+Surface area (sq. km), Fixed telephone subscriptions (per 100 people), 0.06585283319610756
+Bird species  threatened, Fixed telephone subscriptions (per 100 people), -0.10866434635365776
+Fish species  threatened, Fixed telephone subscriptions (per 100 people), -0.0457769259570736
+Plant species (higher)  threatened, Fixed telephone subscriptions (per 100 people), -0.09265640077512727
+Mammal species  threatened, Fixed telephone subscriptions (per 100 people), -0.22483823527458063
+Population density (people per sq. km of land area), Fixed telephone subscriptions (per 100 people), 0.1682409211451206
+Mobile cellular subscriptions, Fixed telephone subscriptions (per 100 people), -0.02854670151327293
+Mobile cellular subscriptions (per 100 people), Fixed telephone subscriptions (per 100 people), 0.4135124901607892
+Fixed telephone subscriptions, Fixed telephone subscriptions (per 100 people), 0.21232856872873682
+Primary school starting age (years), Secure Internet servers, -0.008825346892991142
+Primary education  duration (years), Secure Internet servers, -0.0014032236304295101
+Lower secondary school starting age (years), Secure Internet servers, -0.006764738713382888
+Secondary education  duration (years), Secure Internet servers, -0.0020642807183823423
+People using at least basic drinking water services (% of population), Secure Internet servers, 0.0937390351226523
+People using at least basic sanitation services (% of population), Secure Internet servers, 0.1041560523192344
+Diabetes prevalence (% of population ages 20 to 79), Secure Internet servers, 0.03689834867644863
+People practicing open defecation (% of population), Secure Internet servers, -0.06974497248935964
+Tuberculosis case detection rate (%  all forms), Secure Internet servers, 0.09632248824735619
+Incidence of tuberculosis (per 100 000 people), Secure Internet servers, -0.08324429952201472
+Access to electricity  rural (% of rural population), Secure Internet servers, 0.07978568782499311
+Access to electricity  urban (% of urban population), Secure Internet servers, 0.06413051399945924
+Access to electricity (% of population), Secure Internet servers, 0.0760442000652118
+Renewable electricity output (% of total electricity output), Secure Internet servers, -0.05131469354195744
+Renewable energy consumption (% of total final energy consumption), Secure Internet servers, -0.09038539404883164
+Agricultural land (sq. km), Secure Internet servers, 0.45130413347579873
+Agricultural land (% of land area), Secure Internet servers, 0.026889123585391802
+Forest area (sq. km), Secure Internet servers, 0.3067569166450438
+Forest area (% of land area), Secure Internet servers, 0.00985626914361599
+Land area (sq. km), Secure Internet servers, 0.3740619755058715
+Surface area (sq. km), Secure Internet servers, 0.38445318854925875
+Bird species  threatened, Secure Internet servers, 0.20327487782579243
+Fish species  threatened, Secure Internet servers, 0.4109763381489731
+Plant species (higher)  threatened, Secure Internet servers, 0.15292329696658874
+Mammal species  threatened, Secure Internet servers, 0.07782176771499505
+Population density (people per sq. km of land area), Secure Internet servers, -0.007578903675745665
+Mobile cellular subscriptions, Secure Internet servers, 0.21632285543168278
+Mobile cellular subscriptions (per 100 people), Secure Internet servers, 0.0730482009873398
+Fixed telephone subscriptions, Secure Internet servers, 0.502854500875085
+Fixed telephone subscriptions (per 100 people), Secure Internet servers, 0.16700241904260268
+Primary school starting age (years), Secure Internet servers (per 1 million people), -0.03666925135901543
+Primary education  duration (years), Secure Internet servers (per 1 million people), 0.14606869365879818
+Lower secondary school starting age (years), Secure Internet servers (per 1 million people), 0.11700769443334849
+Secondary education  duration (years), Secure Internet servers (per 1 million people), -0.046269450435694956
+People using at least basic drinking water services (% of population), Secure Internet servers (per 1 million people), 0.273278350031176
+People using at least basic sanitation services (% of population), Secure Internet servers (per 1 million people), 0.28941116108351755
+Diabetes prevalence (% of population ages 20 to 79), Secure Internet servers (per 1 million people), -0.033811911769270515
+People practicing open defecation (% of population), Secure Internet servers (per 1 million people), -0.2063368475083156
+Tuberculosis case detection rate (%  all forms), Secure Internet servers (per 1 million people), 0.27062733375052817
+Incidence of tuberculosis (per 100 000 people), Secure Internet servers (per 1 million people), -0.24336807470283411
+Access to electricity  rural (% of rural population), Secure Internet servers (per 1 million people), 0.23010698864061244
+Access to electricity  urban (% of urban population), Secure Internet servers (per 1 million people), 0.18354449590926408
+Access to electricity (% of population), Secure Internet servers (per 1 million people), 0.21922431392661673
+Renewable electricity output (% of total electricity output), Secure Internet servers (per 1 million people), -0.0027533751271345813
+Renewable energy consumption (% of total final energy consumption), Secure Internet servers (per 1 million people), -0.16134128017867932
+Agricultural land (sq. km), Secure Internet servers (per 1 million people), 0.061049244346940194
+Agricultural land (% of land area), Secure Internet servers (per 1 million people), -0.01838810735388034
+Forest area (sq. km), Secure Internet servers (per 1 million people), 0.05461172618805527
+Forest area (% of land area), Secure Internet servers (per 1 million people), 0.00643249173339019
+Land area (sq. km), Secure Internet servers (per 1 million people), 0.062959293863922
+Surface area (sq. km), Secure Internet servers (per 1 million people), 0.06784291105421042
+Bird species  threatened, Secure Internet servers (per 1 million people), -0.07839335751989031
+Fish species  threatened, Secure Internet servers (per 1 million people), -0.01251218989446785
+Plant species (higher)  threatened, Secure Internet servers (per 1 million people), -0.06821753327997153
+Mammal species  threatened, Secure Internet servers (per 1 million people), -0.1415579091193332
+Population density (people per sq. km of land area), Secure Internet servers (per 1 million people), 0.220958729669166
+Mobile cellular subscriptions, Secure Internet servers (per 1 million people), -0.0030721167041959955
+Mobile cellular subscriptions (per 100 people), Secure Internet servers (per 1 million people), 0.2196877608737138
+Fixed telephone subscriptions, Secure Internet servers (per 1 million people), 0.12969371538243357
+Fixed telephone subscriptions (per 100 people), Secure Internet servers (per 1 million people), 0.35022057506323834
+Secure Internet servers, Secure Internet servers (per 1 million people), 0.33722829865721404
+Primary school starting age (years), Individuals using the Internet (% of population), -0.15722105476193649
+Primary education  duration (years), Individuals using the Internet (% of population), -0.1251460219325201
+Lower secondary school starting age (years), Individuals using the Internet (% of population), -0.216187198822668
+Secondary education  duration (years), Individuals using the Internet (% of population), 0.03174340236810605
+People using at least basic drinking water services (% of population), Individuals using the Internet (% of population), 0.782623602851111
+People using at least basic sanitation services (% of population), Individuals using the Internet (% of population), 0.8217110540982453
+Diabetes prevalence (% of population ages 20 to 79), Individuals using the Internet (% of population), 0.18117956922333486
+People practicing open defecation (% of population), Individuals using the Internet (% of population), -0.6163458232393514
+Tuberculosis case detection rate (%  all forms), Individuals using the Internet (% of population), 0.6616800097087961
+Incidence of tuberculosis (per 100 000 people), Individuals using the Internet (% of population), -0.5714514543602177
+Access to electricity  rural (% of rural population), Individuals using the Internet (% of population), 0.7351001171341185
+Access to electricity  urban (% of urban population), Individuals using the Internet (% of population), 0.6442647643611721
+Access to electricity (% of population), Individuals using the Internet (% of population), 0.7381489972385212
+Renewable electricity output (% of total electricity output), Individuals using the Internet (% of population), -0.2124339001674539
+Renewable energy consumption (% of total final energy consumption), Individuals using the Internet (% of population), -0.6366360088517683
+Agricultural land (sq. km), Individuals using the Internet (% of population), 0.05509347755414476
+Agricultural land (% of land area), Individuals using the Internet (% of population), -0.2397525278098984
+Forest area (sq. km), Individuals using the Internet (% of population), 0.10340711449929778
+Forest area (% of land area), Individuals using the Internet (% of population), -0.03597526356826358
+Land area (sq. km), Individuals using the Internet (% of population), 0.09585906642747201
+Surface area (sq. km), Individuals using the Internet (% of population), 0.09866895065934815
+Bird species  threatened, Individuals using the Internet (% of population), -0.03350973853729275
+Fish species  threatened, Individuals using the Internet (% of population), -0.052346529631920824
+Plant species (higher)  threatened, Individuals using the Internet (% of population), -0.07426563600660721
+Mammal species  threatened, Individuals using the Internet (% of population), -0.1887856477166249
+Population density (people per sq. km of land area), Individuals using the Internet (% of population), 0.14930595529015447
+Mobile cellular subscriptions, Individuals using the Internet (% of population), -0.004818141459802395
+Mobile cellular subscriptions (per 100 people), Individuals using the Internet (% of population), 0.5835980220481983
+Fixed telephone subscriptions, Individuals using the Internet (% of population), 0.1610162424757069
+Fixed telephone subscriptions (per 100 people), Individuals using the Internet (% of population), 0.7394680524619617
+Secure Internet servers, Individuals using the Internet (% of population), 0.14098781801182947
+Secure Internet servers (per 1 million people), Individuals using the Internet (% of population), 0.39743143551397614
+Primary school starting age (years), Population growth (annual %), 0.09213709763412567
+Primary education  duration (years), Population growth (annual %), 0.25166215550502397
+Lower secondary school starting age (years), Population growth (annual %), 0.2970514833018091
+Secondary education  duration (years), Population growth (annual %), -0.08950455641020066
+People using at least basic drinking water services (% of population), Population growth (annual %), -0.5911120265922661
+People using at least basic sanitation services (% of population), Population growth (annual %), -0.5969691322753994
+Diabetes prevalence (% of population ages 20 to 79), Population growth (annual %), -0.14664820254384847
+People practicing open defecation (% of population), Population growth (annual %), 0.4605187608059802
+Tuberculosis case detection rate (%  all forms), Population growth (annual %), -0.5382551499522028
+Incidence of tuberculosis (per 100 000 people), Population growth (annual %), 0.3508406439384007
+Access to electricity  rural (% of rural population), Population growth (annual %), -0.6202369085198649
+Access to electricity  urban (% of urban population), Population growth (annual %), -0.5158535207390194
+Access to electricity (% of population), Population growth (annual %), -0.6006752508305846
+Renewable electricity output (% of total electricity output), Population growth (annual %), 0.08554790085898771
+Renewable energy consumption (% of total final energy consumption), Population growth (annual %), 0.4279311923009469
+Agricultural land (sq. km), Population growth (annual %), -0.02526045096927862
+Agricultural land (% of land area), Population growth (annual %), 0.022414598572643732
+Forest area (sq. km), Population growth (annual %), -0.10392593705039443
+Forest area (% of land area), Population growth (annual %), -0.1981062581193052
+Land area (sq. km), Population growth (annual %), -0.05749559606103756
+Surface area (sq. km), Population growth (annual %), -0.05940853695542948
+Bird species  threatened, Population growth (annual %), -0.014132724982807881
+Fish species  threatened, Population growth (annual %), 0.04756541100950448
+Plant species (higher)  threatened, Population growth (annual %), 0.06444891188789885
+Mammal species  threatened, Population growth (annual %), 0.10717620177308597
+Population density (people per sq. km of land area), Population growth (annual %), 0.040918141138748254
+Mobile cellular subscriptions, Population growth (annual %), -0.09693497070800167
+Mobile cellular subscriptions (per 100 people), Population growth (annual %), -0.3224199352534388
+Fixed telephone subscriptions, Population growth (annual %), -0.18593977013209118
+Fixed telephone subscriptions (per 100 people), Population growth (annual %), -0.48257974955720534
+Secure Internet servers, Population growth (annual %), -0.09968943233993413
+Secure Internet servers (per 1 million people), Population growth (annual %), -0.20996570104198783
+Individuals using the Internet (% of population), Population growth (annual %), -0.5339865689070752
+Primary school starting age (years), Population  total, 0.011357003873515827
+Primary education  duration (years), Population  total, -0.06213490485039604
+Lower secondary school starting age (years), Population  total, -0.0523797297243729
+Secondary education  duration (years), Population  total, 0.009545867658336623
+People using at least basic drinking water services (% of population), Population  total, 0.035611395326937086
+People using at least basic sanitation services (% of population), Population  total, -0.023642162807618123
+Diabetes prevalence (% of population ages 20 to 79), Population  total, 0.04187376935079912
+People practicing open defecation (% of population), Population  total, 0.036884162641799834
+Tuberculosis case detection rate (%  all forms), Population  total, 0.018627224082185777
+Incidence of tuberculosis (per 100 000 people), Population  total, 0.05539796743081542
+Access to electricity  rural (% of rural population), Population  total, 0.05559243664923983
+Access to electricity  urban (% of urban population), Population  total, 0.0684563738955115
+Access to electricity (% of population), Population  total, 0.052225010315968795
+Renewable electricity output (% of total electricity output), Population  total, -0.04933484498710675
+Renewable energy consumption (% of total final energy consumption), Population  total, -0.015276615520527313
+Agricultural land (sq. km), Population  total, 0.6436722516764692
+Agricultural land (% of land area), Population  total, 0.11885317207871553
+Forest area (sq. km), Population  total, 0.29922537134131827
+Forest area (% of land area), Population  total, -0.050714803996799625
+Land area (sq. km), Population  total, 0.44730316778067597
+Surface area (sq. km), Population  total, 0.4462809167646166
+Bird species  threatened, Population  total, 0.463791412188823
+Fish species  threatened, Population  total, 0.5388860562201779
+Plant species (higher)  threatened, Population  total, 0.2925339243300413
+Mammal species  threatened, Population  total, 0.46317371619202613
+Population density (people per sq. km of land area), Population  total, 0.00374590866020414
+Mobile cellular subscriptions, Population  total, 0.9842218093308572
+Mobile cellular subscriptions (per 100 people), Population  total, -0.02333793898772938
+Fixed telephone subscriptions, Population  total, 0.7069491148674107
+Fixed telephone subscriptions (per 100 people), Population  total, -0.05975322217570491
+Secure Internet servers, Population  total, 0.17392064880562266
+Secure Internet servers (per 1 million people), Population  total, -0.020434283598755466
+Individuals using the Internet (% of population), Population  total, -0.04323494182515146
+Population growth (annual %), Population  total, -0.063274473628531
+Primary school starting age (years), Rural population, 0.010277865607490149
+Primary education  duration (years), Rural population, -0.06401983991473001
+Lower secondary school starting age (years), Rural population, -0.05484373575872937
+Secondary education  duration (years), Rural population, 0.023430025093463067
+People using at least basic drinking water services (% of population), Rural population, -0.012535922008760497
+People using at least basic sanitation services (% of population), Rural population, -0.08272435266935392
+Diabetes prevalence (% of population ages 20 to 79), Rural population, 0.03576298003684536
+People practicing open defecation (% of population), Rural population, 0.09357924915566823
+Tuberculosis case detection rate (%  all forms), Rural population, -0.035513202403616134
+Incidence of tuberculosis (per 100 000 people), Rural population, 0.09900021670136715
+Access to electricity  rural (% of rural population), Rural population, 0.012959355989311418
+Access to electricity  urban (% of urban population), Rural population, 0.03531258019121553
+Access to electricity (% of population), Rural population, 0.0075234440692692195
+Renewable electricity output (% of total electricity output), Rural population, -0.032607083432997355
+Renewable energy consumption (% of total final energy consumption), Rural population, 0.038964272318233024
+Agricultural land (sq. km), Rural population, 0.4849548500681541
+Agricultural land (% of land area), Rural population, 0.12578682276507594
+Forest area (sq. km), Rural population, 0.17655540470465472
+Forest area (% of land area), Rural population, -0.06948019564251373
+Land area (sq. km), Rural population, 0.3074948365187253
+Surface area (sq. km), Rural population, 0.3088693413959128
+Bird species  threatened, Rural population, 0.3789532475371158
+Fish species  threatened, Rural population, 0.4826594862532705
+Plant species (higher)  threatened, Rural population, 0.238394270425887
+Mammal species  threatened, Rural population, 0.4246010212859407
+Population density (people per sq. km of land area), Rural population, 0.016185917202971623
+Mobile cellular subscriptions, Rural population, 0.8980042169562918
+Mobile cellular subscriptions (per 100 people), Rural population, -0.06258763410153424
+Fixed telephone subscriptions, Rural population, 0.4893981223129978
+Fixed telephone subscriptions (per 100 people), Rural population, -0.12165499005478402
+Secure Internet servers, Rural population, 0.05592996954140256
+Secure Internet servers (per 1 million people), Rural population, -0.05650306912598273
+Individuals using the Internet (% of population), Rural population, -0.10655431702160438
+Population growth (annual %), Rural population, -0.01703085376637999
+Population  total, Rural population, 0.9573709410360929
+Primary school starting age (years), Rural population (% of total population), 0.057290962006329486
+Primary education  duration (years), Rural population (% of total population), 0.10125504136602151
+Lower secondary school starting age (years), Rural population (% of total population), 0.13194474764301625
+Secondary education  duration (years), Rural population (% of total population), -0.0193913741183386
+People using at least basic drinking water services (% of population), Rural population (% of total population), -0.5759276247359
+People using at least basic sanitation services (% of population), Rural population (% of total population), -0.567029120367331
+Diabetes prevalence (% of population ages 20 to 79), Rural population (% of total population), -0.04733053630908252
+People practicing open defecation (% of population), Rural population (% of total population), 0.41058938481384405
+Tuberculosis case detection rate (%  all forms), Rural population (% of total population), -0.40445610513710795
+Incidence of tuberculosis (per 100 000 people), Rural population (% of total population), 0.37242612378612705
+Access to electricity  rural (% of rural population), Rural population (% of total population), -0.4327019690886845
+Access to electricity  urban (% of urban population), Rural population (% of total population), -0.4191677379988116
+Access to electricity (% of population), Rural population (% of total population), -0.5086422136384011
+Renewable electricity output (% of total electricity output), Rural population (% of total population), 0.19384701894441173
+Renewable energy consumption (% of total final energy consumption), Rural population (% of total population), 0.5089499538804543
+Agricultural land (sq. km), Rural population (% of total population), -0.09893929420407749
+Agricultural land (% of land area), Rural population (% of total population), 0.1692118743367994
+Forest area (sq. km), Rural population (% of total population), -0.13849706846361423
+Forest area (% of land area), Rural population (% of total population), -0.012855867498496244
+Land area (sq. km), Rural population (% of total population), -0.13057474394084023
+Surface area (sq. km), Rural population (% of total population), -0.13051530006233214
+Bird species  threatened, Rural population (% of total population), -0.05353952121797321
+Fish species  threatened, Rural population (% of total population), -0.046645211750301264
+Plant species (higher)  threatened, Rural population (% of total population), 0.0041382378925516146
+Mammal species  threatened, Rural population (% of total population), 0.09662184787786154
+Population density (people per sq. km of land area), Rural population (% of total population), -0.15266004342178166
+Mobile cellular subscriptions, Rural population (% of total population), 0.014235698947642594
+Mobile cellular subscriptions (per 100 people), Rural population (% of total population), -0.38439467004369726
+Fixed telephone subscriptions, Rural population (% of total population), -0.15716865952618997
+Fixed telephone subscriptions (per 100 people), Rural population (% of total population), -0.552385083387308
+Secure Internet servers, Rural population (% of total population), -0.12372911621998
+Secure Internet servers (per 1 million people), Rural population (% of total population), -0.2928950817414674
+Individuals using the Internet (% of population), Rural population (% of total population), -0.7187075217922712
+Population growth (annual %), Rural population (% of total population), 0.26715883728558176
+Population  total, Rural population (% of total population), 0.048144757904308874
+Rural population, Rural population (% of total population), 0.12890248307706015
+Primary school starting age (years), Urban population growth (annual %), 0.14819352800219887
+Primary education  duration (years), Urban population growth (annual %), 0.23777583049371867
+Lower secondary school starting age (years), Urban population growth (annual %), 0.3182384163073351
+Secondary education  duration (years), Urban population growth (annual %), -0.08675440103488338
+People using at least basic drinking water services (% of population), Urban population growth (annual %), -0.6857583169204219
+People using at least basic sanitation services (% of population), Urban population growth (annual %), -0.7027385029992389
+Diabetes prevalence (% of population ages 20 to 79), Urban population growth (annual %), -0.19070120807121513
+People practicing open defecation (% of population), Urban population growth (annual %), 0.5378170257919468
+Tuberculosis case detection rate (%  all forms), Urban population growth (annual %), -0.6074038663578394
+Incidence of tuberculosis (per 100 000 people), Urban population growth (annual %), 0.44675103059017024
+Access to electricity  rural (% of rural population), Urban population growth (annual %), -0.6778923613476411
+Access to electricity  urban (% of urban population), Urban population growth (annual %), -0.5743664655842187
+Access to electricity (% of population), Urban population growth (annual %), -0.6709853101800388
+Renewable electricity output (% of total electricity output), Urban population growth (annual %), 0.17656738562918728
+Renewable energy consumption (% of total final energy consumption), Urban population growth (annual %), 0.5511838161289575
+Agricultural land (sq. km), Urban population growth (annual %), 0.003919818314577056
+Agricultural land (% of land area), Urban population growth (annual %), 0.12992802908666545
+Forest area (sq. km), Urban population growth (annual %), -0.10328616278343992
+Forest area (% of land area), Urban population growth (annual %), -0.16424219634093307
+Land area (sq. km), Urban population growth (annual %), -0.05292417717902382
+Surface area (sq. km), Urban population growth (annual %), -0.054904718505816325
+Bird species  threatened, Urban population growth (annual %), 0.0419644037001754
+Fish species  threatened, Urban population growth (annual %), 0.12101168143949824
+Plant species (higher)  threatened, Urban population growth (annual %), 0.11081238760239302
+Mammal species  threatened, Urban population growth (annual %), 0.20744390512184083
+Population density (people per sq. km of land area), Urban population growth (annual %), -0.007029597949995027
+Mobile cellular subscriptions, Urban population growth (annual %), 0.003578061912235269
+Mobile cellular subscriptions (per 100 people), Urban population growth (annual %), -0.37982312130328044
+Fixed telephone subscriptions, Urban population growth (annual %), -0.13175382420242104
+Fixed telephone subscriptions (per 100 people), Urban population growth (annual %), -0.5907465808741177
+Secure Internet servers, Urban population growth (annual %), -0.10974159768442436
+Secure Internet servers (per 1 million people), Urban population growth (annual %), -0.2570127388443333
+Individuals using the Internet (% of population), Urban population growth (annual %), -0.6614682006470115
+Population growth (annual %), Urban population growth (annual %), 0.9246924344115897
+Population  total, Urban population growth (annual %), 0.0351246809570239
+Rural population, Urban population growth (annual %), 0.08242199033391835
+Rural population (% of total population), Urban population growth (annual %), 0.40918953998474517
+Primary school starting age (years), Urban population, 0.011454225966078547
+Primary education  duration (years), Urban population, -0.054620444058686594
+Lower secondary school starting age (years), Urban population, -0.04514111713213487
+Secondary education  duration (years), Urban population, -0.005652415063310509
+People using at least basic drinking water services (% of population), Urban population, 0.08215906467657162
+People using at least basic sanitation services (% of population), Urban population, 0.03951080782431375
+Diabetes prevalence (% of population ages 20 to 79), Urban population, 0.04443464475925037
+People practicing open defecation (% of population), Urban population, -0.024989291123826647
+Tuberculosis case detection rate (%  all forms), Urban population, 0.07288782163138136
+Incidence of tuberculosis (per 100 000 people), Urban population, 0.005391202781836869
+Access to electricity  rural (% of rural population), Urban population, 0.09465335832621152
+Access to electricity  urban (% of urban population), Urban population, 0.09656182242543207
+Access to electricity (% of population), Urban population, 0.09372449246662894
+Renewable electricity output (% of total electricity output), Urban population, -0.06219504091536932
+Renewable energy consumption (% of total final energy consumption), Urban population, -0.06994120602806621
+Agricultural land (sq. km), Urban population, 0.749962225468552
+Agricultural land (% of land area), Urban population, 0.10104124405218451
+Forest area (sq. km), Urban population, 0.399138816797933
+Forest area (% of land area), Urban population, -0.026785277080299628
+Land area (sq. km), Urban population, 0.5516536960125186
+Surface area (sq. km), Urban population, 0.5482470774045937
+Bird species  threatened, Urban population, 0.5098778663076863
+Fish species  threatened, Urban population, 0.5486869841590015
+Plant species (higher)  threatened, Urban population, 0.3222519142392149
+Mammal species  threatened, Urban population, 0.461521131161822
+Population density (people per sq. km of land area), Urban population, -0.009440829582870494
+Mobile cellular subscriptions, Urban population, 0.9851031514793185
+Mobile cellular subscriptions (per 100 people), Urban population, 0.019299883046881964
+Fixed telephone subscriptions, Urban population, 0.8683473735529919
+Fixed telephone subscriptions (per 100 people), Urban population, 0.009548024306274829
+Secure Internet servers, Urban population, 0.28022737010458526
+Secure Internet servers (per 1 million people), Urban population, 0.018657345665976734
+Individuals using the Internet (% of population), Urban population, 0.026050735014201937
+Population growth (annual %), Urban population, -0.1053769463543759
+Population  total, Urban population, 0.954438645232465
+Rural population, Urban population, 0.8275535089191229
+Rural population (% of total population), Urban population, -0.03959546170648218
+Urban population growth (annual %), Urban population, -0.01688278342540747
+Primary school starting age (years), Urban population (% of total population), -0.057290962006329445
+Primary education  duration (years), Urban population (% of total population), -0.1012550413660216
+Lower secondary school starting age (years), Urban population (% of total population), -0.13194474764301634
+Secondary education  duration (years), Urban population (% of total population), 0.019391374118338633
+People using at least basic drinking water services (% of population), Urban population (% of total population), 0.5759276247359001
+People using at least basic sanitation services (% of population), Urban population (% of total population), 0.5670291203673313
+Diabetes prevalence (% of population ages 20 to 79), Urban population (% of total population), 0.047330536309082606
+People practicing open defecation (% of population), Urban population (% of total population), -0.4105893848138441
+Tuberculosis case detection rate (%  all forms), Urban population (% of total population), 0.40445610513710845
+Incidence of tuberculosis (per 100 000 people), Urban population (% of total population), -0.3724261237861271
+Access to electricity  rural (% of rural population), Urban population (% of total population), 0.4327019690886847
+Access to electricity  urban (% of urban population), Urban population (% of total population), 0.4191677379988118
+Access to electricity (% of population), Urban population (% of total population), 0.5086422136384009
+Renewable electricity output (% of total electricity output), Urban population (% of total population), -0.19384701894441186
+Renewable energy consumption (% of total final energy consumption), Urban population (% of total population), -0.5089499538804546
+Agricultural land (sq. km), Urban population (% of total population), 0.09893929420407746
+Agricultural land (% of land area), Urban population (% of total population), -0.1692118743367991
+Forest area (sq. km), Urban population (% of total population), 0.1384970684636142
+Forest area (% of land area), Urban population (% of total population), 0.012855867498496244
+Land area (sq. km), Urban population (% of total population), 0.1305747439408402
+Surface area (sq. km), Urban population (% of total population), 0.13051530006233214
+Bird species  threatened, Urban population (% of total population), 0.05353952121797322
+Fish species  threatened, Urban population (% of total population), 0.04664521175030135
+Plant species (higher)  threatened, Urban population (% of total population), -0.004138237892551604
+Mammal species  threatened, Urban population (% of total population), -0.09662184787786153
+Population density (people per sq. km of land area), Urban population (% of total population), 0.15266004342178185
+Mobile cellular subscriptions, Urban population (% of total population), -0.014235698947642624
+Mobile cellular subscriptions (per 100 people), Urban population (% of total population), 0.38439467004369765
+Fixed telephone subscriptions, Urban population (% of total population), 0.15716865952619005
+Fixed telephone subscriptions (per 100 people), Urban population (% of total population), 0.5523850833873082
+Secure Internet servers, Urban population (% of total population), 0.12372911621998006
+Secure Internet servers (per 1 million people), Urban population (% of total population), 0.29289508174146744
+Individuals using the Internet (% of population), Urban population (% of total population), 0.7187075217922715
+Population growth (annual %), Urban population (% of total population), -0.26715883728558193
+Population  total, Urban population (% of total population), -0.048144757904308826
+Rural population, Urban population (% of total population), -0.12890248307706018
+Rural population (% of total population), Urban population (% of total population), -1.0000000000000002
+Urban population growth (annual %), Urban population (% of total population), -0.4091895399847453
+Urban population, Urban population (% of total population), 0.039595461706482184
+Primary school starting age (years), covid_severity, -0.11728324594032347
+Primary education  duration (years), covid_severity, 0.012778487080628549
+Lower secondary school starting age (years), covid_severity, -0.05987616932948482
+Secondary education  duration (years), covid_severity, 0.0587372487950413
+People using at least basic drinking water services (% of population), covid_severity, 0.5693419446740693
+People using at least basic sanitation services (% of population), covid_severity, 0.6014006988146265
+Diabetes prevalence (% of population ages 20 to 79), covid_severity, 0.0580740533269432
+People practicing open defecation (% of population), covid_severity, -0.435155887100242
+Tuberculosis case detection rate (%  all forms), covid_severity, 0.5093408108912824
+Incidence of tuberculosis (per 100 000 people), covid_severity, -0.4726907093646906
+Access to electricity  rural (% of rural population), covid_severity, 0.5165846898911033
+Access to electricity  urban (% of urban population), covid_severity, 0.4151874100712379
+Access to electricity (% of population), covid_severity, 0.49883933721600965
+Renewable electricity output (% of total electricity output), covid_severity, -0.06549409973598735
+Renewable energy consumption (% of total final energy consumption), covid_severity, -0.4031184151788068
+Agricultural land (sq. km), covid_severity, -0.06883041590080471
+Agricultural land (% of land area), covid_severity, -0.22706576460312822
+Forest area (sq. km), covid_severity, -0.0189227296969381
+Forest area (% of land area), covid_severity, 0.08074347607626949
+Land area (sq. km), covid_severity, -0.05187825346406938
+Surface area (sq. km), covid_severity, -0.050464684996539534
+Bird species  threatened, covid_severity, -0.15509562081225114
+Fish species  threatened, covid_severity, -0.15729468007924294
+Plant species (higher)  threatened, covid_severity, -0.14539846709413248
+Mammal species  threatened, covid_severity, -0.2702792376135849
+Population density (people per sq. km of land area), covid_severity, 0.13814601367849205
+Mobile cellular subscriptions, covid_severity, -0.10850687212706851
+Mobile cellular subscriptions (per 100 people), covid_severity, 0.4594005094789478
+Fixed telephone subscriptions, covid_severity, 0.030067373779802287
+Fixed telephone subscriptions (per 100 people), covid_severity, 0.7348514728070583
+Secure Internet servers, covid_severity, 0.11390528809445885
+Secure Internet servers (per 1 million people), covid_severity, 0.51829215559033
+Individuals using the Internet (% of population), covid_severity, 0.7236253138036689
+Population growth (annual %), covid_severity, -0.4450860170027306
+Population  total, covid_severity, -0.12673083672676674
+Rural population, covid_severity, -0.1485156131363776
+Rural population (% of total population), covid_severity, -0.5056641589156282
+Urban population growth (annual %), covid_severity, -0.5497408526426582
+Urban population, covid_severity, -0.09287117230259039
+Urban population (% of total population), covid_severity, 0.5056641589156285

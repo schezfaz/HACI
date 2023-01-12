@@ -1,0 +1,26 @@
+,indicator_code,importance_wrt_covid_severity
+0,Secure Internet servers (per 1 million people),0.5690885083127076
+1,Individuals using the Internet (% of population),0.06914158242233756
+2,Fixed telephone subscriptions (per 100 people),0.06029024986644694
+3,Agricultural land (sq. km),0.04687565969323327
+4,"Incidence of tuberculosis (per 100,000 people)",0.03094214443420122
+5,Rural population,0.023812268886216594
+6,Mobile cellular subscriptions (per 100 people),0.022286738322706622
+7,Urban population growth (annual %),0.02116198863587551
+8,Population density (people per sq. km of land area),0.021094276963694602
+9,"Mammal species, threatened",0.014527689480835815
+10,Lower secondary school starting age (years),0.010678668246992781
+11,"Plant species (higher), threatened",0.00976277155971414
+12,Diabetes prevalence (% of population ages 20 to 79),0.009674881969629873
+13,Urban population (% of total population),0.009323449476719259
+14,Forest area (% of land area),0.009300937852764455
+15,Secure Internet servers,0.009107897518625773
+16,Renewable electricity output (% of total electricity output),0.00907899730651139
+17,Agricultural land (% of land area),0.008392217269889849
+18,"Bird species, threatened",0.00826556297788061
+19,"Fish species, threatened",0.00818351081048612
+20,Renewable energy consumption (% of total final energy consumption),0.00775586640153535
+21,People practicing open defecation (% of population),0.0074504489978407225
+22,"Tuberculosis case detection rate (%, all forms)",0.006068501489994892
+23,"Secondary education, duration (years)",0.004948662116033505
+24,Primary school starting age (years),0.0027865189871253667

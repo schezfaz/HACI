@@ -1,0 +1,34 @@
+Deadline: Wednesday Evening, 30th November
+
+TODOs:
+
+Adarsh:
+1. Add text to graphs to explain what it is.
+2. Add 2-3 more graphs to CoViD Severity page.
+4. Choose text font and color.
+
+Nidhi + Vatsal:
+1. Add text to graphs to explain what it is.
+2. Add at 3 more graphs to Government tab.
+3. Add 3 more graphs to Vaccinations tab.
+4. Change all line graphs color to match the color scheme of the page.
+5. Add GDP choropleth to economy tab.
+
+Palak:
+1. Add text to graphs to explain what it is.
+2. Add 3 more graphs to Economy tab.
+3. "Correlation Between Global Factors that Affect CoVid Severity" fix the y-axis names.
+4. CoViD Severity graphs, change the colors of the headings.
+
+Schezeen:
+1. Add text to graphs to explain what it is.
+2. Fix the Choropleth.
+3. Add all countries to Pie chart.
+4. Change pie chart boundaries to background color.
+5. Add 2-3 more graphs to the mobility page.
+
+Upaasana:
+1. Add text to graphs to explain what it is.
+2. Add global, all time symptoms word cloud. (Preferably d3 word cloud or a better looking word cloud in Python)
+3. Add bar graph comparing confirmed, deaths and recoveries of each strain.
+4. Strain-wise line graphs, word clouds and bar graphs for confirmed, deceased and recoveries in that strain.

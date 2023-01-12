@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.layout.cloud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <!-- Add heading for the visualization -->
+    <!-- <div><p></p></div> -->
+    <!-- <script>
+      var drop_down_text = d3.select("body")
+        .append("text")
+        .attr("dy", "5em")
+        .text("\n\n\u00A0\u00A0\u00A0\u00A0\u00A0Select Category: ");
+  
+      //  Create dropdown element here. Options should be added after reading in index file, they should not be created here
+      var drop_down = d3.select("body").append("select").attr("id", "index_dropdown");
+    </script> -->
+    
+    <!-- append visualization svg to this div-->
+    <!-- <div id="space"></div> -->
+
+    <div class="d-flex flex-column">
+      <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Google Search trends across all C0VID strains</h1>
+          </div>
+          <div id="whole_wc" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+          <div class="my-1 py-1">
+              <h1 class="display-5">Top Search trends</h1>
+            <div> 
+                <p  style="font-size: 16px; color: white;">Select Symptom: <select id="symptom_dropdown"></select> </p>
+            </div>
+          </div>
+          <div id= "symptom_line" class="bg-light box-shadow mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Cases across different COVID variants</h1>
+          </div>
+          <div id="bar_plot" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Google Search Trends - Alpha strain</h1>
+          </div>
+          <div id = "alpha" class="box-shadow mx-auto" style="background-color: #282c34;width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-column">
+        <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 class="display-5">Google Search Trends - Delta strain</h1>
+            </div>
+            <div id="delta" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+  
+
+      <div class="d-flex flex-column">
+        <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 class="display-5">Google Search Trends - Omicron strain</h1>
+            </div>
+            <div id="omicron" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+  
+
+      <footer class="container py-1">
+        <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+          <div class="col-md-0 p-lg-0 mx-auto my-0">
+            <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+            <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+          </div>
+        </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div> -->
+    </footer>
+
+    <script>
+      var color = d3.scaleOrdinal(d3.schemeCategory10)
+      words = {{ get_search_trends() | safe }}
+  
+      console.log(words)
+      all = words[4]
+      alpha = words[0]
+      delta = words[1]
+      omicron = words[2]
+  
+      d3.layout.cloud()
+      .size([1200, 600])
+      .words((all)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw1)
+          .start();
+      
+      
+      
+      function draw1(words) {
+      d3.select("#whole_wc").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+  
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((alpha)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw2)
+          .start();
+      
+      
+      
+      function draw2(words) {
+      d3.select("#alpha").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((delta)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw3)
+          .start();
+      
+      
+      
+      function draw3(words) {
+      d3.select("#delta").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+
+
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((omicron)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw4)
+          .start();
+      
+      
+      
+      function draw4(words) {
+      d3.select("#omicron").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+    </script>
+
+      
+    <script>
+    
+    both = {{ get_top_search_trends() | safe }}
+    top20 = both[0]
+    both[1].shift()
+    symptom_list = both[1]
+    console.log(top20)
+    console.log(symptom_list)
+    
+    const parseTime = d3.timeParse("%m/%d/%Y")
+    var color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    date = []
+    for (i in top20){
+      top20[i].date = parseTime(top20[i].date)
+      date[i] = top20[i].date
+    }
+
+    console.log(date)
+
+    var svg1 = d3.select("#symptom_line")
+    .append("svg")
+    .attr("width", 600)
+    .attr("height", 800)
+    .append("g")
+    .attr("transform",
+          "translate(" + 50 + "," + 30 + ")");
+
+    
+
+    d3.select("#symptom_dropdown")
+      .selectAll('myOptions')
+     	.data(symptom_list)
+      .enter()
+    	.append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; })
+
+
+
+    var x = d3.scaleTime()
+      .domain(d3.extent(date))
+      .range([ 0, 520 ]);
+
+    var xaxis = d3.axisBottom(x).tickFormat(d3.timeFormat('%b %y')).tickSize(10)
+
+    svg1.append("g")
+      .attr("transform",
+          "translate(" + 0 + "," + 400 + ")")
+      .style("stroke", "black")
+      .call(xaxis).attr("stroke", "black")
+      .selectAll('path')
+      .style("stroke", "black")
+      
+      
+
+    var y = d3.scaleLinear()
+      .domain([0,100])
+      .range([ 400, 0 ]);
+    
+    svg1.append("g")
+      .attr("transform",
+          "translate(" + 0 + "," + 0 + ")")
+      .call(d3.axisLeft(y))
+      .attr("id","y-axis")
+      .attr('stroke', 'black')
+      .selectAll('path')
+      .attr('stroke', 'black').style("stroke", "black")
+      
+
+      var line = svg1.append('g')
+        .append("path")
+        .datum(top20)
+        .attr("d", d3.line()
+          .x(function(d) { console.log(d.date)
+            return x(d.date) })
+          .y(function(d) { console.log(d.pain)
+            return y(d.pain * 1.82) })
+        )
+        .attr("stroke", 'red')
+        .style("stroke-width", 4)
+        .style("fill", "none")
+
+      function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = top20.map(function(d){return {time: d.date, value:d[selectedGroup]} })
+
+      line
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("d", d3.line()
+            .x(function(d) { return x(+d.time) })
+            .y(function(d) { return y(+d.value*1.82) })
+          )
+          .attr("stroke", color(Math.floor(Math.random() * 10)))
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#symptom_dropdown").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
+
+    svg1.append("text")
+      .attr("transform", "translate(-35, 200)rotate(-90)")
+            .attr("x", 15)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'line_y_axis_label')
+            .text("Relative search frequency %").attr("style","bold")
+
+      svg1.append("text")
+      .attr("transform", "translate(150, 440)")
+            .attr("x", 100)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'line_x_axis_label')
+            .text("Time").attr("style","bold")
+            
+    </script>
+
+    <script>
+
+     all = {{ get_epidemiology_strains() | safe }}
+     strain_dict = all[0]
+     all[1].shift()
+     bar_label = all[1]
+     strains = all[2]
+     console.log(strain_dict)
+     console.log(bar_label)
+     console.log(strains)
+
+     var svg2 = d3.select("#bar_plot")
+     .append("svg")
+     .attr("width", 600)
+     .attr("height", 400)
+     .append("g")
+     .attr("transform",
+          "translate(" + 50 + "," + 30 + ")");
+
+
+     var x2 = d3.scaleBand()
+      .domain(strains)
+      .range([0, 520])
+     
+     svg2.append("g")
+     .attr("transform",
+          "translate(" + 0 + "," + -10 + ")")
+    .call(d3.axisBottom(x2)).attr("id","x-axis")
+      .attr('stroke', 'white').style("font-size", "13px")
+      .selectAll('path')
+      .attr('stroke', 'white').style("stroke", "white")
+
+  // Add Y axis
+  var y2 = d3.scaleLog()
+    .domain([100000, 350000000])
+    .range([ 400, 0 ]);
+  svg2.append("g")
+  .attr("transform",
+          "translate(" + 0 + "," + 0 + ")")
+    .call(d3.axisLeft(y2))
+    .attr("id","y-axis")
+    .attr('stroke', 'white')
+    .selectAll('path')
+    .attr('stroke', 'white').style("stroke", "white");
+
+  // Another scale for subgroup position?
+  const x_sublabel = d3.scaleBand()
+    .domain(bar_label)
+    .range([0, x2.bandwidth()])
+    .padding([0.05])
+
+  // color palette = one color per subgroup
+ 
+  var colors = d3.scaleOrdinal()
+    .domain(bar_label)
+    .range(['#377eb8','#e41a1c','#4daf4a'])
+     
+
+  // Show the bars
+  svg2.append("g")
+    .selectAll("g")
+    // Enter in data = loop group per group
+    .data(strain_dict)
+    .enter()
+    .append("g")
+    .attr("transform", function(d) { return "translate(" + x2(d.strain) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return bar_label.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) {  console.log(x_sublabel(d.key))
+        return x_sublabel(d.key); })
+      .attr("y", function(d) { return y2(+d.value); })
+      //.attr("y", function(d) { return console.log(d.value)
+      //  800 - y2(+d.value); })
+      .attr("width", x_sublabel.bandwidth()-2)
+      .attr("height", function(d) { return 800 - y2(+d.value); })
+     // .attr("height", function(d) { return y2(+d.value); })
+      .attr("fill", function(d) { return colors(d.key); });
+
+      svg2.append("text")
+      .attr("transform", "translate(-35, 70)rotate(-90)")
+            .attr("x", 15)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'bar_y_axis_label')
+            .text("No. of cases").attr("style","bold")
+            .style("fill", "white");
+
+      var svg3 = d3.select("#bar_plot")
+     .append("svg")
+     .attr("width", 400)
+     .attr("height", 80)
+     //.attr("transform",
+     //     "translate(" + 50 + "," + 450 + ")");
+
+     svg3.append("text")
+      .attr("transform", "translate(120, 15)")
+            .attr("x", 100)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'bar_x_axis_label')
+            .text("Covid Variants").attr("style","bold")
+            .style("fill", "white")
+
+    var cols = ['#377eb8','#e41a1c','#4daf4a']
+      
+        svg3.append("circle").attr("cx", 10).attr("cy",70).attr("r", 7).style("fill", cols[0])
+        svg3.append("circle").attr("cx",160 ).attr("cy",70).attr("r", 7).style("fill", cols[1])
+        svg3.append("circle").attr("cx",310 ).attr("cy",70).attr("r", 7).style("fill", cols[2])
+        svg3.append("text").attr("x",20 ).attr("y",70).text("Confirmed").style("font-size", "15px").style("fill", cols[0]).attr("alignment-baseline","middle")
+        svg3.append("text").attr("x",170 ).attr("y",70).text("Deceased").style("font-size", "15px").style("fill", cols[1]).attr("alignment-baseline","middle")
+        svg3.append("text").attr("x",320).attr("y", 70).text("Recovered").style("font-size", "15px").style("fill", cols[2]).attr("alignment-baseline","middle")
+
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>

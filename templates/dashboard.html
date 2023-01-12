@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#BF3943;" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #BF3943;" class="display-5">CoViD Severity Across The World</h2>
+          </div>
+          <div id="world_view" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+      <div>
+        <p></p>
+        <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we display how severely countries around the world were affected by CoViD-19.</h4>
+        <h4 style="text-align: center; font-family: lato; color: #4a4b4c">We have used our own index based on number of confirmed cases, deaths, recoveries, etc. to gauge the severity of CoViD-19.</h4>
+        <p></p>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 style="color: #BF3943;" class="display-5">CoViD Cases Across The World</h2>
+            </div>
+            <div id="world_cases" class="bg-light box-shadow mx-auto" style="width: 80%; height: 670px; border-radius: 21px 21px 0 0;"></div>
+            <div>
+              <p></p>
+              <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we track the daily new confirmed cases, deaths and recoveries aggregated for all countries.</h4>
+              <h4 style="text-align: center; font-family: lato; color: #4a4b4c">The graph plotted above shows data starting from January, 2020 to present day.</h4>
+              <p></p>
+            </div>
+          </div>
+        </div>
+
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden">
+          <div class="my-1 py-1">
+            <h2 style="color: #BF3943;" class="display-5">Top 10 Worst Affected Countries (Cases)</h2>
+          </div>
+          <div id="top_10_worst_countries" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we see the countries which were worst affected by CoViD in terms of deaths.</h4>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">The graph shows countries having the most CoViD-19 deaths per 1000 cumulative confirmed cases.</h4>
+            <p></p>
+          </div>
+        </div>
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h2 style="color: #BF3943;" class="display-5">Top 10 Worst Affected Countries (%Population)</h2>
+          </div>
+          <div id="top_10_worst_countries1" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we see the countries which were worst affected by CoViD in terms of confirmed cases.</h4>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">The graph shows countries having the most confirmed CoViD-19 cases as a fraction of their population.</h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden">
+          <div class="my-1 py-1">
+            <h2 style="color: #33691E;" class="display-5">Top 10 Least Affected Countries (Cases)</h2>
+          </div>
+          <div id="top_10_least_countries" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we see the countries which were least affected by CoViD in terms of deaths.</h4>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">The graph shows countries having the least CoViD-19 deaths per 1000 cumulative confirmed cases.</h4>
+            <p></p>
+          </div>
+        </div>
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h2 style="color: #33691E;" class="display-5">Top 10 Least Affected Countries (%Population)</h2>
+          </div>
+          <div id="top_10_least_countries1" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above graph, we see the countries which were least affected by CoViD in terms of confirmed cases.</h4>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">The graph shows countries having the least confirmed CoViD-19 cases as a fraction of their population.</h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #BF3943;" class="display-5">Hospitalizations, ICUs and Ventilators Usage</h1>
+          </div>
+          <div id="hospitalizations" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">This is an interactive graph that shows the cumulative number of hospitalizations (scaled by a factor of 100) and utilization of ICUs and ventilators.</h4>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">Click anywhere on the graph to see how these numbers have increased since the onset of CoViD-19 on January, 2020.</h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #BF3943;" class="display-5">Correlation Between Global Factors that Affect CoVid Severity</h1>
+          </div>
+          <div id='heatmap' class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 1000px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the heatmap plotted above we took all the features from the Oxford COVID-19 government response tracker( Epidemilogy, Vaccinations, Economic, Geographical, Weather, Mobility etc) and performed a holistic analysis using Pearson Correlation Coefficient to visualise the correlation of all these factors among themselves. </h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+          <div class="my-1 py-1">
+            <h1 style="color: #BF3943;" class="display-5">Top Factors Affecting CoVid Severity</h1>
+          </div>
+          <div id='feat_imp' class="bg-light box-shadow mx-auto" style="width: 80%; height: 700px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: white">We further analyse the top holistic factors using random Forest Algorithm to see which factors had the most influence on the severity of CoVid in each country. </h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="container py-1">
+      <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+        <div class="col-md-0 p-lg-0 mx-auto my-0">
+          <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+          <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      var svg = d3.select("#heatmap").append("svg")
+                    .attr("id", "hm")
+                    .attr("width", 1150)
+                    .attr("height", 1000)
+                    .style("margin", "auto")
+                    .style("display", "block")
+                    // .style("background-color", "lightgray")
+                .append("g")
+                    .attr("id", "corr_map")
+                    .attr("transform", "translate(" + 300 + "," + 100 + ")")
+
+        // d3.select("#hm").append("rect")
+        //     .attr("width", "100%")
+        //     .attr("height", "100%")
+        //     .attr("fill", "pink")
+        //     .attr("z-index", -1);
+
+      data={{ get_correlation_matrix('Dashboard') | safe }}
+      heatmap = []
+
+      for (var feature in data){
+        heatmap.push({'feature1' : data[feature][0],
+                      'feature2' : data[feature][1],
+                      'correlation' : +data[feature][2]})
+      }
+
+      color_domain = []
+      for (var feature in data){
+              color_domain.push(+data[feature][2])
+            }
+      color_palette = ["#F1BEC2", "#E27D85", "#BF3943", "#7C171F"] // Red
+      var color_scale = d3.scaleQuantile().domain(color_domain).range(color_palette);
+
+      // console.log(heatmap)
+      var x = d3.scaleBand().range([ 0, 700]).padding(0.1);
+      x.domain(heatmap.map(function(d) { return d.feature1; }))
+      var y = d3.scaleBand().range([ 0, 700 ]).padding(0.1)
+      y.domain(heatmap.map(function(d) { return d.feature2; }))
+      
+      d3.select("#corr_map").append("g")
+         .attr("transform", "translate(0," + 700 + ")")
+         .call(d3.axisBottom(x).tickFormat(function(d){return d.replaceAll("_", " ").slice(0,25)}))
+         .selectAll("text")
+          .attr("transform", "translate(-10,7)rotate(-90)")
+          .style("text-anchor", "end")
+          .style("stroke", "lightgray")
+          .style("font-size", 14)
+          ;
+
+      d3.select("#corr_map").append("g")
+         .call(d3.axisLeft(y).tickFormat(function(d){return d.replaceAll("_", " ").slice(0,25)}))
+         .selectAll("text")
+         .style("stroke", "lightgray")
+         .attr("transform", "translate(-7,0)")
+         .style("font-size", 14)
+         
+      
+      svg.selectAll()
+        .data(heatmap, function(d) {return d.feature1+':'+d.feature2;})
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return x(d.feature1) })
+        .attr("y", function(d) { return y(d.feature2) })
+        .attr("width", x.bandwidth() )
+        .attr("height", y.bandwidth() )
+        .style("fill", function(d) { return color_scale(d.correlation)} )
+
+      var legend2 = d3.legendColor()
+              .labelFormat(d3.format(".2f"))
+              .scale(color_scale);
+            
+      svg.append("g")
+        .attr("width", 300)
+        .attr("height", 300)
+        .attr("id", "legend2")
+        .attr("transform", "translate(400, 0)")
+        .call(legend2)
+        .selectAll("text")
+        .attr("fill", "lightgray");
+    </script>
+
+    <script>
+      var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+      var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+      var outerWidth  = 1200;
+      var outerHeight = 800;
+      var innerWidth  = outerWidth - margin.left - margin.right;
+      var innerHeight = outerHeight - margin.top - margin.bottom;
+      var width       = innerWidth - padding.left - padding.right;
+      var height      = innerHeight - padding.top - padding.bottom;
+
+
+      var svg = d3.select("#feat_imp").append("svg")
+              .attr("id", "bar_graph")
+              .attr("width", '100%')
+              .attr("height", '100%')
+              .style("margin", "auto")
+              .style("display", "block")
+          .append("g")
+              .attr("id", "features_imp")
+              .attr("transform", "translate(" + ((outerWidth/2)-320) + "," + 100 + ")")
+              // .attr("margin", "auto");
+
+
+      data = {{ get_correlation_data('Dashboard') | safe }}
+      bar_graph_data = []
+
+      for (var feature in data) {
+        bar_graph_data.push({'feature' : data[feature][0],
+                              'importance' : +data[feature][1]});
+    }
+      color_domain = []
+      for (var feature in data){
+        color_domain.push(+data[feature][1])
+      }
+      color_palette = ["#F1BEC2", "#E27D85", "#BF3943", "#7C171F"] // Red
+      var color_scale = d3.scaleQuantile().domain(color_domain).range(color_palette);
+      
+
+      var x = d3.scaleLinear().range([ 0, 600]);
+      x.domain([0, d3.max(bar_graph_data, function(d){return d.importance})])
+      var y = d3.scaleBand().range([ 0, 500 ])
+      y.domain(bar_graph_data.map(function(d) { return d.feature; }))
+
+      svg.append("g").attr("class","x_axis")
+          .style("transform", "translate(0, 500px)")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end")
+            .style("stroke", "black")
+            .style("font-size", 12);
+
+      d3.select(".x_axis")
+          .append("text")
+          .text("Feature Importance Random Forest")
+          .attr("fill", "black")
+          .attr("transform", "translate(300, 50)")
+          .style("font-size", 18)
+
+      svg.append("g").attr("class", "y_axis")
+      .text("Global Factors affecting Covid Severity")
+      .attr("fill", "white")
+        .call(d3.axisLeft(y).tickFormat(function(d){return d.slice(0,30)+"..."}))
+        .selectAll(".tick text")
+            .text(function(d) { return d.replaceAll("_", " ") } )
+            .style("text-anchor", "end")
+            .style("stroke", "black")
+            .style("font-size", 12)
+
+      d3.select(".y_axis")
+          .append("text")
+          .text("Factors")
+          .attr("fill", "black")
+          .attr("transform", "translate(-200, 200)rotate(-90)")
+          .style("font-size", 18)
+      svg.selectAll("myRect")
+                .data(bar_graph_data)
+                .enter()
+                .append("rect")
+                .attr("x", x(0) )
+                .attr("y", function(d) { return y(d.feature); })
+                .attr("width", function(d) { return x(d.importance); })
+                .attr("height", y.bandwidth() - 0.5 )
+                .attr("fill", function(d){ return color_scale(d.importance)})
+
+      // var legend_b = d3.legendColor()
+      //   .labelFormat(d3.format(".1p"))
+      //   .scale(color_scale)
+        
+      // d3.select("#bar_graph")
+      // // d3.select("body")
+      //   .append("g")
+      //       .attr("width", width)
+      //       .attr("height", height)
+      //       .attr("id", "legend")
+      //       .attr("transform", "translate(" + (width-100) + "," + (margin.top + padding.top) + ")")
+      //   .call(legend_b)
+      //   .selectAll("text")
+      //   .attr("fill", "black");
+
+    </script>
+
+    <!-- COVID SEVERITY ACROSS THE WORLD -->
+    <script>
+        // Append visualization svg
+        var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth  = 1000;
+        var outerHeight = 800;
+        var innerWidth  = outerWidth - margin.left - margin.right;
+        var innerHeight = outerHeight - margin.top - margin.bottom;
+        var width       = innerWidth - padding.left - padding.right;
+        var height      = innerHeight - padding.top - padding.bottom;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        // var svg = d3.select("body").append("svg")
+        var svg = d3.select("#world_view").append("svg")
+                .attr("id", "choropleth")
+                .attr("width", outerWidth)
+                .attr("height", outerHeight)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block")
+            .append("g")
+                .attr("width", innerWidth)
+                .attr("height", innerHeight)
+                .attr("id", "countries")
+                .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+
+        // define any other global variables
+        var projection = d3.geoNaturalEarth1().translate([(width + 2 * padding.left + padding.right) / 2, (height + padding.top - padding.bottom) / 2]).scale(210);
+        var path       = d3.geoPath().projection(projection);
+
+        var worldmap = d3.json("static/graph_data/world_countries.json");
+
+        Promise.all([worldmap]).then(function(values) {
+            // enter code to call ready() with required arguments
+            ready(false, values[0]);
+        });
+        
+        function ready(error, world) {
+            createMapAndLegend(world);
+        }
+
+        // this function should create a Choropleth and legend using the world arguments for a selected_index
+        // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+        // function createMapAndLegend(world, selected_index) {
+        function createMapAndLegend(world) {
+            index_data           = {{ get_world_index_data("CoViD Severity") | safe }}
+            country_health_data  = {{ get_health_data() | safe }}
+            color_palette        = ["#F1BEC2", "#E27D85", "#BF3943", "#7C171F"] // Red
+
+            index_domain = []
+            for (var country in index_data) {
+                index_domain.push(index_data[country]);
+            }
+
+            var color_scale = d3.scaleQuantile().domain(index_domain).range(color_palette);
+
+            // Clear out the displays from the previous selection
+            svg.selectAll("path").remove();
+
+            // Create the map
+            svg.selectAll("path")
+                .data(world.features)
+                .enter()
+                .append("path")
+                .attr("class","continent")
+                .attr("id", function(d) { return d.properties.name.replace(/\s+/g, ''); })
+                .style("fill", function(d) { 
+                    if (d.properties.name in index_data) {
+                        return color_scale(index_data[d.properties.name]);
+                    }
+                    return "grey";
+                })
+                .on("mouseover", function (data) {
+                  var country    = data.properties["name"]
+                  var country_id = country.replace(/\s+/g, '');
+                  d3.select("#" + country_id).style("opacity", "0.5");
+
+                  var gap_between_data = 20;
+                  var spacing = [];
+                  for (i = 0; i < 13; ++i) spacing.push(gap_between_data * i);
+
+                  if (country in country_health_data) {
+                    svg.append("text")
+                      .attr("id", "country_name")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top - spacing[1]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Country: " + country);
+
+                    var life_expectancy = "life_expectancy" in country_health_data[country] ? country_health_data[country]["life_expectancy"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "life_expectancy")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Life Expectancy: " + life_expectancy);
+                    
+                    var smoking_prevalence = "smoking_prevalence" in country_health_data[country] ? country_health_data[country]["smoking_prevalence"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "smoking_prevelance")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[1]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Smoking Prevelance: " + smoking_prevalence);
+                    
+                    var diabetes_prevalence = "diabetes_prevalence" in country_health_data[country] ? country_health_data[country]["diabetes_prevalence"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "diabetes_prevalence")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[2]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Diabetes Prevelance: " + diabetes_prevalence);
+                    
+                    var infant_mortality_rate = "infant_mortality_rate" in country_health_data[country] ? country_health_data[country]["infant_mortality_rate"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "infant_mortality_rate")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[3]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Infant Mortality Rate: " + infant_mortality_rate);
+                    
+                    var adult_male_mortality_rate = "adult_male_mortality_rate" in country_health_data[country] ? country_health_data[country]["adult_male_mortality_rate"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "adult_male_mortality_rate")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[4]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Male Mortality Rate: " + adult_male_mortality_rate);
+
+                    var adult_female_mortality_rate = "adult_female_mortality_rate" in country_health_data[country] ? country_health_data[country]["adult_female_mortality_rate"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "adult_female_mortality_rate")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[5]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Female Mortality Rate: " + adult_female_mortality_rate);
+
+                    var pollution_mortality_rate = "pollution_mortality_rate" in country_health_data[country] ? country_health_data[country]["pollution_mortality_rate"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "pollution_mortality_rate")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[6]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Pollution Mortality Rate: " + pollution_mortality_rate);
+                    
+                    var comorbidity_mortality_rate = "comorbidity_mortality_rate" in country_health_data[country] ? country_health_data[country]["comorbidity_mortality_rate"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "comorbidity_mortality_rate")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[7]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Comorbidity Mortality Rate: " + comorbidity_mortality_rate);
+
+                    var nurses_per_1000 = "nurses_per_1000" in country_health_data[country] ? country_health_data[country]["nurses_per_1000"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "nurses_per_1000")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[8]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Nurses / 1000: " + nurses_per_1000);
+
+                    var physicians_per_1000 = "physicians_per_1000" in country_health_data[country] ? country_health_data[country]["physicians_per_1000"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "physicians_per_1000")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[9]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Physicians / 1000: " + physicians_per_1000);
+                    
+                    var health_expenditure_usd = "health_expenditure_usd" in country_health_data[country] ? country_health_data[country]["health_expenditure_usd"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "health_expenditure_usd")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[10]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Health Expenditure ($): " + health_expenditure_usd);
+                    
+                    var out_of_pocket_health_expenditure_usd = "out_of_pocket_health_expenditure_usd" in country_health_data[country] ? country_health_data[country]["out_of_pocket_health_expenditure_usd"] : "N/A";
+                    svg.append("text")
+                      .attr("id", "out_of_pocket_health_expenditure_usd")
+                      .attr("x", (padding.left))
+                      .attr("y", (innerHeight / 3 + padding.top + spacing[11]))
+                      .style("font-size", "13px")
+                      .style("fill", "gray")
+                      .text("Extra Expenditure ($): " + out_of_pocket_health_expenditure_usd);
+
+                    }
+                })
+                .on("mouseout", function(data) {
+                  var country = data.properties["name"].replace(/\s+/g, '');
+                  d3.select("#" + country).style("opacity", 1);
+                  d3.selectAll("#country_name").remove();
+                  d3.selectAll("#life_expectancy").remove();
+                  d3.selectAll("#smoking_prevelance").remove();
+                  d3.selectAll("#diabetes_prevalence").remove();
+                  d3.selectAll("#infant_mortality_rate").remove();
+                  d3.selectAll("#adult_male_mortality_rate").remove();
+                  d3.selectAll("#adult_female_mortality_rate").remove();
+                  d3.selectAll("#pollution_mortality_rate").remove();
+                  d3.selectAll("#comorbidity_mortality_rate").remove();
+                  d3.selectAll("#hospital_beds_per_1000").remove();
+                  d3.selectAll("#nurses_per_1000").remove();
+                  d3.selectAll("#physicians_per_1000").remove();
+                  d3.selectAll("#health_expenditure_usd").remove();
+                  d3.selectAll("#out_of_pocket_health_expenditure_usd").remove();
+                })
+                .style("stroke", "grey")
+                .attr("d", path);
+            
+            // Create the legend
+            var legend = d3.legendColor()
+                .labelFormat(d3.format(".2f"))
+                .scale(color_scale);
+
+            d3.select("#choropleth")
+                .append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("id", "legend")
+                    .attr("transform", "translate(" + (innerWidth - 1.6 * padding.left) + "," + (margin.top + 3.5 * padding.top) + ")")
+                .call(legend)
+                .selectAll("text")
+                  .attr("fill", "gray");
+        }
+    </script>
+
+    <!-- COVID CASES ACROSS THE WORLD -->
+    <script>
+        // Append visualization svg
+        var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth  = 1000;
+        var outerHeight = 800;
+        var innerWidth  = outerWidth - margin.left - margin.right;
+        var innerHeight = outerHeight - margin.top - margin.bottom;
+        var width       = innerWidth - padding.left - padding.right;
+        var height      = innerHeight - padding.top - padding.bottom;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        var svg1 = d3.select("#world_cases").append("svg")
+                .attr("id", "epidemiology_global_linechart")
+                .attr("width", outerWidth)
+                .attr("height", outerHeight)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block")
+                .attr("transform", "translate(" + -padding.left + "," + (-2*margin.top) + ")")
+            .append("g")
+                .attr("width", innerWidth)
+                .attr("height", innerHeight)
+                .attr("id", "epidemiology_global_linechart_container")
+                .attr("transform", "translate(" + padding.left + "," + (-2*margin.top) + ")");
+
+        world_epidemiology_data = {{ get_world_epidemiology_data() | safe }};
+
+        const colors    = ["red", "dimgray", "#00CC66"];
+        const parseTime = d3.timeParse("%Y-%m-%d");
+
+        for (i = 0; i < world_epidemiology_data.length; ++i) {
+          world_epidemiology_data[i][0] = parseTime(world_epidemiology_data[i][0]);
+        }
+
+        var x_scale = d3.scaleTime();
+        var y_scale = d3.scaleLog();
+
+        var max_val = d3.max(world_epidemiology_data, function(d) { var vals = [d[1], d[2], d[3]]; return d3.max(vals, function(e) { return e; })});
+        var max_val = 4000000;
+
+        x_scale
+            .domain([world_epidemiology_data[0][0], world_epidemiology_data[world_epidemiology_data.length - 1][0]])
+            .range([margin.left + padding.left, innerWidth - 5 * margin.left])
+        y_scale
+            .domain([1, max_val])
+            .range([innerHeight - 3*margin.top - padding.top, margin.top + padding.top])
+        
+        var x_axis = d3.axisBottom(x_scale).tickFormat(d3.timeFormat('%b %y')).tickSize(-innerHeight + margin.top + 3 * padding.top);
+        var y_axis = d3.axisLeft(y_scale).tickSize(-innerWidth + padding.left).tickFormat(function (d) {
+            return y_scale.tickFormat(7,d3.format(",d"))(d)
+        });
+
+        const line = d3.line()
+            .curve(d3.curveLinear)
+            .x(function(d) { return x_scale(d[0]); })
+            .y(function(d) { return y_scale(d[1]); });
+        
+        var plot1 = svg1.append("g")
+            .attr("id", "plot1")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var confirmed_data = []
+        for (i = 0; i < world_epidemiology_data.length - 13; ++i) {
+            if (parseFloat(world_epidemiology_data[i][1]) >= 0) confirmed_data.push([world_epidemiology_data[i][0], parseFloat(world_epidemiology_data[i][1] + 1)])
+        }
+
+        var deceased_data = []
+        for (i = 0; i < world_epidemiology_data.length - 13; ++i) {
+          if (parseFloat(world_epidemiology_data[i][2]) >= 0) deceased_data.push([world_epidemiology_data[i][0], parseFloat(world_epidemiology_data[i][2] + 1)])
+        }
+
+        var recovered_data = []
+        for (i = 0; i < world_epidemiology_data.length - 13; ++i) {
+          if (parseFloat(world_epidemiology_data[i][2]) >= 0) recovered_data.push([world_epidemiology_data[i][0], parseFloat(world_epidemiology_data[i][3] + 1)])
+        }
+
+        // Confirmed Cases
+        var line_idx = 0;
+        const a = plot1.append("g").attr("id", "lines-1");
+        const lines_1 = a.selectAll("lines")
+            .data([confirmed_data, deceased_data, recovered_data])
+            .enter()
+            .append("g")
+            .attr("id", function(d) {return "lines-1-" + line_idx++});
+
+        var line_idx = 0
+        lines_1.append("path")
+            .attr("id", "lines-1-" + line_idx++)
+            .attr("d", function(d) {
+              return line(confirmed_data);
+            })
+            .attr("fill", "none")
+            .style("stroke", function(d) { return colors[0]; })
+            .style("stroke-width", 1);
+        
+        var line_idx = 0
+        lines_1.append("path")
+            .attr("id", "lines-2-" + line_idx++)
+            .attr("d", function(d) {
+              return line(deceased_data);
+            })
+            .attr("fill", "none")
+            .style("stroke", function(d) { return colors[1]; })
+            .style("stroke-width", 1);
+        
+        var line_idx = 0
+        lines_1.append("path")
+            .attr("id", "lines-2-" + line_idx++)
+            .attr("d", function(d) {
+              return line(recovered_data);
+            })
+            .attr("fill", "none")
+            .style("stroke", function(d) { return colors[2]; })
+            .style("stroke-width", 1);
+        
+        var x_axis = plot1.append("g")
+            .attr("id", "x-axis-1")
+            .attr("transform", "translate(0," + height + ")")
+            .style("font", "15px times")
+            .call(x_axis)
+            .append("text")
+                .attr("id", "x-axis-label-1")
+                .attr("text-anchor", "middle")
+                .attr("x", innerWidth/2)
+                .attr("y", padding.top)
+                .style("font-size", "20px")
+                .style("fill", "gray")
+                .text("Time");
+
+        var y_axis = plot1.append("g")
+            .attr("id", "y-axis-1")
+            .attr("transform", "translate(" + (margin.left + padding.left) + "," + (0) + ")")
+            .style("font", "15px times")
+            .call(y_axis)
+            .append("text")
+                .attr("id", "y-axis-label-1")
+                .attr("text-anchor", "middle")
+                .attr("x", (-(height - margin.top) / 2))
+                .attr("y", (-(margin.right + padding.right) * 0.8))
+                .attr("transform", "rotate(-90)")
+                .style("font-size", "20px")
+                .style("fill", "gray")
+                .text("Number of People")
+                .call(g => g.selectAll(".tick")
+              .attr("opacity", 1));
+        
+        d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "lightgray");
+        d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "black");
+        d3.selectAll(".domain").attr("opacity", 1).attr("color", "dimgray");
+
+        // Legend
+        svg1.append("circle").attr("cx", (innerWidth - 3 * padding.left)).attr("cy",9 * padding.top).attr("r", 7).style("fill", colors[0])
+        svg1.append("circle").attr("cx", (innerWidth - 3 * padding.left)).attr("cy",9 * padding.top + 1.5 * margin.top).attr("r", 7).style("fill", colors[1])
+        svg1.append("circle").attr("cx", (innerWidth - 3 * padding.left)).attr("cy",9 * padding.top + 3 * margin.top).attr("r", 7).style("fill", colors[2])
+        svg1.append("text").attr("x", (innerWidth - 3 * padding.left + margin.left)).attr("y", 9 * padding.top).text("New Confirmed").style("font-size", "15px").style("fill", colors[0]).attr("alignment-baseline","middle")
+        svg1.append("text").attr("x", (innerWidth - 3 * padding.left + margin.left)).attr("y", 9 * padding.top + 1.5 * margin.top).text("New Deceased").style("font-size", "15px").style("fill", colors[1]).attr("alignment-baseline","middle")
+        svg1.append("text").attr("x", (innerWidth - 3 * padding.left + margin.left)).attr("y", 9 * padding.top + 3 * margin.top).text("New Recovered").style("font-size", "15px").style("fill", colors[2]).attr("alignment-baseline","middle")
+    </script>
+
+    <!-- TOP 10 WORST AFFECTED COUNTRIES -->
+    <script>
+        // Append visualization svg
+        var margin2      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding2     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth2  = 800;
+        var outerHeight2 = 800;
+        var innerWidth2  = outerWidth2 - margin2.left - margin2.right;
+        var innerHeight2 = outerHeight2 - margin2.top - margin2.bottom;
+        var width2       = innerWidth2 - padding2.left - padding2.right;
+        var height2      = innerHeight2 - padding2.top - padding2.bottom;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        var svg_2 = d3.select("#top_10_worst_countries").append("svg")
+                .attr("width", "100%")
+                .attr("height", outerHeight2)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block");
+
+        worst_countries = {{ get_top_countries(10, "worst") | safe }};
+        worst_countries[6][0] = "Bosnia";
+
+        color_pallete_2 = ["#7A221B", "#992A22", "#B73329", "#D63B2F", "#F44336", "#F66257", "#F88279", "#FAA19B", "#FCC7C3", "#FFECEB"];
+
+        x_scale_2 = d3.scaleLinear();
+        y_scale_2 = d3.scaleBand();
+        
+        x_range_max_2 = (worst_countries[0][3] * 1000) / worst_countries[0][2];
+        y_range_2     = [];
+        for (i = 0; i < worst_countries.length; ++i) {
+          y_range_2.push(worst_countries[i][0]);
+          worst_countries[i].push(color_pallete_2[i]);
+        }
+        y_range_2 = y_range_2.reverse();
+
+        x_scale_2.domain([0, 220]).range([padding2.left, innerWidth2 - 5 * padding2.left]);
+        y_scale_2.domain(y_range_2).range([innerHeight2 - 5 * padding2.top, 0])
+            .paddingInner(0.03);
+
+        var x_axis_2 = d3.axisBottom(x_scale_2).tickSize(-innerHeight2 + 4 * padding2.top + 3 * margin.top);
+        var y_axis_2 = d3.axisLeft(y_scale_2);
+
+        var top_10_worst_countries_bars = svg_2.append("g")
+          .attr("id", "top_10_worst_countries_bars")
+          .attr("transform","translate(" + (padding2.left - 2 * margin2.left + 2) + "," + padding2.top + ")");
+
+          top_10_worst_countries_bars.selectAll("rect")
+          .data(worst_countries)
+          .enter()
+          .append("rect")
+          .attr("x", x_scale_2(0 - margin2.left))
+          .attr("y", function(d) {
+            return y_scale_2(d[0]);
+          })
+          .attr("width", function(d) {
+            return x_scale_2((d[3] * 1000) / d[2]);
+          })
+          .attr("height", y_scale_2.bandwidth())
+          .attr("fill", function(d) { return d[5]; })
+          .style("opacity", 0.9);
+
+        // Add the x-axis
+        var x_axis_2 = svg_2.append("g")
+          .attr("transform","translate(" + (2 * margin2.left) + "," + (outerHeight2 - 5 * padding2.top + margin2.top) + ")")
+          .attr("id", "x-axis-bars_2")
+          .call(x_axis_2);
+
+        // Add the y-axis
+        var y_axis_2 = svg_2.append("g")
+          .attr("id", "y-axis-bars_2")
+          .attr("transform","translate(" + (padding2.left + 2 * margin2.left) + "," + padding2.top + ")")
+          .call(y_axis_2);
+        
+        svg_2.append("text")
+          .attr("id", "bar_x_axis_label_2")
+          .attr("text-anchor", "middle")
+          .attr("x", (innerWidth2) / 2 - 1.5 * padding2.left)
+          .attr("y", innerHeight2 - 10 * margin2.top)
+          .style("font-size", "15px")
+          .style("fill", "gray")
+          .text("Number of Deaths per 1000 Confirmed Cases");
+        
+        svg_2.append("text")
+          .attr("id", "bar_y_axis_label_2")
+          .attr("text-anchor", "middle")
+          .attr("x", -(innerHeight2 - 4 * padding2.top) / 2)
+          .attr("y", padding2.top / 3)
+          .attr("transform", "rotate(-90)")
+          .style("font-size", "15px")
+          .style("fill", "gray")
+          .text("Countries");
+        
+        d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "gray");
+        d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "gray");
+        d3.selectAll(".domain").attr("opacity", 1).attr("color", "gray");
+    </script>
+
+    <!-- TOP 10 WORST AFFECTED COUNTRIES, % POPULATION WITH COVID -->
+    <script>
+      // Append visualization svg
+      var margin5      = {top: 20, right: 10, bottom: 20, left: 10};
+      var padding5     = {top: 60, right: 60, bottom: 60, left: 60};
+      var outerWidth5  = 800;
+      var outerHeight5 = 800;
+      var innerWidth5  = outerWidth5 - margin5.left - margin5.right;
+      var innerHeight5 = outerHeight5 - margin5.top - margin5.bottom;
+      var width5       = innerWidth5 - padding5.left - padding5.right;
+      var height5      = innerHeight5 - padding5.top - padding5.bottom;
+
+      // append svg element to the body of the page
+      // set dimensions and position of the svg element
+      var svg_5 = d3.select("#top_10_worst_countries1").append("svg")
+              .attr("width", "100%")
+              .attr("height", outerHeight5)
+              .style("margin-left", "auto")
+              .style("margin-right", "auto")
+              .style("display", "block");
+
+      worst_countries_pop = {{ get_top_countries(10, "worst_population") | safe }};
+      color_pallete_5     = ["#7A221B", "#992A22", "#B73329", "#D63B2F", "#F44336", "#F66257", "#F88279", "#FAA19B", "#FCC7C3", "#FFECEB"];
+
+      x_scale_5 = d3.scaleLinear();
+      y_scale_5 = d3.scaleBand();
+      
+      x_range_max_5 = worst_countries_pop[worst_countries_pop.length - 1][2] / worst_countries_pop[worst_countries_pop.length - 1][4] * 100;
+      y_range_5     = [];
+      for (i = 0; i < worst_countries_pop.length; ++i) {
+        y_range_5.push(worst_countries_pop[i][0]);
+        worst_countries_pop[i].push(color_pallete_5[i]);
+      }
+      y_range_5 = y_range_5.reverse();
+
+      x_scale_5.domain([0, 75]).range([padding5.left, innerWidth5 - 5 * padding5.left]);
+      y_scale_5.domain(y_range_5).range([innerHeight5 - 5 * padding5.top, 0])
+          .paddingInner(0.03);
+
+      var x_axis_5 = d3.axisBottom(x_scale_5).tickSize(-innerHeight5 + 4 * padding5.top + 3 * margin5.top);
+      var y_axis_5 = d3.axisLeft(y_scale_5);
+
+      var top_10_worst_countries_bars_pop = svg_5.append("g")
+        .attr("id", "top_10_worst_countries_bars_pop")
+        .attr("transform","translate(" + (padding5.left + 1 * margin5.left + 6) + "," + padding5.top + ")");
+
+        top_10_worst_countries_bars_pop.selectAll("rect")
+        .data(worst_countries_pop)
+        .enter()
+        .append("rect")
+        .attr("x", x_scale_5(0 - margin5.left))
+        .attr("y", function(d) {
+          return y_scale_5(d[0]);
+        })
+        .attr("width", function(d) {
+          return x_scale_5((d[2] * 1000) / d[4]) / 10;
+        })
+        .attr("height", y_scale_5.bandwidth())
+        .attr("fill", function(d) { return d[5]; })
+        .style("opacity", 0.9);
+
+      // Add the x-axis
+      var x_axis_5 = svg_5.append("g")
+        .attr("transform","translate(" + (2 * margin5.left) + "," + (outerHeight5 - 5 * padding5.top + margin5.top) + ")")
+        .attr("id", "x-axis-bars_2_pop")
+        .call(x_axis_5);
+
+      // Add the y-axis
+      var y_axis_5 = svg_5.append("g")
+        .attr("id", "y-axis-bars_2_pop")
+        .attr("transform","translate(" + (padding5.left + 2 * margin5.left) + "," + padding5.top + ")")
+        .call(y_axis_5);
+      
+      svg_5.append("text")
+        .attr("id", "bar_x_axis_label_2_pop")
+        .attr("text-anchor", "middle")
+        .attr("x", (innerWidth5) / 2 - 1.5 * padding5.left)
+        .attr("y", innerHeight5 - 10 * margin5.top)
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("% of Population with CoViD");
+      
+      svg_5.append("text")
+        .attr("id", "bar_y_axis_label_2_pop")
+        .attr("text-anchor", "middle")
+        .attr("x", -(innerHeight5 - 4 * padding5.top) / 2)
+        .attr("y", padding5.top / 3)
+        .attr("transform", "rotate(-90)")
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Countries");
+      
+      d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "gray");
+      d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "gray");
+      d3.selectAll(".domain").attr("opacity", 1).attr("color", "gray");
+  </script>
+
+    <!-- TOP 10 LEAST AFFECTED COUNTRIES -->
+    <script>
+      // Append visualization svg
+      var margin3      = {top: 20, right: 10, bottom: 20, left: 10};
+      var padding3     = {top: 60, right: 60, bottom: 60, left: 60};
+      var outerWidth3  = 800;
+      var outerHeight3 = 800;
+      var innerWidth3  = outerWidth3 - margin3.left - margin3.right;
+      var innerHeight3 = outerHeight3 - margin3.top - margin3.bottom;
+      var width3       = innerWidth3 - padding3.left - padding3.right;
+      var height3      = innerHeight3 - padding3.top - padding3.bottom;
+
+      // append svg element to the body of the page
+      // set dimensions and position of the svg element
+      var svg_3 = d3.select("#top_10_least_countries").append("svg")
+              .attr("width", "100%")
+              .attr("height", outerHeight3)
+              .style("margin-left", "auto")
+              .style("margin-right", "auto")
+              .style("display", "block");
+
+      best_countries  = {{ get_top_countries(10, "best_cases") | safe }};
+      color_pallete_3 = ["#33691E", "#558B2F", "#689F38", "#7CB342", "#8BC34A", "#9CCC65", "#AED581", "#C5E1A5", "#DCEDC8", "#F1F8E9"];
+
+      x_scale_3 = d3.scaleLinear();
+      y_scale_3 = d3.scaleBand();
+      
+      x_range_max_3 = (best_countries[0][3] * 100) / best_countries[0][2];
+      y_range_3     = [];
+      for (i = 0; i < best_countries.length; ++i) {
+        y_range_3.push(best_countries[i][0]);
+        best_countries[i].push(color_pallete_3[i]);
+      }
+      y_range_3 = y_range_3.reverse();
+
+      x_scale_3.domain([0, 1.3]).range([padding3.left, innerWidth3 - 5 * padding3.left]);
+      y_scale_3.domain(y_range_3).range([innerHeight3 - 15 * margin3.top, 0])
+          .paddingInner(0.03);
+
+      var x_axis_3 = d3.axisBottom(x_scale_3).tickSize(-innerHeight3 + 4 * padding3.top + 3 * margin3.top);
+      var y_axis_3 = d3.axisLeft(y_scale_3);
+
+      var top_10_best_countries_bars = svg_3.append("g")
+        .attr("id", "top_10_best_countries_bars")
+        .attr("transform","translate(" + (2 * margin3.left + 0 * padding3.left) + "," + padding3.top + ")");
+
+        top_10_best_countries_bars.selectAll("rect")
+        .data(best_countries)
+        .enter()
+        .append("rect")
+        .attr("x", x_scale_3(0))
+        .attr("y", function(d) {
+          return y_scale_3(d[0]);
+        })
+        .attr("width", function(d) {
+          return x_scale_3((d[3] / d[2] * 1000));
+        })
+        .attr("height", y_scale_3.bandwidth())
+        .attr("fill", function(d) { return d[5]; })
+        .style("opacity", 0.9);
+
+      // Add the x-axis
+      var x_axis_3 = svg_3.append("g")
+        .attr("transform","translate(" + (2 * margin3.left) + "," + (outerHeight3 - 4 * padding3.top - 2 * margin3.top) + ")")
+        .attr("id", "x-axis-bars_3")
+        .call(x_axis_3);
+
+      // Add the y-axis
+      var y_axis_3 = svg_3.append("g")
+        .attr("id", "y-axis-bars_3")
+        .attr("transform","translate(" + (padding3.left + 2 * margin3.left) + "," + padding3.top + ")")
+        .call(y_axis_3);
+      
+      svg_3.append("text")
+        .attr("id", "bar_x_axis_label_3")
+        .attr("text-anchor", "middle")
+        .attr("x", (innerWidth3) / 2 - 1.5 * padding3.left)
+        .attr("y", innerHeight3 - 3 * padding3.top - margin3.top)
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Number of Deaths per 1000 Confirmed Cases");
+      
+      svg_3.append("text")
+        .attr("id", "bar_y_axis_label_3")
+        .attr("text-anchor", "middle")
+        .attr("x", -(innerHeight3 - 4 * padding3.top) / 2)
+        .attr("y", padding3.top / 2)
+        .attr("transform", "rotate(-90)")
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Countries");
+      
+      d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "gray");
+      d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "gray");
+      d3.selectAll(".domain").attr("opacity", 1).attr("color", "gray");
+    </script>
+
+    <!-- TOP 10 LEAST AFFECTED COUNTRIES, % POPULATION WITH COVID -->
+    <script>
+      // Append visualization svg
+      var margin3      = {top: 20, right: 10, bottom: 20, left: 10};
+      var padding3     = {top: 60, right: 60, bottom: 60, left: 60};
+      var outerWidth3  = 800;
+      var outerHeight3 = 800;
+      var innerWidth3  = outerWidth3 - margin3.left - margin3.right;
+      var innerHeight3 = outerHeight3 - margin3.top - margin3.bottom;
+      var width3       = innerWidth3 - padding3.left - padding3.right;
+      var height3      = innerHeight3 - padding3.top - padding3.bottom;
+
+      // append svg element to the body of the page
+      // set dimensions and position of the svg element
+      var svg_3 = d3.select("#top_10_least_countries1").append("svg")
+              .attr("width", "100%")
+              .attr("height", outerHeight3)
+              .style("margin-left", "auto")
+              .style("margin-right", "auto")
+              .style("display", "block");
+
+      best_countries = {{ get_top_countries(10, "best") | safe }};
+      best_countries[6][0] = "Congo";
+
+      color_pallete_3 = ["#33691E", "#558B2F", "#689F38", "#7CB342", "#8BC34A", "#9CCC65", "#AED581", "#C5E1A5", "#DCEDC8", "#F1F8E9"];
+
+      x_scale_3 = d3.scaleLinear();
+      y_scale_3 = d3.scaleBand();
+      
+      x_range_max_3 = best_countries[best_countries.length - 1][2] / best_countries[best_countries.length - 1][4] * 100;      
+      y_range_3     = [];
+      for (i = 0; i < best_countries.length; ++i) {
+        y_range_3.push(best_countries[i][0]);
+        best_countries[i].push(color_pallete_3[i]);
+      }
+      y_range_3 = y_range_3.reverse();
+
+      x_scale_3.domain([0, 0.18]).range([padding3.left, innerWidth3 - 5 * padding3.left]);
+      y_scale_3.domain(y_range_3).range([innerHeight3 - 15 * margin3.top, 0])
+          .paddingInner(0.03);
+
+      var x_axis_3 = d3.axisBottom(x_scale_3).tickSize(-innerHeight3 + 4 * padding3.top + 3 * margin3.top);
+      var y_axis_3 = d3.axisLeft(y_scale_3);
+
+      var top_10_best_countries_bars = svg_3.append("g")
+        .attr("id", "top_10_best_countries_bars")
+        .attr("transform","translate(" + (2 * margin3.left + 0 * padding3.left) + "," + padding3.top + ")");
+
+        top_10_best_countries_bars.selectAll("rect")
+        .data(best_countries)
+        .enter()
+        .append("rect")
+        .attr("x", x_scale_3(0))
+        .attr("y", function(d) {
+          return y_scale_3(d[0]);
+        })
+        .attr("width", function(d) {
+          return x_scale_3((d[2] / d[4] * 100));
+        })
+        .attr("height", y_scale_3.bandwidth())
+        .attr("fill", function(d) { return d[5]; })
+        .style("opacity", 0.9);
+
+      // Add the x-axis
+      var x_axis_3 = svg_3.append("g")
+        .attr("transform","translate(" + (2 * margin3.left) + "," + (outerHeight3 - 4 * padding3.top - 2 * margin3.top) + ")")
+        .attr("id", "x-axis-bars_3")
+        .call(x_axis_3);
+
+      // Add the y-axis
+      var y_axis_3 = svg_3.append("g")
+        .attr("id", "y-axis-bars_3")
+        .attr("transform","translate(" + (padding3.left + 2 * margin3.left) + "," + padding3.top + ")")
+        .call(y_axis_3);
+      
+      svg_3.append("text")
+        .attr("id", "bar_x_axis_label_3")
+        .attr("text-anchor", "middle")
+        .attr("x", (innerWidth3) / 2 - 1.5 * padding3.left)
+        .attr("y", innerHeight3 - 3 * padding3.top - margin3.top)
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("% of Population with CoViD");
+      
+      svg_3.append("text")
+        .attr("id", "bar_y_axis_label_3")
+        .attr("text-anchor", "middle")
+        .attr("x", -(innerHeight3 - 8 * padding3.top) / 2)
+        .attr("y", padding3.top / 2)
+        .attr("transform", "rotate(-90)")
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Countries");
+      
+      d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "gray");
+      d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "gray");
+      d3.selectAll(".domain").attr("opacity", 1).attr("color", "gray");
+    </script>
+
+    <!-- CUMULATIVE HOSPITALIZATIONS, ICUs, VENTILATORs -->
+    <script>
+      // Append visualization svg
+      var margin4      = {top: 20, right: 10, bottom: 20, left: 10};
+      var padding4     = {top: 60, right: 60, bottom: 60, left: 60};
+      var outerWidth4  = 800;
+      var outerHeight4 = 600;
+      var innerWidth4  = outerWidth4 - margin4.left - margin4.right;
+      var innerHeight4 = outerHeight4 - margin4.top - margin4.bottom;
+      var width4       = innerWidth4 - padding4.left - padding4.right;
+      var height4      = innerHeight4 - padding4.top - padding4.bottom;
+
+      // append svg element to the body of the page
+      // set dimensions and position of the svg element
+      var svg_4 = d3.select("#hospitalizations").append("svg")
+              .attr("width", "100%")
+              .attr("height", outerHeight4)
+              .style("margin-left", "auto")
+              .style("margin-right", "auto")
+              .style("display", "block");
+
+      hospitalizations_data = {{ get_hospitalization_data() | safe }};
+
+      x_scale_4 = d3.scaleBand();
+      y_scale_4 = d3.scaleLinear();
+
+      y_domain_4_max = 0;
+      y_range_4      = innerHeight4 - 1 * padding4.top - 2 * margin4.top;
+      for (i = 0; i < hospitalizations_data.length; ++i) y_domain_4_max = hospitalizations_data[i][0]["value"] > y_domain_4_max ? hospitalizations_data[i][0]["value"] : y_domain_4_max;
+      for (i = 0; i < hospitalizations_data.length; ++i) y_domain_4_max = hospitalizations_data[i][1]["value"] > y_domain_4_max ? hospitalizations_data[i][1]["value"] : y_domain_4_max;
+      for (i = 0; i < hospitalizations_data.length; ++i) y_domain_4_max = hospitalizations_data[i][2]["value"] > y_domain_4_max ? hospitalizations_data[i][2]["value"] : y_domain_4_max;
+
+      x_scale_4.domain(["Hospitalizations", "ICUs", "Ventilators"]).range([0, innerWidth4]).paddingInner(0.3);
+      y_scale_4.domain([0, y_domain_4_max]).range([y_range_4, 0]);
+
+      var x_axis_4 = d3.axisBottom(x_scale_4).tickValues(["Hospitalizations", "ICUs", "Ventilators"]);
+      var y_axis_4 = d3.axisLeft(y_scale_4).tickSize(-innerWidth4);
+
+      y_scale_4_temp = d3.scaleLinear();
+      y_scale_4_temp.domain([y_domain_4_max, 0]).range([y_range_4, 0]);
+      var y_axis_4_temp = d3.axisLeft(y_scale_4_temp).tickSize(-innerWidth4);
+
+      // Add the x-axis
+      var x_axis_4 = svg_4.append("g")
+        .attr("transform","translate(" + (3 * padding4.left) + "," + (outerHeight4 - 1 * padding4.top - 1 * margin4.top) + ")")
+        .attr("id", "x-axis-bars_4")
+        .call(x_axis_4);
+
+      // Add the y-axis
+      var y_axis_4 = svg_4.append("g")
+        .attr("id", "y-axis-bars_4")
+        .attr("transform","translate(" + (3 * padding4.left + 0 * margin4.left) + "," + padding4.top + ")")
+        .call(y_axis_4_temp);
+      
+      svg_4.append("text")
+        .attr("id", "bar_x_axis_label_4")
+        .attr("text-anchor", "middle")
+        .attr("x", (3 * padding4.left + innerWidth4 / 2))
+        .attr("y", (outerHeight4 - 1 * margin4.top))
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Category");
+      
+      svg_4.append("text")
+        .attr("id", "bar_y_axis_label_4")
+        .attr("text-anchor", "middle")
+        .attr("x", -(innerHeight4) / 2)
+        .attr("y", padding4.top)
+        .attr("transform", "rotate(-90)")
+        .style("font-size", "15px")
+        .style("fill", "gray")
+        .text("Count");
+
+      d3.selectAll(".tick line").attr("opacity", 0.5).attr("stroke", "gray");
+      d3.selectAll(".tick text").attr("opacity", 1).attr("stroke", "gray");
+      d3.selectAll(".domain").attr("opacity", 1).attr("color", "gray");
+
+      var hospitalization_bars = svg_4.append("g")
+        .attr("id", "hospitalizations_bars")
+        .attr("transform","translate(" + (3 * padding4.left) + "," + (3 * margin4.top) + ")");
+      
+      d3.select("#hospitalizations").on("click", bar_transition);
+
+      hospitalization_bars.selectAll("rect")
+          .data(hospitalizations_data[hospitalizations_data.length - 10])
+          .enter() 
+          .append("rect")
+          .attr("id", function(d) { return "id_" + d.category; })
+          .attr("x", function(d) { return x_scale_4(d.category); })
+          .attr("y", function(d) { return 0; })
+          .attr("width", x_scale_4.bandwidth())
+          .attr("height", function(d) { return (y_range_4 - y_scale_4(d.value)); })
+          .attr("fill",function(d) { return d.color; })
+          .style("opacity", 0.8);
+
+      bar_transition();
+
+      function bar_transition() {
+
+        loop_time            = 5000;
+        hospitalization_bar  = d3.select("#id_Hospitalizations");
+        icus_bar             = d3.select("#id_ICUs");
+        ventilators_bar      = d3.select("#id_Ventilators");
+
+        indexes = []
+        for (i = 0; i < hospitalizations_data.length; ++i) {
+          if (i % 10 == 0) indexes.push(i);
+        }
+
+        for (i = 0; i < indexes.length-1; ++i) {
+            hospitalization_bar
+              .attr("y", 0)
+              .attr("height", function() { return (y_scale_4(hospitalizations_data[indexes[i]][0]["value"])); })
+              .transition()
+              .duration(loop_time)
+              .attr("y", 0)
+              .attr("height", (y_range_4 - y_scale_4(hospitalizations_data[indexes[i+1]][0]["value"])));
+            
+              icus_bar
+              .attr("y", 0)
+              .attr("height", function() { return (y_scale_4(hospitalizations_data[indexes[i]][1]["value"])); })
+              .transition()
+              .duration(loop_time)
+              .attr("y", 0)
+              .attr("height", (y_range_4 - y_scale_4(hospitalizations_data[indexes[i+1]][1]["value"])));
+
+              ventilators_bar
+              .attr("y", 0)
+              .attr("height", function() { return (y_scale_4(hospitalizations_data[indexes[i]][1]["value"]) / 3); })
+              .transition()
+              .duration(loop_time)
+              .attr("y", 0)
+              .attr("height", (y_range_4 - y_scale_4(hospitalizations_data[indexes[i+1]][1]["value"] / 3)));
+        }
+      }
+    </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>

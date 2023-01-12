@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#4EA27A;" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color:#4EA27A; align:center" class="display-5">GDP Across the World</h2>
+          </div>
+          <div id="world_view" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+
+           <!-- CHLOROPLETH FOR GDP -->
+          <script>
+            var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+            var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+            var outerWidth  = 1000;
+            var outerHeight = 800;
+            var innerWidth  = outerWidth - margin.left - margin.right;
+            var innerHeight = outerHeight - margin.top - margin.bottom;
+            var width       = innerWidth - padding.left - padding.right;
+            var height      = innerHeight - padding.top - padding.bottom;
+    
+            // append svg element to the body of the page
+            // set dimensions and position of the svg element
+            // var svg = d3.select("body").append("svg")
+            var svg2 = d3.select("#world_view").append("svg")
+                    .attr("id", "choropleth")
+                    .attr("width", outerWidth)
+                    .attr("height", outerHeight)
+                    .style("margin-left", "auto")
+                    .style("margin-right", "auto")
+                    .style("display", "block")
+                .append("g")
+                    .attr("width", innerWidth)
+                    .attr("height", innerHeight)
+                    .attr("id", "countries")
+                    .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+    
+            // data = {{ get_world_index_data("Gdp") | safe}}
+            // console.log(data)
+    
+            // define any other global variables
+            var projection = d3.geoNaturalEarth1().translate([(width + 2 * padding.left + padding.right) / 2, (height + padding.top - padding.bottom) / 2]).scale(210);
+            var path       = d3.geoPath().projection(projection);
+    
+            var worldmap = d3.json("static/graph_data/world_countries.json");
+    
+            Promise.all([worldmap]).then(function(values) {
+                // enter code to call ready() with required arguments
+                ready(false, values[0]);
+            });
+    
+            function ready(error, world) {
+                createMapAndLegend(world);
+            }
+    
+            // this function should create a Choropleth and legend using the world arguments for a selected_index
+            // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+            // function createMapAndLegend(world, selected_index) {
+            function createMapAndLegend(world) {
+                index_data = {{ get_world_index_data("Gdp") | safe }}
+                eco_data   = {{ get_other_eco_data() | safe }}
+
+                color_palette = ["#C4E8D6", "#9CD8BB", "#4EA27A", "#287C53"] // Greens
+    
+                index_domain = []
+                for (var country in index_data) {
+                    index_domain.push(index_data[country]);
+                }
+                var color_scale = d3.scaleQuantile().domain(index_domain).range(color_palette);
+    
+                // Clear out the displays from the previous selection
+                svg2.selectAll("path").remove();
+    
+                // Create the map
+                svg2.selectAll("path")
+                    .data(world.features)
+                    .enter()
+                    .append("path")
+                    .attr("class","continent")
+                    .attr("id", function(d) { return d.properties.name.replace(/\s+/g, ''); })
+                    .style("fill", function(d) { 
+                        if (d.properties.name in index_data) {
+                            return color_scale(index_data[d.properties.name]);
+                        }
+                        return "grey";
+                    })
+                    .style("stroke", "grey")
+                    .attr("d", path)
+                    .on("mouseover", function (data) {
+                      var country    = data.properties["name"]
+                      var country_id = country.replace(/\s+/g, '');
+                      d3.select("#" + country_id).style("opacity", "0.5");
+                      // console.log(country)
+
+                      var gap_between_data = 20;
+                      var spacing = [];
+                      for (i = 0; i < 13; ++i) spacing.push(gap_between_data * i);
+
+                      if (country in eco_data){
+                        var gdp_per_capita = eco_data[country][0]
+                        var human_capital_index = eco_data[country][1]
+
+                        svg2.append("text")
+                            .attr("id", "gdp_per_capita")
+                            .attr("x", (padding.left))
+                            .attr("y", (innerHeight / 3 + padding.top))
+                            .style("font-size", "13px")
+                            .style("fill", "gray")
+                            .text("GDP Per Capita: " + gdp_per_capita);
+
+                        svg2.append("text")
+                            .attr("id", "human_capital_index")
+                            .attr("x", (padding.left))
+                            .attr("y", (innerHeight / 3 + padding.top + spacing[1]))
+                            .style("font-size", "13px")
+                            .style("fill", "gray")
+                            .text("Human Capital Index: " + human_capital_index);
+                        svg2.append("text")
+                            .attr("id", "country_text")
+                            .attr("x", (padding.left))
+                            .attr("y", (innerHeight / 3 + padding.top-22))
+                            .style("font-size", "15px")
+                            .style("fill", "gray")
+                            .text(country);
+
+                      }
+                    }).on("mouseout", function(data) {
+                  var country = data.properties["name"].replace(/\s+/g, '');
+                  d3.select("#" + country).style("opacity", 1);
+                  d3.selectAll("#gdp_per_capita").remove();
+                  d3.selectAll("#human_capital_index").remove();
+                  d3.selectAll("#country_text").remove()})
+                
+                // Create the legend
+                var legend2 = d3.legendColor()
+                    .labelFormat(d3.format("$.2"))
+                    .scale(color_scale);
+    
+                d3.select("#choropleth")
+                    .append("g")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .attr("id", "legend")
+                        .attr("transform", "translate(0," + (margin.top + 6 * padding.top) + ")")
+                    .call(legend2)
+                    .selectAll("text")
+                      .attr("fill", "gray");
+                    
+            }
+          </script>
+
+        </div>
+      </div>
+      <div>
+        <p></p>
+        <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the above world map, we display the current GDP of all countries.</h4>
+        <h5 style="text-align: center; font-family: lato; color: #4a4b4c">Hover over each country to visualise the GDP per Capita and the Human Capital Index of the country.</h5>
+        <p></p>
+      </div>
+
+    <!-- FEATURE IMPORTANCE PLOT -->
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h2 class="display-5" align="center" style="color:#4EA27A;" >Correlation Between World Bank Data</h2>
+          </div>
+          <div id="heatmap" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 890px; border-radius: 21px 21px 0 0;"></div>
+          <div>
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color: #4a4b4c">In the heatmap above we took all the features from the World Bank Data repository in the Oxford COVID-19 government response tracker and did analysis using Pearson Coefficient to visualise the correlation of all the Economic Factors among themselves. We further analyse these factors using random Forest Algorithm to see which top factors had the most influence on the severity of CoVid in each country. </h4>
+            <p></p>
+          </div>
+
+
+          <script>
+            var svg = d3.select("#heatmap").append("svg")
+                          .attr("id", "hm")
+                          .attr("width", "100%")
+                          .attr("height", "100%")
+                      .append("g")
+                          .attr("id", "corr_map")
+                          .attr("transform", "translate(" + 320 + "," + 50 + ")")
+    
+            data={{ get_correlation_matrix('wb_corr_matrix') | safe }}
+            heatmap = []
+    
+            for (var feature in data){
+              heatmap.push({'feature1' : data[feature][0],
+                            'feature2' : data[feature][1],
+                            'correlation' : +data[feature][2]})
+            }
+    
+            color_domain = []
+            for (var feature in data){
+                    color_domain.push(+data[feature][2])
+                  }
+            color_palette = ["#C4E8D6", "#9CD8BB", "#4EA27A", "#287C53"] // Green
+            var color_scale = d3.scaleQuantile().domain(color_domain).range(color_palette);
+    
+            var x = d3.scaleBand().range([ 0, 600]).padding(0.1);
+            x.domain(heatmap.map(function(d) { return d.feature1; }))
+            var y = d3.scaleBand().range([ 0, 600 ]).padding(0.1)
+            y.domain(heatmap.map(function(d) { return d.feature2; }))
+    
+            d3.select("#corr_map").append("g")
+               .attr("transform", "translate(0," + 600 + ")")
+               .call(d3.axisBottom(x).tickFormat(function(d){return d.slice(0,25)+"..."}))
+               .attr("class", "x_axis_hm")
+               .selectAll("text")
+                              .attr("transform", "translate(-10,0)rotate(-90)")
+                              .style("text-anchor", "end")
+                              .attr("fill", "white")
+                              .style("font-size", 14)
+                              .on("mouseover", function(d){
+                          d3.select(this).text(function(d){
+                            return d
+                          })
+                        }).on("mouseout", function(d){
+                          d3.select(this).text(function(d){return d.slice(0,25)+"..."})
+                        })
+           d3.select(".x_axis_hm").select(".domain").style("fill", "none").style("stroke", "white")
+    
+            d3.select("#corr_map").append("g")
+               .call(d3.axisLeft(y).tickFormat(function(d){return d.slice(0,20)+"..."}))
+               .attr("class", "y_axis_hm")
+               .style("stroke", "bold")
+               .selectAll("text")
+               .attr("fill", "white")
+               .style("font-size", 14)
+               .on("mouseover", function(d){
+                    d3.select(this).text(function(d){
+                            return d
+                          })
+                        })
+                        .on("mouseout", function(d){
+                          d3.select(this).text(function(d){return d.slice(0,20)+"..."})
+                        });
+
+           d3.select(".y_axis_hm").select(".domain").style("fill", "none").style("stroke", "white")
+            
+            
+            svg.selectAll()
+              .data(heatmap, function(d) {return d.feature1+':'+d.feature2;})
+              .enter()
+              .append("rect")
+              .attr("x", function(d) { return x(d.feature1) })
+              .attr("y", function(d) { return y(d.feature2) })
+              .attr("width", x.bandwidth() )
+              .attr("height", y.bandwidth() )
+              .style("fill", function(d) { return color_scale(d.correlation);} )
+    
+            var legend2 = d3.legendColor()
+                    .labelFormat(d3.format(".1"))
+                    .scale(color_scale);
+                  
+            // d3.select("#hm")
+            svg.append("g")
+                        .attr("width", 300)
+                        .attr("height", 300)
+                        .attr("id", "legend2")
+                        .attr("transform", "translate(350, 0)")
+                    .call(legend2).selectAll("text")
+      .attr("fill", "white");
+    
+    
+          </script>
+    
+          </div>
+        </div>
+      </div>
+
+      <!-- CORRELATION MAP -->
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34; height: 800px">
+          <div class="my-1 py-1">
+            <h1 style="color:#4EA27A;" class="display-5">Top Economic Factors Impacting Covid Severity</h1>
+          </div>
+          <div id="feat_importance" class="bg-light box-shadow mx-auto" style="width: 100%; height: 70%; border-radius: 21px 21px 0 0;">
+          </div>
+          <div id="description">
+            <p></p>
+            <h4 style="text-align: center; font-family: lato; color:  white">We further analyse the top holistic factors using random Forest Algorithm to see which factors had the most influence on the severity of CoVid in each country.</h4>
+            <p></p>
+          </div>
+            <script>
+              var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+              var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+              var outerWidth  = 1200;
+              var outerHeight = 800;
+              var innerWidth  = outerWidth - margin.left - margin.right;
+              var innerHeight = outerHeight - margin.top - margin.bottom;
+              var width       = innerWidth - padding.left - padding.right;
+              var height      = innerHeight - padding.top - padding.bottom;
+
+        
+              var svg = d3.select("#feat_importance").append("svg")
+                      .attr("id", "bar_graph")
+                      .attr("width", '100%')
+                      .attr("height", '100%')
+                      .style("margin", "auto")
+                      .style("display", "block")
+                            .style("background-color", "lightgray")
+                            .style("border-radius", "21px")
+                  .append("g")
+                      .attr("id", "features_imp")
+                      .attr("transform", "translate(" + 250 + "," + 40 + ")")
+                      
+              // var desc = d3.select("#bar_graph").append("g")
+              //               .attr("height", "100%")
+              //               .attr("width", "30%")
+              //               .append("text")
+              //               .text("According to this bar plot, we see that the economic factor that affects the CoVid Severity the most is Secure Internet Servers.")
+              //               .style("display", "block")
+              //               .style("background", "gray")
+              //               .attr("transform", "translate(600, 20)")
+
+              data = {{ get_correlation_data('Economy') | safe }}
+              bar_graph_data = []
+
+              for (var feature in data) {
+                bar_graph_data.push({'feature' : data[feature][0],
+                                      'importance' : +data[feature][1]});
+            }
+              color_domain = []
+              for (var feature in data){
+                color_domain.push(+data[feature][1])
+              }
+              color_palette = ["#C4E8D6", "#9CD8BB", "#4EA27A", "#287C53"] // Green
+              var color_scale = d3.scaleQuantile().domain(color_domain).range(color_palette);
+              
+
+              var x = d3.scaleLinear().range([ 0, 400]);
+              x.domain([0, d3.max(bar_graph_data, function(d){return d.importance})])
+              var y = d3.scaleBand().range([ 0, 450 ])
+              y.domain(bar_graph_data.map(function(d) { return d.feature; }))
+
+              svg.append("g").attr("class","x_axis")
+                        .style("transform", "translate(0, 450px)")
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                          .attr("transform", "translate(-10,0)rotate(-45)")
+                          .style("text-anchor", "end")
+                          .style("fill", "black")
+                          .style("font-size", 12);
+
+              d3.select(".x_axis")
+                .append("text")
+                .text("Feature Importance by Random Forest")
+                .style("font-size", 16)
+                .attr("fill", "black")
+                .attr("transform", "translate(250, 50)")
+              d3.select(".x_axis")
+              .selectAll(".tick .path")
+              .style("fill", "black")
+
+              svg.append("g").attr("class", "y_axis")
+               .attr("fill", "black")
+                 .call(d3.axisLeft(y).tickFormat(function(d){return d.slice(0,25)+"..."}))
+                 .selectAll(".tick text")
+                          .attr("id", function(d){return "tick_"+d.replaceAll(" ", "_")})
+                          // .attr("transform", "translate(-10,0)rotate(-25)")
+                          .style("text-anchor", "end")
+                          .style("fill", "black")
+                          .style("font-size", 12)
+                          .on("mouseover", function(d){
+                            d3.select(this).style("z-index", 1)
+                            d3.select(this).text(function(d){
+                              return d
+                            })
+                          }).on("mouseout", function(d){
+                            d3.select(this).text(function(d){return d.slice(0,25)+"..."})
+                          })
+              d3.select(".y_axis")
+                .select(".domain")
+                .style("stroke", "black")
+                .style("fill", "none")
+              
+              d3.select(".y_axis")
+                .append("text")
+                .text("Factors")
+                .attr("fill", "black")
+                .style("font-size", 16)
+                .attr("transform", "translate(-200, 200)rotate(-90)")
+              
+                d3.select(".x_axis")
+                .select(".domain")
+                .style("stroke", "black")
+                .style("fill", "none")
+                  //Bars
+              svg.selectAll("myRect")
+                        .data(bar_graph_data)
+                        .enter()
+                        .append("rect")
+                        .attr("x", x(0) )
+                        .attr("y", function(d) { return y(d.feature); })
+                        .attr("width", function(d) { return x(d.importance); })
+                        .attr("height", y.bandwidth() - 1 )
+                        .attr("fill", function(d){ return color_scale(d.importance)})
+
+              var legend = d3.legendColor()
+                .labelFormat(d3.format(".1p"))
+                .scale(color_scale)
+                
+              // d3.select("#bar_graph")
+              //   .append("g")
+              //       .attr("width", width)
+              //       .attr("height", height)
+              //       .attr("id", "legend")
+              //       .attr("transform", "translate(" + (width-100) + "," + (margin.top + padding.top) + ")")
+              //   .call(legend)
+              //   .selectAll("text")
+              //   .attr("fill", "white");
+
+            </script> 
+           
+          
+          
+        </div>
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #4EA27A;" class="display-5">Indices Based on GDP</h1>
+            <p  style="font-size: 16px; color: #282c34;">Select Index: <select id="indexDropDown"></select> </p>
+          </div>
+          <div id="scatter_plot" class="box-shadow mx-auto" style="background-color: #282c34; width: 95%; height: 600px; border-radius: 21px 21px 0 0;">
+            
+          </div>
+          <div >
+            <p></p>
+            <h4 id="sc_description" style="text-align: center; font-family: lato; color:  #4a4b4c"></h4>
+            <p></p>
+          </div>
+          <script>
+            data1 = {{ get_world_index_data("CoViD Severity") | safe }}
+            data2 = {{ get_world_index_data("gdp_per_capita") | safe }}
+            data3 = {{ get_world_index_data("Vaccination Status") | safe }}
+            ind = ['CoVid Severity', 'Vaccination Index']
+
+
+            d3.select("#indexDropDown").selectAll("options").data(ind).enter().append("option").attr("value", data=>data).text(data=>data);
+            var sc_plot_data = []
+            for (var country in data1){
+                    sc_plot_data.push({'gdp' : +data2[country],
+                                  'index' : +data1[country],
+                                  'country': country
+                                  })
+                    }
+            
+            create_sc_plot(sc_plot_data, "CoVid Severity")
+
+            d3.select("#indexDropDown").on("change",function(){
+                var sc_plot_data_temp = []
+                
+                var select = document.getElementById('indexDropDown');
+                var dropdown_value = select.options[select.selectedIndex].value;
+                var svg_sc = d3.select("#scatter_plot");
+                svg_sc.selectAll("*").remove();
+                d3.select(".desc").remove();
+
+                if (dropdown_value == 'Vaccination Index')
+                  {
+                    for (var country in data3){
+                    sc_plot_data_temp.push({'gdp' : +data2[country],
+                                  'index' : +data3[country],
+                                  'country': country
+                                  })
+                    }}
+                else if (dropdown_value == 'CoVid Severity')
+                {
+                  for (var country in data1){
+                    sc_plot_data_temp.push({'gdp' : +data2[country],
+                                  'index' : +data1[country],
+                                  'country': country
+                                  })
+                    }
+                }
+                  
+                sc_plot_data = sc_plot_data_temp
+                create_sc_plot(sc_plot_data, dropdown_value)
+                }
+            )
+
+            function create_sc_plot(sc_plot_data, dropdown_value){
+              // console.log("Changed and called function again!!")
+              color_domain = []
+              for (var country in sc_plot_data){
+                color_domain.push(sc_plot_data[country].index)
+              }
+              color_palette = ["#C4E8D6", "#9CD8BB", "#4EA27A", "#287C53"] // Green
+              var color_scale = d3.scaleQuantile().domain(color_domain).range(color_palette);
+
+            // // append the svg object to the body of the page
+            var svg_sc = d3.select("#scatter_plot")
+              .append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%")
+              .append("g")
+                .attr("transform","translate(30, 40)");
+
+            var y = d3.scaleLinear().domain([0, d3.max(sc_plot_data, function(d){ return d.index})]).range([500, 0])
+            var x = d3.scaleLinear().domain([0, d3.max(sc_plot_data, function(d){ return d.gdp})]).range([ 0, 500 ]);
+
+            svg_sc.append("g")
+                      .attr("id", "x_axis")
+                      .attr("transform", "translate(50," + 500 + ")")
+                      .call(d3.axisBottom(x))
+                      .style("stroke", "white")
+                      // .style("fill", "white");
+
+            svg_sc.append("g").call(d3.axisLeft(y))
+                  .attr("transform", "translate(50," + 0 + ")")
+                  .attr("id", "y_axis")
+                  .style("stroke", "white")
+                  // .style("fill", "white");
+            
+            d3.select("#x_axis")
+            .select(".domain")
+            .style("stroke", "white")
+            .style("fill", "none")
+                d3.select("#x_axis").append("text")
+                .text("GDP per Capita")
+                .style("font-size", 16)
+                .attr("fill", "white")
+                .attr("transform", "translate(250, 50)")
+            
+            d3.select("#y_axis")
+            .select(".domain")
+            .style("stroke", "white")
+            .style("fill", "none")
+                d3.select("#y_axis").append("text")
+                .text(function(){return dropdown_value})
+                .style("font-size", 16)
+                .attr("fill", "white")
+                .attr("transform", "translate(-30, 150)rotate(-90)")
+
+            div = d3.select("#scatter_plot").append("div").attr("class", "tooltip");
+            // Add dots
+            svg_sc.selectAll("dots")
+              .data(sc_plot_data)
+              .enter()
+              .append("circle")
+                .attr("cx", function (d) { 
+                  if(d.gdp!=d.gdp) {return x(0)+50} 
+                  else {return x(d.gdp)+50;} } )
+                .attr("cy", function (d) { return y(d.index); } )
+                .attr("r", 4)
+                .style("fill", function (d) { return color_scale(d.index); })
+                .on("mouseover",function(d){
+                  div.html(d.country+"'s "+ dropdown_value+" : "+ d.index.toFixed(2))
+                    .style("left", (d3.event.pageX+15) + "px")
+                    .style("top", (d3.event.pageY-15) + "px")
+                    .style("opacity", 1)
+                    .style("background", "lightgrey")
+                    .style("border", "1px solid black")
+                    .style("padding", "5px")
+                    .style("display","block");
+                })
+                .on("mouseout",function(){div.html(" ").style("display","none");})
+                
+            d3.select("#sc_description").append("text")
+            .attr("class", "desc")
+            .text(function(d){
+              return "Through the scatter plot we see how "+ dropdown_value+ " changes with GDP across all countries."
+            }).style("font-size", 16)
+            
+            }
+            
+            
+            
+            
+            
+            
+
+          </script>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="container py-1">
+      <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+        <div class="col-md-0 p-lg-0 mx-auto my-0">
+          <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+          <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div> -->
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>

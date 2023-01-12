@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#794691;" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 align="center" style="color:#794691;">Vaccination Status Across The World</h1>
+          </div>
+          <div id="world_view" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 700px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+        <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3" >
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" >
+          
+            <div style="font-family: lato; color:black; font-size: 22px; margin: 1px 10%;"> 
+              In the above graph, we display what proportion of the population was vaccinated in countries around the world during the pandemic. We calculated our own vaccination index using weighted average of total singly and doubly vaccinated people as a proportion of the country's population to bring the values to a uniform scale.
+          </div>        
+              <hr>
+        </div>
+      </div>
+    </div>
+
+
+
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div id="lightbox1" class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 style="color: #794691;" class="display-5">Cross Correlation Function Plot between Vaccination Index and COVID Severity</h2>
+            </div>
+            <div id="world_cases" class="box-shadow mx-auto"  style="background-color: #282c34; width: 80%; height: 1000px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+              <div style="color:black; font-size: 22px; margin: 1px 10%;"> 
+                Cross-Correlation plot between the vaccination index and covid severity is the correlation plot between both de-trended time series at different lags of covid severity. This plot helps us understand how long it takes for changes in vaccination index to take effect on covid severity or vice versa. The red lines indicates the significance interval, which means correlation values more than that threshold can be considered significant. The plot shows us that there is maximum interaction between covid severity and vaccination index around the window of 120-140 days. The plot signifies that the covid severity is affected by the vaccination index in the country and not vice versa. Thus we can say that any change in vaccination index (more people gettting vaccinated) today would cause a change in covid severity 4-5 months down the line. 
+              </div>        
+            </div>
+          </div>
+        </div>
+
+         <div> 
+            <hr>
+                <p  align="center" style="font-family: lato; font-size: 16px; color: black;">Select Country: <select id="countrydropdown"></select> </p>
+              </div>
+
+
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+          <div>
+            <p></p>
+            <h1 align="center" >Pre Vaccination Covid Severity</h1>
+          </div>
+          <div class="my-1 py-1">
+            <h1 style="color: #282c34;" class="display-5"></h1>
+          </div>
+          <div id="pre_covid" class="bg-light box-shadow mx-auto" style="width: 90%; height: 800px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+          <div>
+            <p></p>
+            <h1 align="center">Post Vaccination Covid Severity</h1>
+          </div>
+          <div class="my-1 py-1">
+            <h1 style="color: #282c34;" class="display-5"></h1>
+          </div>
+          <div id="post_covid" class="bg-light box-shadow mx-auto" style="width: 90%; height: 800px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+    </div>
+ 
+
+
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+            <div style="font-family: lato; color:black; font-size: 22px; margin: 1px 10%;"> 
+                The above graph shows the breakdown of covid severity into two timelines; Pre-vaccination and post-vaccination. These plots show the change in COVID severity before and after vaccination availability. The graph also shows a general best fit line to easily communicate if there was an upward or a downward trend in the covid severity post/pre vaccination.  
+            </div>        
+                <hr>          
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      data={{ get_time_series_plot('vaccination') | safe }};
+
+      cross_corr = []
+
+      for (var feature in data){
+        cross_corr.push({'lag' : +data[feature][0],
+                      'corr' : +data[feature][1],
+                      'ci' : +data[feature][2],
+                      'neg_ci' : +data[feature][3],})
+      }
+      
+      var svg1 = d3.select("#world_cases").append("svg")
+                   .attr("id", "linechart1")
+                    .attr("width", 1000)
+                    .attr("height", 900)
+                    .style("margin", "auto")
+                    .style("display", "block")
+                .append("g")
+                    .attr("width", innerWidth)
+                    .attr("height", innerHeight)
+                    .attr("id", "g1")
+                    .attr("transform", "translate(" + 60 + "," + 20 + ")");
+      
+      var xScale = d3.scaleLinear()
+                     .range([0, 1000])
+                     .domain([d3.min(cross_corr, function(d) { return d.lag }),d3.max(cross_corr, function(d) { return d.lag })]);
+
+      var yScale = d3.scaleLinear()
+                     .range([800, 0])
+                     .domain([d3.min(cross_corr, function(d) { return d.corr })-0.05,d3.max(cross_corr, function(d) { return d.corr })+0.05]);
+
+      d3.select("#g1").append("g")
+         .attr("id", "x_axis")
+         .attr("transform", "translate(" + 0 + "," + 800 + ")")
+         .call(d3.axisBottom(xScale))
+
+      d3.select("#g1").append("g")
+        .attr("id", "y_axis")
+        .call(d3.axisLeft(yScale))
+
+      lineSvg = d3.select('#g1');
+      let g = lineSvg.append('g');
+
+      
+      // Add the lines
+      var line1 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.corr); });
+
+      // Add the line 2
+      var line2 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.ci); });
+
+      // Add the line 3
+      var line3 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.neg_ci); });
+
+
+      // Line 1
+      g.append("path")
+        .attr("d", function(d) { return line1(cross_corr)})
+        .style("stroke", "#8A5D9F")
+        .attr("fill","none")
+
+      // Line 2, 95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line2(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      // Line 3,95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line3(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      d3.select("#x_axis")
+        .append("text")
+          .text("Lags in Covid Severity")
+          .attr("transform", "translate(500, 30)")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+
+      d3.select("#y_axis")
+        .append("text")
+          .text("Cross Correlaton with Vaccination Index")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+          .attr("transform", "translate(-40, 300)rotate(-90)")
+
+      // Legend
+      svg1.append("rect")
+          .attr("x", 20)
+          .attr("y", 20)
+          .attr("width", 30)
+          .attr("height", 2)
+          .style("fill", "red")
+
+      svg1.append("text")
+          .text("95% confidence interval")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .attr("x", 60)
+          .attr("y", 25)
+
+      max_corr = d3.max(cross_corr, function(d) { return d.corr })
+      min_corr = d3.min(cross_corr, function(d) { return d.corr })
+
+      cross_corr.forEach(function (item) {
+        if (item["corr"] === max_corr){ max_corr_lag = item["lag"];}
+        if (item["corr"] === min_corr){ min_corr_lag = item["lag"];}
+      });
+
+      d3.select("#x_axis").append("text")
+          .text(`Max correlation at lag of ${max_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 50)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+      d3.select("#x_axis").append("text")
+          .text(`Min correlation at lag of ${min_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 75)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+
+    d3.select("#x_axis").attr("stroke", "white")
+    d3.select("#y_axis").attr("stroke", "white")
+
+d3.select("#x_axis").select(".domain").style("stroke", "white")
+d3.select("#y_axis").select(".domain").style("stroke", "white")
+
+    </script>
+      </div>
+    </div>
+
+    <footer class="container py-1">
+      <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+        <div class="col-md-0 p-lg-0 mx-auto my-0">
+          <h5 class="display-11 font-weight-normal" style="font-family: lato; color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+          <h6 class="display-11 font-weight-normal" style="font-family: lato; color:dimgray">Brought To You By Team Inspire</h6>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Add heading for the visualization -->
+    <script>
+        // Append visualization svg
+        var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth  = 1000;
+        var outerHeight = 800;
+        var innerWidth  = outerWidth - margin.left - margin.right;
+        var innerHeight = outerHeight - margin.top - margin.bottom;
+        var width       = innerWidth - padding.left - padding.right;
+        var height      = innerHeight - padding.top - padding.bottom;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        var svg = d3.select("#world_view").append("svg")
+                .attr("id", "choropleth")
+                .attr("width", outerWidth)
+                .attr("height", outerHeight)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block")
+            .append("g")
+                .attr("width", innerWidth)
+                .attr("height", innerHeight)
+                .attr("id", "countries")
+                .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+
+        // define any other global variables
+        var projection = d3.geoNaturalEarth1().translate([(width + 2 * padding.left + padding.right) / 2, (height + padding.top - padding.bottom) / 2]).scale(210);
+        var path       = d3.geoPath().projection(projection);
+
+        var worldmap = d3.json("static/graph_data/world_countries.json");
+
+        Promise.all([worldmap]).then(function(values) {
+            // enter code to call ready() with required arguments
+            ready(false, values[0]);
+        });
+        
+        function ready(error, world) {
+            createMapAndLegend(world);
+        }
+
+        // this function should create a Choropleth and legend using the world arguments for a selected_index
+        // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+        // function createMapAndLegend(world, selected_index) {
+        function createMapAndLegend(world) {
+            index_data = {{ get_world_index_data("Vaccination Status") | safe }}
+            color_palette = ["#CDBAD6", "#AC8CBB", "#8A5D9F", "#794691"] // Purple
+                            // ["#794691", "#8A5D9F", "#AC8CBB", "#CDBAD6"]
+            index_domain = []
+            for (var country in index_data) {
+                index_domain.push(index_data[country]);
+            }
+
+            var color_scale = d3.scaleQuantile().domain(index_domain).range(color_palette);
+
+            // Clear out the displays from the previous selection
+            svg.selectAll("path").remove();
+            d3.select("#legend").remove();
+
+            // Create the map
+            svg.selectAll("path")
+                .data(world.features)
+                .enter()
+                .append("path")
+                .attr("class","continent")
+                .style("fill", function(d) { 
+                    if (d.properties.name in index_data) {
+                        return color_scale(index_data[d.properties.name]);
+                    }
+                    return "grey";
+                })
+                .style("stroke", "gray")
+                .attr("d", path);
+            
+            // Create the legend
+            var legend = d3.legendColor()
+                .labelFormat(d3.format(".2f"))
+                .scale(color_scale);
+
+            d3.select("#choropleth")
+                .append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("id", "legend")
+                    .attr("transform", "translate(" + (padding.left) + "," + (margin.top + 6 * padding.top) + ")")
+                .call(legend)
+                .selectAll("text")
+                  .attr("fill", "gray");
+        }
+    </script>
+
+
+    <script>
+    country_data={{ get_vaccine_country_list() | safe }}
+    d3.select("#countrydropdown").selectAll("options").data(country_data).enter().append("option").attr("value", data=>data).text(data=>data);
+
+
+    d3.select("#countrydropdown").on("change",function(){
+          var select = document.getElementById('countrydropdown');
+          var dropdown_value = select.options[select.selectedIndex].value;
+          var svg1 = d3.select("#pre_covid");
+          var svg2 = d3.select("#post_covid");
+          svg1.selectAll("*").remove();
+          svg2.selectAll("*").remove();
+          show_trend_graphs(dropdown_value);
+   
+});
+      
+
+    d3.select("#countrydropdown").dispatch("change");
+
+
+    function show_trend_graphs(country){
+       var server_data = {'country':country,'pre':'True'};
+      if( window.$ ) {
+     var pre_vac = $.ajax({
+            type: "POST",
+            url: "/vaccination_new",
+            data: JSON.stringify(server_data),
+            contentType: "application/json",
+            dataType: 'json',
+            success : function(data) {
+                  var svg_line = d3.select("#pre_covid").append("svg")
+                  .attr("id", "pre_covid_graph")
+                  .attr("width", 600)
+                  .attr("height", 800)
+                  .style("margin", "auto")
+                  .style("display", "block")
+                  // .style("background-color", "lightgray")
+                  .append("g")
+                  .attr("transform", "translate(" + 100 + "," + 40 + ")");
+
+                  line_vals = []
+
+                  for (var feature in data.resp){
+                    line_vals.push({'date' : data.resp[feature][0],
+                                  'sever' : +data.resp[feature][1],
+                                  'line' : +data.resp[feature][2]})
+                  }
+
+                  minval = +data.min;
+
+
+                 var y = d3.scaleLinear().range([700,0]);
+                  y.domain([minval,d3.max(line_vals, function(d){return d.sever})])
+
+                  var x = d3.scaleTime()
+                    .domain(d3.extent(line_vals, function(d) { 
+                      return new Date(d.date); 
+                    }))
+                    .range([0, 450]);
+
+                  
+                  svg_line.append("g").attr("class","x_axis")
+                .style("fill","black")
+                .style("transform", "translate(0px, 700px)")
+                .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %y")))
+                .selectAll(".tick text")
+                  .style("text-anchor", "middle")
+                  .style("stroke", "black")
+                  ;
+
+                  d3.select(".x_axis")
+                            .append("text")
+                            .attr("transform", "translate(240, 40)")
+                            .text("Date")
+                            .attr("stroke", "black")
+                            .style("font-size", "15px");
+
+
+                  svg_line.append("g").attr("class", "y_axis")
+                  .style("fill", "black")
+                  .style("transform", "translate(0px, 0px)")
+                  .call(d3.axisLeft(y))
+                  .selectAll(".tick text")
+                  .style("text-anchor", "end")
+                  .style("stroke", "black")
+                              // .call(truncateLabel, y.bandwidth());
+
+                  d3.select(".y_axis")
+                            .append("text")
+                            .text("Covid Severity")
+                            .attr("stroke", "black")
+                            .attr("transform", "translate(-60, 350)rotate(-90)")
+                            // .attr("transform", "rotate(-90)")
+                            .style("font-size", "15px");
+
+                  // Add the lines
+                  var line1 = d3.line()
+                  .x(function(d) { return x(new Date(d.date)); })
+                  .y(function(d) { return y(d.sever); });
+
+
+                  // Add the line 2
+                  var line2 = d3.line()
+                  .x(function(d) { return x(new Date(d.date)); })
+                  .y(function(d) { return y(d.line); });
+
+
+                  // Line 1
+                  svg_line.append("path")
+                    .attr("d", function(d) { return line1(line_vals)})
+                    .style("stroke", "#8A5D9F")
+                    .attr("fill","none")
+
+                  // Line 2, 95% confidence interval
+                  svg_line.append("path")
+                    .attr("d", function(d) { return line2(line_vals)})
+                    .style("stroke", "red")
+                    .attr("stroke-width","2")
+                    .attr("fill","none");
+
+
+
+                }
+          });   
+      };
+
+
+      var server_data = {'country':country,'pre':'False'};
+      if( window.$ ) {
+     var pre_vac = $.ajax({
+            type: "POST",
+            url: "/vaccination_new",
+            data: JSON.stringify(server_data),
+            contentType: "application/json",
+            dataType: 'json',
+            success : function(data) {
+                  var svg_line_2 = d3.select("#post_covid").append("svg")
+                  .attr("id", "post_covid_graph")
+                  .attr("width", 600)
+                  .attr("height", 800)
+                  .style("margin", "auto")
+                  .style("display", "block")
+                  // .style("background-color", "lightgray")
+                  .append("g")
+                  .attr("transform", "translate(" + 100 + "," + 40 + ")");
+
+                  line_vals = []
+
+                  for (var feature in data.resp){
+                    line_vals.push({'date' : data.resp[feature][0],
+                                  'sever' : +data.resp[feature][1],
+                                  'line' : +data.resp[feature][2]})
+                  }
+
+                  minval = +data.min;
+
+
+                 var y = d3.scaleLinear().range([700,0]);
+                  y.domain([minval,d3.max(line_vals, function(d){return d.sever})])
+
+                  var x = d3.scaleTime()
+                    .domain(d3.extent(line_vals, function(d) { 
+                      return new Date(d.date); 
+                    }))
+                    .range([0, 450]);
+
+                  
+                svg_line_2.append("g").attr("class","x_axis").attr("id","post_x")
+                .style("fill","black")
+                .style("transform", "translate(0px, 700px)")
+                .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %y")))
+                .selectAll(".tick text")
+                  .style("text-anchor", "middle")
+                  .style("stroke", "black")
+                  ;
+
+                  d3.select("#post_x")
+                            .append("text")
+                            .attr("transform", "translate(240, 40)")
+                            .text("Date")
+                            .attr("stroke", "black")
+                            .style("font-size", "15px");
+
+
+                  svg_line_2.append("g").attr("class", "y_axis").attr("id","post_y")
+                  .style("fill", "black")
+                  .style("transform", "translate(0px, 0px)")
+                  .call(d3.axisLeft(y))
+                  .selectAll(".tick text")
+                  .style("text-anchor", "end")
+                  .style("stroke", "black")
+                              // .call(truncateLabel, y.bandwidth());
+
+                  d3.select("#post_y")
+                            .append("text")
+                            .text("Covid Severity")
+                            .attr("stroke", "black")
+                            .attr("transform", "translate(-60, 350)rotate(-90)")
+                            // .attr("transform", "rotate(-90)")
+                            .style("font-size", "15px");
+
+                  // Add the lines
+                  var line3 = d3.line()
+                  .x(function(d) { return x(new Date(d.date)); })
+                  .y(function(d) { return y(d.sever); });
+
+
+                  // Add the line 2
+                  var line4 = d3.line()
+                  .x(function(d) { return x(new Date(d.date)); })
+                  .y(function(d) { return y(d.line); });
+
+
+                  // Line 1
+                  svg_line_2.append("path")
+                    .attr("d", function(d) { return line3(line_vals)})
+                    .style("stroke", "#8A5D9F")
+                    .attr("stroke-width","1.5")
+                    .attr("fill","none")
+
+                  // Line 2, 95% confidence interval
+                  svg_line_2.append("path")
+                    .attr("d", function(d) { return line4(line_vals)})
+                    .style("stroke", "red")
+                    .attr("stroke-width","2")
+                    .attr("fill","none");
+
+
+
+                }
+          });   
+      };
+
+
+
+
+    }
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script> -->
+    <script src="static/js/bootstrap.min.js"></script>
+    </script>
+  </body>
+</html>

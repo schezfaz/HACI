@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" style="color:#5981BD;" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="color: #5981BD;" class="display-5">Government Stringency Across The World</h2>
+          </div>
+          <div id="world_view" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 600px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3" >
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" >
+          
+            <div style="font-family: lato; color:black; font-size: 22px; margin: 1px 10%;"> 
+              In the above graph, we visualize how stringent the government was in countries around the world during the pandemic. We use the aggregated government stringency index which was available in the Oxford COVID-19 government response tracker dataset.
+
+          </div>        
+              <hr>
+        </div>
+      </div>
+    </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div id="lightbox1" class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 style="font-family: lato; color: #5981BD;" class="display-5">Cross Correlation Function Plot between Stringency Index and COVID Severity</h2>
+            </div>
+            <div id="world_cases" class="box-shadow mx-auto"  style="background-color: #282c34; width: 80%; height: 1000px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+              <div style="font-family: lato; color:black; font-size: 22px; margin: 1px 10%;"> 
+                Cross-Correlation plot between the government stringency index and covid severity is the correlation plot between both de-trended time series at different lags of covid severity. This plot helps us understand how long it takes for changes in government stringency measures to take effect on covid severity. The red lines indicates the significance interval, which means correlation values more than that threshold can be considered significant. The plot shows us that there is maximum interaction between covid severity and government response is around the window of 180-200 days. The plot signifies that the government stringency is affected by the covid severity in the country and not vice versa. Thus we can say that any change in covid severity today would cause a change in how stringent the government is 6-7 months down the line.
+              </div>        
+            </div>
+          </div>
+        </div>
+
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 style="font-family: lato; color: #5981BD;"  class="display-5">Graph of Stringency Level effect on Covid Severity</h1>
+          </div>
+              <div> 
+                <p  style="font-family: lato; font-size: 16px; color: black;">Select Policy: <select id="policydropdown"></select> </p>
+              </div>
+          <div id="bar_graph" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+          </div>
+          
+            </div>
+        </div>
+      </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 overflow-hidden" style="background-color: white;">
+          
+            <div style="font-family: lato; color:black; font-size: 22px; margin: 1px 10%;"> 
+
+                The above bar graph shows how stringency in various government policies (such as cancelling public events, international travel control etc) affect COVID severity. Each bar represents the relative percentage drop in COVID severity from baseline, while keeping all other factors constant.<br><br>
+
+                For example; high government stringency in policies for cancelling public events would lead to a 55-60% drop in COVID severity from the baseline. We can observe that high government stringency in cancelling public events, controlling international travel, public information campaigns and testing policies leads to a higher decline in the COVID severity.<br><br>
+
+                Hence we can say that in the event of a pandemic in the future, the government should focus on these aspects more first. Our analysis showed that the stringency in vaccination policies and facial covering did not have a very significant impact on the covid severity, thus telling us that breaking the interation between people is the best way to move forward in the case of a pandemic.
+            
+            </div>        
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+
+      data={{ get_time_series_plot('govt') | safe }};
+
+      cross_corr = []
+
+      for (var feature in data){
+        cross_corr.push({'lag' : +data[feature][0],
+                      'corr' : +data[feature][1],
+                      'ci' : +data[feature][2],
+                      'neg_ci' : +data[feature][3],})
+      }
+      
+      var svg1 = d3.select("#world_cases").append("svg")
+                   .attr("id", "linechart1")
+                    .attr("width", 1000)
+                    .attr("height", 900)
+                    .style("margin", "auto")
+                    .style("display", "block")
+                .append("g")
+                    .attr("width", innerWidth)
+                    .attr("height", innerHeight)
+                    .attr("id", "g1")
+                    .attr("transform", "translate(" + 60 + "," + 20 + ")");
+      
+      var xScale = d3.scaleLinear()
+                     .range([0, 1000])
+                     .domain([d3.min(cross_corr, function(d) { return d.lag }),d3.max(cross_corr, function(d) { return d.lag })]);
+
+
+
+      // var l3 = {{ylist1}}.concat({{ylist2}}).concat({{ylist3}});
+      var yScale = d3.scaleLinear()
+                     .range([800, 0])
+                     .domain([d3.min(cross_corr, function(d) { return d.corr })-0.05,d3.max(cross_corr, function(d) { return d.corr })+0.05]);
+
+      d3.select("#g1").append("g")
+         .attr("id", "x_axis")
+         .attr("transform", "translate(" + 0 + "," + 800 + ")")
+         .call(d3.axisBottom(xScale))
+
+      d3.select("#g1").append("g")
+        .attr("id", "y_axis")
+        .call(d3.axisLeft(yScale))
+        // .selectAll("text")
+        // .style("stroke", "lightgray")
+
+
+      lineSvg = d3.select('#g1');
+      let g = lineSvg.append('g');
+
+      
+      // Add the lines
+      var line1 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.corr); });
+
+
+      // Add the line 2
+      var line2 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.ci); });
+
+
+      // Add the line 3
+      var line3 = d3.line()
+      .x(function(d) { return xScale(d.lag); })
+      .y(function(d) { return yScale(d.neg_ci); });
+
+
+      // Line 1
+      g.append("path")
+        .attr("d", function(d) { return line1(cross_corr)})
+        .style("stroke", "#5981BD")
+        .attr("stroke-width","2.5")
+        .attr("fill","none")
+
+      // Line 2, 95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line2(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      // Line 3,95% confidence interval
+      g.append("path")
+        .attr("d", function(d) { return line3(cross_corr)})
+        .style("stroke", "red")
+        .attr("stroke-width","2")
+        .attr("fill","none")
+
+      d3.select("#x_axis")
+        .append("text")
+          .text("Lags in Covid Severity")
+          .attr("transform", "translate(500, 30)")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+
+
+      d3.select("#y_axis")
+        .append("text")
+          .text("Cross Correlaton with Government Stringency Index")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .style("stroke-width","0.5px")
+          .style("font-size","14")
+          .attr("transform", "translate(-40, 300)rotate(-90)")
+
+      // Legend
+      svg1.append("rect")
+          .attr("x", 20)
+          .attr("y", 20)
+          .attr("width", 30)
+          .attr("height", 2)
+          .style("fill", "red")
+
+      svg1.append("text")
+          .text("95% confidence interval")
+          .attr("stroke", "white")
+          .attr("fill","white")
+          .attr("x", 60)
+          .attr("y", 25)
+
+
+      max_corr = d3.max(cross_corr, function(d) { return d.corr })
+      min_corr = d3.min(cross_corr, function(d) { return d.corr })
+
+      cross_corr.forEach(function (item) {
+        if (item["corr"] === max_corr){ max_corr_lag = item["lag"];}
+        if (item["corr"] === min_corr){ min_corr_lag = item["lag"];}
+      });
+
+      d3.select("#x_axis").append("text")
+          .text(`Max correlation at lag of ${max_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 50)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+      d3.select("#x_axis").append("text")
+          .text(`Min correlation at lag of ${min_corr_lag}`)
+          .attr("x", 60)
+          .attr("y", 75)
+          .attr("stroke", "white")
+          .style("stroke-width","1px")
+          .style("font-size","13")
+
+
+    d3.select("#x_axis").attr("stroke", "white")
+    d3.select("#y_axis").attr("stroke", "white")
+
+d3.select("#x_axis").select(".domain").style("stroke", "white")
+d3.select("#y_axis").select(".domain").style("stroke", "white")
+
+
+    </script>
+
+    
+        <!-- <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h2 style="color: #282c34;" class="display-5">Graph</h2>
+          </div>
+          <div class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div> -->
+      </div>
+    </div>
+
+    <footer class="container py-1">
+      <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+        <div class="col-md-0 p-lg-0 mx-auto my-0">
+          <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+          <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Add heading for the visualization -->
+    <script>
+        // Append visualization svg
+        var margin      = {top: 20, right: 10, bottom: 20, left: 10};
+        var padding     = {top: 60, right: 60, bottom: 60, left: 60};
+        var outerWidth  = 1000;
+        var outerHeight = 800;
+        var innerWidth  = outerWidth - margin.left - margin.right;
+        var innerHeight = outerHeight - margin.top - margin.bottom;
+        var width       = innerWidth - padding.left - padding.right;
+        var height      = innerHeight - padding.top - padding.bottom;
+
+        // append svg element to the body of the page
+        // set dimensions and position of the svg element
+        var svg = d3.select("#world_view").append("svg")
+                .attr("id", "choropleth")
+                .attr("width", outerWidth)
+                .attr("height", outerHeight)
+                .style("margin-left", "auto")
+                .style("margin-right", "auto")
+                .style("display", "block")
+            .append("g")
+                .attr("width", innerWidth)
+                .attr("height", innerHeight)
+                .attr("id", "countries")
+                .attr("transform", "translate(" + -padding.left + "," + margin.top + ")");
+
+        // define any other global variables
+        var projection = d3.geoNaturalEarth1().translate([(width + 2 * padding.left + padding.right) / 2, (height + padding.top - padding.bottom) / 2]).scale(210);
+        var path       = d3.geoPath().projection(projection);
+
+        var worldmap = d3.json("static/graph_data/world_countries.json");
+
+        Promise.all([worldmap]).then(function(values) {
+            // enter code to call ready() with required arguments
+            ready(false, values[0]);
+        });
+        
+        function ready(error, world) {
+            createMapAndLegend(world);
+        }
+
+        // this function should create a Choropleth and legend using the world arguments for a selected_index
+        // also use this function to update Choropleth and legend when a different index is selected from the dropdown
+        // function createMapAndLegend(world, selected_index) {
+        function createMapAndLegend(world) {
+            index_data = {{ get_world_index_data("Government Stringency") | safe }}
+            color_palette = ["#D5DFEF", "#97B0D6", "#5981BD", "#214479"] // Blue
+
+            index_domain = []
+            for (var country in index_data) {
+                index_domain.push(index_data[country]);
+            }
+
+            var color_scale = d3.scaleQuantile().domain(index_domain).range(color_palette);
+
+            // Clear out the displays from the previous selection
+            svg.selectAll("path").remove();
+            d3.select("#legend").remove();
+
+            // Create the map
+            svg.selectAll("path")
+                .data(world.features)
+                .enter()
+                .append("path")
+                .attr("class","continent")
+                .style("fill", function(d) { 
+                    if (d.properties.name in index_data) {
+                        return color_scale(index_data[d.properties.name]);
+                    }
+                    return "grey";
+                })
+                .style("stroke", "gray")
+                .attr("d", path);
+            
+            // Create the legend
+            var legend = d3.legendColor()
+                .labelFormat(d3.format(".2f"))
+                .scale(color_scale);
+
+            d3.select("#choropleth")
+                .append("g")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("id", "legend")
+                    .attr("transform", "translate(" + (padding.left) + "," + (margin.top + 6 * padding.top) + ")")
+                .call(legend)
+                .selectAll("text")
+                  .attr("fill", "gray");
+        }
+    </script>
+
+    <script>
+
+    data={{ get_govt_bar_plots('govt') | safe }}
+
+    bar_vals = []
+
+      for (var feature in data){
+        bar_vals.push({'feat' : data[feature][0],
+                      'pval' : +data[feature][1],
+                      'coeff' : +data[feature][2],
+                      'base_feat' : data[feature][3].replace(/_/g, ' ')})
+      }
+
+      all_policies = []
+            for(i in bar_vals){
+                all_policies.push(bar_vals[i].base_feat)
+              }
+
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+      var unique_policies = [...new Set(all_policies.sort())];
+
+      d3.select("#policydropdown").selectAll("options").data(unique_policies).enter().append("option").attr("value", data=>data).text(data=> toTitleCase(data));
+
+      d3.select("#policydropdown").on("change",function(){
+          var select = document.getElementById('policydropdown');
+          var dropdown_value = select.options[select.selectedIndex].value;
+          var svg = d3.select("#bar_graph");
+          svg.selectAll("*").remove();
+          generating_data = []
+          for(i in bar_vals){
+            if(bar_vals[i].base_feat == dropdown_value){
+              generating_data.push(bar_vals[i])
+            }
+          }
+          create_bar_graph(generating_data);
+      });
+
+      generating_data = []
+      var select = document.getElementById('policydropdown');
+      var dropdown_value = select.options[select.selectedIndex].value;
+      for(i in bar_vals){
+            if(bar_vals[i].base_feat == dropdown_value){
+              generating_data.push(bar_vals[i])
+            }
+      }
+      create_bar_graph(generating_data);
+
+      function create_bar_graph(bar_data){
+      var svg_bar = d3.select("#bar_graph").append("svg")
+                  .attr("id", "bg")
+                  .attr("width", 1000)
+                  .attr("height", 500)
+                  .style("margin", "auto")
+                  .style("display", "block")
+                  // .style("background-color", "lightgray")
+                  .append("g")
+                  .attr("transform", "translate(" + 100 + "," + 40 + ")");
+
+      color_domain = []
+      maxval = d3.max(bar_data, function(d){return d.coeff});
+      for (var feature in bar_data){
+        color_domain.push(((bar_data[feature].coeff*100)/maxval)-100)
+      }
+      if (color_domain.length == 3) {
+        color_palette = ["#66AADE", "#2F61AD", "#21467A"];
+        labels = ['Low','Moderate','High']
+      }
+      if (color_domain.length == 4) {
+        color_palette = ["#66AADE", "#2F61AD", "#21467A","#1C2F68"];
+        labels = ['Low','Moderate','High','Very High']
+      }
+      if (color_domain.length == 5) {
+        color_palette = ["#66AADE", "#2F61AD", "#21467A","#1C2F68","#6A2765"];
+        labels = ['None','Low','Moderate','High','Very High']
+      }
+
+      var color_scale = d3.scaleQuantile().domain(color_domain.sort()).range(color_palette);
+      
+
+      var y = d3.scaleLinear().range([0,400]);
+      y.domain([0,d3.max(bar_data, function(d){return ((d.coeff*100)/maxval)-100})])
+      var x = d3.scaleBand().range([ 0, 900 ])
+      x.domain(labels.map(function(d) { return d; }))
+
+      svg_bar.append("g").attr("class","x_axis")
+                .style("fill","white")
+                .style("transform", "translate(0px, 0px)")
+                .call(d3.axisBottom(x))
+                .selectAll(".tick text")
+                  .attr("y", "-15px")
+                  .style("text-anchor", "middle")
+                  .style("stroke", "white")
+                  .style("font-size","14");
+
+      d3.select(".x_axis")
+                .append("text")
+                .attr("transform", "translate(450, -25)")
+                .text("Government Stringency Level")
+                .attr("font-size","15")
+                .attr("stroke", "white")
+                .attr("id","x_axis")
+                // .attr("transform", "translate(450, -50)")
+
+
+      svg_bar.append("g").attr("class", "y_axis")
+      .style("fill", "white")
+      .style("transform", "translate(0px, 0px)")
+      .call(d3.axisLeft(y))
+      .selectAll(".tick text")
+      .style("text-anchor", "end")
+      .style("stroke", "white")
+                  // .call(truncateLabel, y.bandwidth());
+
+      d3.select(".y_axis")
+                .append("text")
+                .attr("transform", "translate(-40, 70)rotate(-90)")
+                .text("Relative Percentage drop from Baseline")
+                .attr("font-size","15")
+                .attr("stroke", "white")
+                // .attr("transform", "rotate(-90)")
+                // .style("font-size", "10px");
+          
+              
+          //Bars
+
+      svg_bar.selectAll("myRect")
+                .data(bar_data)
+                .enter()
+                .append("rect")
+                .attr("x", function(d,i) { return x(labels[i]); } )
+                .attr("y", 0 )
+                .transition().duration("1000")
+                .attr("width", x.bandwidth()-20)
+                .attr("height", function(d) { return y(((d.coeff*100)/maxval)-100); } )
+                .attr("fill", function(d){ return color_scale(((d.coeff*100)/maxval)-100)});
+      }
+
+    d3.select("#x_axis").attr("stroke", "white")
+    d3.select(".y_axis").attr("stroke", "white")
+
+d3.select("#x_axis").select(".domain").style("stroke", "white")
+d3.select(".y_axis").select(".domain").style("stroke", "white")
+
+      
+    </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>
