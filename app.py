@@ -516,4 +516,4 @@ def utility_processor():
         get_epidemiology_strains    = get_epidemiology_strains)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.app()
