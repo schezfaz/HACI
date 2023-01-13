@@ -41,6 +41,7 @@ Flask-Compress==1.12
 Flask-Cors==3.0.10
 flask-ngrok==0.0.25
 fonttools==4.28.5
+Frozen-Flask==0.18
 future==0.18.2
 ghostscript==0.7
 idna==2.10
@@ -111,6 +112,8 @@ PyPDF2==1.27.12
 pyrsistent==0.18.1
 python-dateutil==2.8.2
 pytz==2022.4
+pywin32==305
+pywinpty==2.0.9
 PyYAML==6.0
 pyzmq==23.2.1
 qtconsole==5.3.2
