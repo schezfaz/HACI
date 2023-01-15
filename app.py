@@ -20,23 +20,23 @@ app = Flask(__name__)
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/economy/economy.html")
+@app.route("/economy.html")
 def economy():
     return render_template("economy.html")
 
-@app.route("/government/government.html")
+@app.route("/government.html")
 def government():
     return render_template("government.html")
 
-@app.route("/mobility/mobility.html")
+@app.route("/mobility.html")
 def mobility():
     return render_template("mobility.html")
 
-@app.route("/symptoms/symptoms.html")
+@app.route("/symptoms.html")
 def symptoms():
     return render_template("symptoms.html")
 
-@app.route("/vaccination/vaccination.html")
+@app.route("/vaccination.html")
 def vaccination():
     return render_template("vaccination.html")
 
@@ -74,7 +74,7 @@ def vaccination():
 #         minval=min(line)
 #     return jsonify({'resp':final,'min':minval})
 
-@app.route("/about/about.html")
+@app.route("/about.html")
 def about():
     return render_template("about.html")
 
