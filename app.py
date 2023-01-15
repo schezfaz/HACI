@@ -20,63 +20,61 @@ app = Flask(__name__)
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/economy")
+@app.route("/economy/economy.html")
 def economy():
     return render_template("economy.html")
 
-@app.route("/government")
+@app.route("/government/government.html")
 def government():
     return render_template("government.html")
 
-@app.route("/mobility")
+@app.route("/mobility/mobility.html")
 def mobility():
     return render_template("mobility.html")
 
-@app.route("/symptoms")
+@app.route("/symptoms/symptoms.html")
 def symptoms():
     return render_template("symptoms.html")
 
-@app.route("/vaccination")
+@app.route("/vaccination/vaccination.html")
 def vaccination():
     return render_template("vaccination.html")
 
-@app.route('/vaccination_new', methods=['POST', 'GET'])
-def process_country():
-    if request.method == "POST":
-        response = request.get_json()
-    
-    country = response['country']
-    pre = response['pre']
-    df1 = pd.read_csv("data/generated_files/vac_country.csv")
-    df2 = pd.read_csv("data/generated_files/ep_country.csv")
-    df_vac_country = df1[df1["country_name"]==country]
-    df_vac_country = df_vac_country.groupby(['date','location_key'])['new_persons_vaccinated','new_persons_fully_vaccinated','population'].sum().reset_index()
-    df_vac_country['vaccination_index'] = (df_vac_country['new_persons_vaccinated']+2*df_vac_country['new_persons_fully_vaccinated'])/df_vac_country['population']
-    df_vac_country.sort_values(by='date',inplace=True,ignore_index=True)
-    df_ep_country = df2[df2["country_name"]==country]
-    df_ep_country = df_ep_country.groupby(['date','location_key'])['new_confirmed','new_deceased','population'].sum().reset_index()
-    df_ep_country['covid_severity'] = (df_ep_country['new_confirmed']+10*df_ep_country['new_deceased'])/df_ep_country['population']
-    df_ep_country.sort_values(by='date',inplace=True,ignore_index=True)
+# @app.route('/vaccination_new')
+# def process_country():
+#     response = request.get_json()
+#     country = response['country']
+#     pre = response['pre']
+#     df1 = pd.read_csv("data/generated_files/vac_country.csv")
+#     df2 = pd.read_csv("data/generated_files/ep_country.csv")
+#     df_vac_country = df1[df1["country_name"]==country]
+#     df_vac_country = df_vac_country.groupby(['date','location_key'])['new_persons_vaccinated','new_persons_fully_vaccinated','population'].sum().reset_index()
+#     df_vac_country['vaccination_index'] = (df_vac_country['new_persons_vaccinated']+2*df_vac_country['new_persons_fully_vaccinated'])/df_vac_country['population']
+#     df_vac_country.sort_values(by='date',inplace=True,ignore_index=True)
+#     df_ep_country = df2[df2["country_name"]==country]
+#     df_ep_country = df_ep_country.groupby(['date','location_key'])['new_confirmed','new_deceased','population'].sum().reset_index()
+#     df_ep_country['covid_severity'] = (df_ep_country['new_confirmed']+10*df_ep_country['new_deceased'])/df_ep_country['population']
+#     df_ep_country.sort_values(by='date',inplace=True,ignore_index=True)
     
     
-    if pre=='True':
-        df_final = df_ep_country[(df_ep_country['date']<df_vac_country.date[0])]
-    else:
-        df_final = df_ep_country[(df_ep_country['date']>=df_vac_country.date[0])]
-    x = np.arange(df_final.shape[0])
-    fit = np.polyfit(x, df_final['covid_severity'], deg=1)
-    fit_function = np.poly1d(fit)
-    line = fit_function(x)
+#     if pre=='True':
+#         df_final = df_ep_country[(df_ep_country['date']<df_vac_country.date[0])]
+#     else:
+#         df_final = df_ep_country[(df_ep_country['date']>=df_vac_country.date[0])]
+#     x = np.arange(df_final.shape[0])
+#     fit = np.polyfit(x, df_final['covid_severity'], deg=1)
+#     fit_function = np.poly1d(fit)
+#     line = fit_function(x)
 
-    final = []
-    for i in range(len(line)):
-        final.append([df_final.date.values[i],df_final.covid_severity.values[i],line[i]])
-    minval = min(df_final.covid_severity.values)
-    if min(line)<minval:
-        minval=min(line)
-    return jsonify({'resp':final,'min':minval})
+#     final = []
+#     for i in range(len(line)):
+#         final.append([df_final.date.values[i],df_final.covid_severity.values[i],line[i]])
+#     minval = min(df_final.covid_severity.values)
+#     if min(line)<minval:
+#         minval=min(line)
+#     return jsonify({'resp':final,'min':minval})
 
-@app.route("/about")
+@app.route("/about/about.html")
 def about():
     return render_template("about.html")
 

@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>Holistic Analysis of CoViD Impacts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/product.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="static/js/d3.v5.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="static/js/d3-legend.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.layout.cloud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
+    <!-- <script type="text/javascript" src="static/js/d3-tip.min.js"></script> -->
+
+    <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+      <div class="col-md-0 p-lg-0 mx-auto my-0">
+        <h1 class="display-4 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h1>
+      </div>
+    </div>
+
+    <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="/">CoViD Severity</a>
+        <a class="py-2 d-none d-md-inline-block" href="/economy">Economy</a>
+        <a class="py-2 d-none d-md-inline-block" href="/government">Government</a>
+        <a class="py-2 d-none d-md-inline-block" href="/mobility">Mobility</a>
+        <a class="py-2 d-none d-md-inline-block" href="/symptoms">Symptoms</a>
+        <a class="py-2 d-none d-md-inline-block" href="/vaccination">Vaccination</a>
+        <a class="py-2 d-none d-md-inline-block" href="/about">About Us</a>
+      </div>
+    </nav>
+
+    <!-- Add heading for the visualization -->
+    <!-- <div><p></p></div> -->
+    <!-- <script>
+      var drop_down_text = d3.select("body")
+        .append("text")
+        .attr("dy", "5em")
+        .text("\n\n\u00A0\u00A0\u00A0\u00A0\u00A0Select Category: ");
+  
+      //  Create dropdown element here. Options should be added after reading in index file, they should not be created here
+      var drop_down = d3.select("body").append("select").attr("id", "index_dropdown");
+    </script> -->
+    
+    <!-- append visualization svg to this div-->
+    <!-- <div id="space"></div> -->
+
+    <div class="d-flex flex-column">
+      <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Google Search trends across all C0VID strains</h1>
+          </div>
+          <div id="whole_wc" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center text-white overflow-hidden" style="background-color: #282c34;">
+          <div class="my-1 py-1">
+              <h1 class="display-5">Top Search trends</h1>
+            <div> 
+                <p  style="font-size: 16px; color: white;">Select Symptom: <select id="symptom_dropdown"></select> </p>
+            </div>
+          </div>
+          <div id= "symptom_line" class="bg-light box-shadow mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Cases across different COVID variants</h1>
+          </div>
+          <div id="bar_plot" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+          <div class="my-1 p-1">
+            <h1 class="display-5">Google Search Trends - Alpha strain</h1>
+          </div>
+          <div id = "alpha" class="box-shadow mx-auto" style="background-color: #282c34;width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-column">
+        <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 class="display-5">Google Search Trends - Delta strain</h1>
+            </div>
+            <div id="delta" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+  
+
+      <div class="d-flex flex-column">
+        <div id="world_view" class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+          <div class="bg-light mr-md-1 pt-1 px-1 pt-md-1 px-md-1 text-center overflow-hidden">
+            <div class="my-1 p-1">
+              <h1 class="display-5">Google Search Trends - Omicron strain</h1>
+            </div>
+            <div id="omicron" class="box-shadow mx-auto" style="background-color: #282c34; width: 80%; height: 500px; border-radius: 21px 21px 0 0;"></div>
+          </div>
+        </div>
+  
+
+      <footer class="container py-1">
+        <div class="position-relative overflow-hidden p-3 p-md-4 text-center background-color:black">
+          <div class="col-md-0 p-lg-0 mx-auto my-0">
+            <h5 class="display-11 font-weight-normal" style="color:dimgray">Holistic Analysis Of CoViD-19 Impacts</h5>
+            <h6 class="display-11 font-weight-normal" style="color:dimgray">Brought To You By Team Inspire</h6>
+          </div>
+        </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div> -->
+    </footer>
+
+    <script>
+      var color = d3.scaleOrdinal(d3.schemeCategory10)
+      words = [[['strain', 'alpha'], ['abdominal obesity', 2.360858842], ['abdominal pain', 4.432370269], ['acne', 7.335264837], ['actinic keratosis', 0.324187453], ['acute bronchitis', 0.237141611], ['adrenal crisis', 0.117204198], ['ageusia', 0.191644297], ['alcoholism', 3.959271201], ['allergic conjunctivitis', 0.078698624], ['allergy', 10.22186639], ['amblyopia', 0.209970468], ['amenorrhea', 0.148475544], ['amnesia', 0.458427314], ['anal fissure', 0.284580846], ['anaphylaxis', 0.552005947], ['anemia', 2.325406958], ['angina pectoris', 0.758406609], ['angioedema', 0.186120501], ['angular cheilitis', 0.080287455], ['anosmia', 0.234616534], ['anxiety', 7.87835336], ['aphasia', 0.25930857], ['aphonia', 0.069657579], ['apnea', 0.456650695], ['arthralgia', 0.337564129], ['arthritis', 4.894623129], ['ascites', 0.186198507], ['asperger syndrome', 1.267275773], ['asphyxia', 0.128880969], ['asthma', 2.053506689], ['astigmatism', 0.331774442], ['ataxia', 0.175917521], ['atheroma', 0.146184435], ['attention deficit hyperactivity disorder', 3.570289301], ['auditory hallucination', 0.10023106], ['autoimmune disease', 1.474706242], ['avoidant personality disorder', 0.261017794], ['back pain', 5.336624703], ['bacterial vaginosis', 1.201335603], ['balance disorder', 0.143029159], ['beaus lines', 0.119085895], ['bells palsy', 0.398435647], ['biliary colic', 0.208809325], ['binge eating', 0.300216441], ['bleeding', 3.745611396], ['bleeding on probing', 0.175566535], ['blepharospasm', 0.363238829], ['bloating', 2.111835163], ['blood in stool', 0.465551228], ['blurred vision', 0.415572269], ['blushing', 0.231908573], ['boil', 0.826888384], ['bone fracture', 2.981422676], ['bone tumor', 0.193754623], ['bowel obstruction', 0.26944146], ['bradycardia', 0.593059492], ['braxton hicks contractions', 0.3963575], ['breakthrough bleeding', 0.614088257], ['breast pain', 0.462863032], ['bronchitis', 0.413013043], ['bruise', 1.557604408], ['bruxism', 0.366242499], ['bunion', 0.429649642], ['burn', 1.811344422], ['burning chest pain', 0.068965487], ['burning mouth syndrome', 0.167052217], ['candidiasis', 2.46841946], ['canker sore', 0.906100078], ['cardiac arrest', 0.438246337], ['carpal tunnel syndrome', 0.87642617], ['cataplexy', 0.108227949], ['cataract', 0.554447577], ['chancre', 0.19128849], ['cheilitis', 0.288946447], ['chest pain', 1.410742824], ['chills', 0.297828303], ['chorea', 0.172618422], ['chronic pain', 0.974130643], ['cirrhosis', 0.703867132], ['cleft lip and cleft palate', 0.163518718], ['clouding of consciousness', 0.130296028], ['cluster headache', 0.21773843], ['colitis', 0.492041801], ['coma', 0.307519612], ['common cold', 7.76384345], ['compulsive behavior', 0.700613392], ['compulsive hoarding', 0.140951255], ['confusion', 0.270790354], ['congenital heart defect', 0.228645919], ['conjunctivitis', 0.706759078], ['constipation', 3.540929185], ['convulsion', 0.300909091], ['cough', 4.163709753], ['crackles', 0.06870342], ['cramp', 2.950837362], ['crepitus', 0.099941422], ['croup', 0.158071224], ['cyanosis', 0.115782956], ['dandruff', 1.212289562], ['delayed onset muscle soreness', 0.509324369], ['dementia', 2.116222958], ['dentin hypersensitivity', 0.317863161], ['depersonalization', 0.131879822], ['depression', 4.791327171], ['dermatitis', 2.244355248], ['desquamation', 0.356476659], ['developmental disability', 0.163417829], ['diabetes', 8.34106259], ['diabetic ketoacidosis', 0.268980037], ['diarrhea', 3.893638968], ['dizziness', 1.66915224], ['dry eye syndrome', 0.664274668], ['dysautonomia', 0.092948178], ['dysgeusia', 0.150702485], ['dysmenorrhea', 1.181208435], ['dyspareunia', 0.105158862], ['dysphagia', 0.342474227], ['dysphoria', 0.249098202], ['dystonia', 0.167116609], ['dysuria', 0.14445663], ['ear pain', 0.609290704], ['eczema', 0.2076029], ['edema', 0.870854474], ['encephalitis', 0.171332968], ['encephalopathy', 0.213360829], ['epidermoid cyst', 0.239716596], ['epilepsy', 2.115778354], ['epiphora', 0.105082789], ['erectile dysfunction', 2.54400069], ['erythema', 0.537164355], ['erythema chronicum migrans', 0.168736225], ['esophagitis', 0.133140092], ['excessive daytime sleepiness', 0.275128786], ['eye pain', 0.172123614], ['eye strain', 0.323410922], ['facial nerve paralysis', 0.356470864], ['facial swelling', 0.132311973], ['fasciculation', 0.715430847], ['fatigue', 4.589662709], ['fatty liver disease', 0.428097157], ['fecal incontinence', 0.1684829], ['fever', 3.626093793], ['fibrillation', 0.500534098], ['fibrocystic breast changes', 0.117643184], ['fibromyalgia', 0.574075924], ['flatulence', 2.179978951], ['floater', 0.235516722], ['focal seizure', 0.124356482], ['folate deficiency', 0.219600237], ['food craving', 0.451334522], ['food intolerance', 0.723835175], ['frequent urination', 0.475641744], ['gastroesophageal reflux disease', 3.845758518], ['gastroparesis', 0.138590889], ['generalized anxiety disorder', 1.104253663], ['genital wart', 0.827350484], ['gingival recession', 0.13931689], ['gingivitis', 0.447373806], ['globus pharyngis', 0.111907974], ['goitre', 0.144145757], ['gout', 0.950100843], ['grandiosity', 0.181689541], ['granuloma', 0.153003255], ['guilt', 0.36355613], ['hair loss', 4.360134519], ['halitosis', 0.534487904], ['hay fever', 1.766859317], ['headache', 4.238478213], ['heart arrhythmia', 2.044348115], ['heart murmur', 0.176441411], ['heartburn', 2.778999948], ['hematochezia', 0.19987486], ['hematoma', 0.354506462], ['hematuria', 0.37675745], ['hemolysis', 0.106041571], ['hemoptysis', 0.099525399], ['hemorrhoids', 1.459990894], ['hepatic encephalopathy', 0.101904416], ['hepatitis', 0.88400574], ['hepatotoxicity', 0.122339974], ['hiccup', 0.510206054], ['hip pain', 0.888759204], ['hives', 1.016918321], ['hot flash', 0.649196383], ['hydrocephalus', 0.145637544], ['hypercalcaemia', 0.13841987], ['hypercapnia', 0.084472745], ['hypercholesterolemia', 1.488118807], ['hyperemesis gravidarum', 0.120864619], ['hyperglycemia', 1.17693868], ['hyperhidrosis', 0.483684832], ['hyperkalemia', 0.573707161], ['hyperlipidemia', 0.183235072], ['hypermobility', 0.213237906], ['hyperpigmentation', 0.889598041], ['hypersomnia', 0.101051248], ['hypertension', 6.979481982], ['hyperthermia', 0.299726264], ['hyperthyroidism', 1.071596499], ['hypertriglyceridemia', 0.266572658], ['hypertrophy', 0.295432972], ['hyperventilation', 0.126088675], ['hypocalcaemia', 0.151130682], ['hypochondriasis', 0.132796625], ['hypoglycemia', 0.719639248], ['hypogonadism', 0.67200918], ['hypokalemia', 0.714785935], ['hypomania', 0.142987089], ['hyponatremia', 0.284724372], ['hypotension', 1.218797997], ['hypothyroidism', 1.768097288], ['hypoxemia', 0.449798217], ['hypoxia', 0.215932897], ['impetigo', 0.13905774], ['implantation bleeding', 1.017423762], ['impulsivity', 0.544999175], ['indigestion', 1.436328463], ['infection', 19.52228865], ['inflammation', 5.343529747], ['inflammatory bowel disease', 1.072550671], ['ingrown hair', 0.659041926], ['insomnia', 3.083455132], ['insulin resistance', 0.424856901], ['intermenstrual bleeding', 0.195890384], ['intracranial pressure', 0.309820476], ['iron deficiency', 1.682160891], ['irregular menstruation', 0.42571702], ['itch', 6.393882532], ['jaundice', 0.488412792], ['kidney failure', 1.354849176], ['kidney stone', 1.406302141], ['knee pain', 1.599845499], ['kyphosis', 0.152139406], ['lactose intolerance', 0.789955255], ['laryngitis', 0.08763531], ['leg cramps', 0.390402271], ['lesion', 1.02810837], ['leukorrhea', 0.160428755], ['lightheadedness', 0.521472648], ['low back pain', 2.870791931], ['low grade fever', 0.228817991], ['lymphedema', 0.250318778], ['major depressive disorder', 4.056182297], ['malabsorption', 0.145542752], ['male infertility', 0.150178922], ['manic disorder', 0.653873562], ['melasma', 0.248803309], ['melena', 0.262810713], ['meningitis', 0.39051837], ['menorrhagia', 0.642316157], ['middle back pain', 0.344327035], ['migraine', 4.1895297], ['milium', 0.240600887], ['mitral insufficiency', 0.144740678], ['mood disorder', 1.073491111], ['mood swing', 0.247445218], ['morning sickness', 0.865615895], ['motion sickness', 0.26525127], ['mouth ulcer', 0.745422362], ['muscle atrophy', 0.148311096], ['muscle weakness', 0.24148822], ['myalgia', 0.58131717], ['mydriasis', 0.212696802], ['myocardial infarction', 2.296351258], ['myoclonus', 0.087691393], ['nasal congestion', 1.558596771], ['nasal polyp', 0.108897046], ['nausea', 2.063031416], ['neck mass', 0.126705271], ['neck pain', 1.546390351], ['neonatal jaundice', 0.19361843], ['nerve injury', 0.276754653], ['neuralgia', 0.227043973], ['neutropenia', 0.149171056], ['night sweats', 0.282484619], ['night terror', 0.106549125], ['nocturnal enuresis', 0.131283801], ['nodule', 0.378204227], ['nosebleed', 0.54206961], ['nystagmus', 0.118150699], ['obesity', 5.562503853], ['onychorrhexis', 0.128720179], ['oral candidiasis', 0.468275417], ['orthostatic hypotension', 0.265648723], ['osteopenia', 0.212434327], ['osteophyte', 0.138838243], ['osteoporosis', 0.88465722], ['otitis', 0.946666375], ['otitis externa', 0.310641961], ['otitis media', 0.624908099], ['pain', 34.95241672], ['palpitations', 0.490231075], ['pancreatitis', 0.357159671], ['panic attack', 1.570205095], ['papule', 0.154636662], ['paranoia', 0.169732936], ['paresthesia', 2.028494542], ['pelvic inflammatory disease', 0.50268767], ['pericarditis', 0.116948715], ['periodontal disease', 0.747055269], ['periorbital puffiness', 0.827129056], ['peripheral neuropathy', 0.795103299], ['perspiration', 1.701384811], ['petechia', 0.122218095], ['phlegm', 0.546507581], ['photodermatitis', 0.096758721], ['photophobia', 0.106091036], ['photopsia', 0.156473632], ['pleural effusion', 0.233695427], ['pleurisy', 0.146678898], ['pneumonia', 1.014043183], ['podalgia', 0.902233096], ['polycythemia', 0.179780832], ['polydipsia', 0.079040154], ['polyneuropathy', 0.164063728], ['polyuria', 0.135626831], ['poor posture', 0.592974045], ['post nasal drip', 0.182470923], ['postural orthostatic tachycardia syndrome', 0.187661226], ['prediabetes', 0.613659357], ['proteinuria', 0.27413356], ['pruritus ani', 0.227113031], ['psychosis', 1.653454246], ['ptosis', 0.142782028], ['pulmonary edema', 0.091638586], ['pulmonary hypertension', 0.329485023], ['purpura', 0.225391909], ['pus', 0.557266521], ['pyelonephritis', 0.443877558], ['radiculopathy', 0.421946182], ['rectal pain', 0.090318203], ['rectal prolapse', 0.133139735], ['red eye', 0.344904149], ['renal colic', 0.148209948], ['restless legs syndrome', 0.52732205], ['rheum', 0.091091098], ['rhinitis', 0.309187947], ['rhinorrhea', 0.367669179], ['rosacea', 0.413360859], ['round ligament pain', 0.154128091], ['rumination', 0.127400316], ['scar', 2.501684696], ['sciatica', 1.148912469], ['scoliosis', 0.312724059], ['seborrheic dermatitis', 0.346531638], ['self harm', 0.278619563], ['sensitivity to sound', 0.123894436], ['sexual dysfunction', 0.595220691], ['shallow breathing', 0.066907271], ['sharp pain', 0.808851616], ['shivering', 0.222971814], ['shortness of breath', 0.765260903], ['shyness', 0.34571258], ['sinusitis', 1.680373441], ['skin condition', 3.792545999], ['skin rash', 5.764452426], ['skin tag', 0.553465918], ['skin ulcer', 1.621411815], ['sleep apnea', 1.187906899], ['sleep deprivation', 0.386855332], ['sleep disorder', 2.331849476], ['snoring', 0.901699079], ['sore throat', 1.554580632], ['spasticity', 0.121707823], ['splenomegaly', 0.139511078], ['sputum', 0.149786623], ['stomach rumble', 0.129565049], ['strabismus', 0.36642122], ['stretch marks', 0.579237276], ['stridor', 0.08823269], ['stroke', 2.62923422], ['stuttering', 0.226000537], ['subdural hematoma', 0.134588667], ['suicidal ideation', 0.406661601], ['swelling', 5.43760959], ['swollen feet', 0.521818008], ['swollen lymph nodes', 0.984300175], ['syncope', 0.704412666], ['tachycardia', 0.929648804], ['tachypnea', 0.109265745], ['telangiectasia', 0.264792602], ['tenderness', 0.144914756], ['testicular pain', 0.258432002], ['throat irritation', 0.191364615], ['thrombocytopenia', 0.483127818], ['thyroid nodule', 0.1554863], ['tic', 0.350286022], ['tinnitus', 1.075524156], ['tonsillitis', 0.602585339], ['toothache', 0.972873349], ['tremor', 0.659963172], ['trichoptilosis', 0.140977052], ['tumor', 1.128578948], ['type 2 diabetes', 4.135839063], ['unconsciousness', 0.228587391], ['underweight', 0.702672756], ['upper respiratory tract infection', 0.125711203], ['urethritis', 0.145356241], ['urinary incontinence', 1.309506274], ['urinary tract infection', 4.056081948], ['urinary urgency', 0.076750101], ['uterine contraction', 0.810397936], ['vaginal bleeding', 0.517874902], ['vaginal discharge', 2.519420055], ['vaginitis', 0.681853941], ['varicose veins', 0.478371645], ['vasculitis', 0.150731589], ['ventricular fibrillation', 0.088408036], ['ventricular tachycardia', 0.210942798], ['vertigo', 1.170732955], ['viral pneumonia', 0.05734031], ['visual acuity', 0.23157718], ['vomiting', 2.667864194], ['wart', 1.26542443], ['water retention', 0.287541787], ['weakness', 0.419633049], ['weight gain', 3.201358894], ['wheeze', 0.256403891], ['xeroderma', 2.523404343], ['xerostomia', 0.430891875], ['yawn', 0.174857517]], [['strain', 'delta'], ['abdominal obesity', 2.040865795], ['abdominal pain', 4.551930271], ['acne', 6.648862012], ['actinic keratosis', 0.366669697], ['acute bronchitis', 0.384970645], ['adrenal crisis', 0.116149982], ['ageusia', 0.140749214], ['alcoholism', 4.026666085], ['allergic conjunctivitis', 0.077644315], ['allergy', 12.18480626], ['amblyopia', 0.210016626], ['amenorrhea', 0.140245369], ['amnesia', 0.436520002], ['anal fissure', 0.268434287], ['anaphylaxis', 0.514546065], ['anemia', 2.362225409], ['angina pectoris', 0.755814104], ['angioedema', 0.203781398], ['angular cheilitis', 0.079487414], ['anosmia', 0.20132174], ['anxiety', 7.436814111], ['aphasia', 0.264002624], ['aphonia', 0.101537538], ['apnea', 0.459891335], ['arthralgia', 0.326762576], ['arthritis', 4.977761399], ['ascites', 0.193253689], ['asperger syndrome', 1.471539736], ['asphyxia', 0.121785527], ['asthma', 2.087373535], ['astigmatism', 0.313077393], ['ataxia', 0.180522203], ['atheroma', 0.13971151], ['attention deficit hyperactivity disorder', 3.758965009], ['auditory hallucination', 0.097075141], ['autoimmune disease', 1.499253718], ['avoidant personality disorder', 0.287891189], ['back pain', 5.284518284], ['bacterial vaginosis', 1.217770104], ['balance disorder', 0.149714456], ['beaus lines', 0.109422102], ['bells palsy', 0.234248184], ['biliary colic', 0.207805464], ['binge eating', 0.272141097], ['bleeding', 3.695910667], ['bleeding on probing', 0.168041469], ['blepharospasm', 0.356694726], ['bloating', 2.058244805], ['blood in stool', 0.467525653], ['blurred vision', 0.409690313], ['blushing', 0.227239712], ['boil', 0.903058768], ['bone fracture', 3.108012335], ['bone tumor', 0.203385099], ['bowel obstruction', 0.273076322], ['bradycardia', 0.581305921], ['braxton hicks contractions', 0.403641234], ['breakthrough bleeding', 0.60524229], ['breast pain', 0.444331074], ['bronchitis', 0.61826996], ['bruise', 1.749014889], ['bruxism', 0.349627474], ['bunion', 0.458885427], ['burn', 2.030612565], ['burning chest pain', 0.065905594], ['burning mouth syndrome', 0.166226076], ['candidiasis', 2.586966683], ['canker sore', 0.906214555], ['cardiac arrest', 0.440730744], ['carpal tunnel syndrome', 0.855059759], ['cataplexy', 0.102944434], ['cataract', 0.583397377], ['chancre', 0.193612065], ['cheilitis', 0.246783938], ['chest pain', 1.401265303], ['chills', 0.275665372], ['chorea', 0.173079733], ['chronic pain', 0.951477526], ['cirrhosis', 0.73294141], ['cleft lip and cleft palate', 0.136222878], ['clouding of consciousness', 0.131398412], ['cluster headache', 0.212886663], ['colitis', 0.497190725], ['coma', 0.320885728], ['common cold', 10.00259869], ['compulsive behavior', 0.702772597], ['compulsive hoarding', 0.149021334], ['confusion', 0.260877643], ['congenital heart defect', 0.215711636], ['conjunctivitis', 0.865337277], ['constipation', 3.476371408], ['convulsion', 0.313402844], ['cough', 5.657086608], ['crackles', 0.072578705], ['cramp', 3.075861052], ['crepitus', 0.097627024], ['croup', 0.308614869], ['cyanosis', 0.106468406], ['dandruff', 1.063254291], ['delayed onset muscle soreness', 0.484871405], ['dementia', 2.196512798], ['dentin hypersensitivity', 0.29020206], ['depersonalization', 0.147285514], ['depression', 4.413038249], ['dermatitis', 2.296968905], ['desquamation', 0.379015746], ['developmental disability', 0.161496818], ['diabetes', 8.273158227], ['diabetic ketoacidosis', 0.261466696], ['diarrhea', 4.363480213], ['dizziness', 1.733143313], ['dry eye syndrome', 0.657259667], ['dysautonomia', 0.101490719], ['dysgeusia', 0.127313091], ['dysmenorrhea', 1.163424524], ['dyspareunia', 0.107247262], ['dysphagia', 0.333458167], ['dysphoria', 0.235270796], ['dystonia', 0.169689851], ['dysuria', 0.151918791], ['ear pain', 0.76046185], ['eczema', 0.199005517], ['edema', 0.951495991], ['encephalitis', 0.218895573], ['encephalopathy', 0.212012158], ['epidermoid cyst', 0.243170685], ['epilepsy', 2.170028462], ['epiphora', 0.106862525], ['erectile dysfunction', 2.495495094], ['erythema', 0.530213594], ['erythema chronicum migrans', 0.27841978], ['esophagitis', 0.136923473], ['excessive daytime sleepiness', 0.272430679], ['eye pain', 0.167920353], ['eye strain', 0.249147185], ['facial nerve paralysis', 0.203522657], ['facial swelling', 0.139540584], ['fasciculation', 0.712367574], ['fatigue', 4.590481167], ['fatty liver disease', 0.446751183], ['fecal incontinence', 0.173342115], ['fever', 3.947476545], ['fibrillation', 0.508510131], ['fibrocystic breast changes', 0.119098658], ['fibromyalgia', 0.559029551], ['flatulence', 2.087192042], ['floater', 0.251505376], ['focal seizure', 0.126959173], ['folate deficiency', 0.223863468], ['food craving', 0.418401126], ['food intolerance', 0.68416774], ['frequent urination', 0.488013994], ['gastroesophageal reflux disease', 3.832281924], ['gastroparesis', 0.145027589], ['generalized anxiety disorder', 1.066246434], ['genital wart', 0.852338272], ['gingival recession', 0.132798904], ['gingivitis', 0.430839029], ['globus pharyngis', 0.115819697], ['goitre', 0.147689784], ['gout', 0.967058819], ['grandiosity', 0.170208952], ['granuloma', 0.166661387], ['guilt', 0.355587073], ['hair loss', 4.108893527], ['halitosis', 0.504888253], ['hay fever', 1.831547751], ['headache', 4.145509052], ['heart arrhythmia', 2.026607918], ['heart murmur', 0.171891061], ['heartburn', 2.723934371], ['hematochezia', 0.197445404], ['hematoma', 0.419845279], ['hematuria', 0.393364187], ['hemolysis', 0.094758207], ['hemoptysis', 0.109350894], ['hemorrhoids', 1.469465344], ['hepatic encephalopathy', 0.103738171], ['hepatitis', 0.960752115], ['hepatotoxicity', 0.132507014], ['hiccup', 0.511317992], ['hip pain', 0.899284337], ['hives', 1.109760652], ['hot flash', 0.654352941], ['hydrocephalus', 0.14937374], ['hypercalcaemia', 0.141457862], ['hypercapnia', 0.082503654], ['hypercholesterolemia', 1.512225133], ['hyperemesis gravidarum', 0.116148994], ['hyperglycemia', 1.151491582], ['hyperhidrosis', 0.536640817], ['hyperkalemia', 0.578863271], ['hyperlipidemia', 0.191263578], ['hypermobility', 0.233504883], ['hyperpigmentation', 0.80088638], ['hypersomnia', 0.101909657], ['hypertension', 6.951699906], ['hyperthermia', 0.387726186], ['hyperthyroidism', 1.092361158], ['hypertriglyceridemia', 0.279346949], ['hypertrophy', 0.30438198], ['hyperventilation', 0.119027184], ['hypocalcaemia', 0.150252186], ['hypochondriasis', 0.125961628], ['hypoglycemia', 0.708460695], ['hypogonadism', 0.654376289], ['hypokalemia', 0.70684548], ['hypomania', 0.140943094], ['hyponatremia', 0.301110319], ['hypotension', 1.246729581], ['hypothyroidism', 1.700763625], ['hypoxemia', 0.380584143], ['hypoxia', 0.19994508], ['impetigo', 0.172385742], ['implantation bleeding', 0.994568368], ['impulsivity', 0.549799383], ['indigestion', 1.454152259], ['infection', 22.84416531], ['inflammation', 5.744596153], ['inflammatory bowel disease', 1.056030654], ['ingrown hair', 0.689754461], ['insomnia', 2.910061849], ['insulin resistance', 0.400098456], ['intermenstrual bleeding', 0.193421782], ['intracranial pressure', 0.266045843], ['iron deficiency', 1.71456117], ['irregular menstruation', 0.404190157], ['itch', 8.430771924], ['jaundice', 0.510190546], ['kidney failure', 1.392886008], ['kidney stone', 1.428867845], ['knee pain', 1.674911531], ['kyphosis', 0.158493752], ['lactose intolerance', 0.770873973], ['laryngitis', 0.142938719], ['leg cramps', 0.479129758], ['lesion', 1.09866792], ['leukorrhea', 0.159960601], ['lightheadedness', 0.527677391], ['low back pain', 2.846558243], ['low grade fever', 0.216394963], ['lymphedema', 0.251292656], ['major depressive disorder', 3.96494647], ['malabsorption', 0.156003629], ['male infertility', 0.148394867], ['manic disorder', 0.637869851], ['melasma', 0.253444161], ['melena', 0.292329924], ['meningitis', 0.487918638], ['menorrhagia', 0.635904396], ['middle back pain', 0.337668918], ['migraine', 4.103382257], ['milium', 0.248262512], ['mitral insufficiency', 0.142473607], ['mood disorder', 1.035597123], ['mood swing', 0.246344957], ['morning sickness', 0.850125605], ['motion sickness', 0.336154891], ['mouth ulcer', 0.757950692], ['muscle atrophy', 0.147277835], ['muscle weakness', 0.249182805], ['myalgia', 0.540362294], ['mydriasis', 0.209822798], ['myocardial infarction', 2.270787133], ['myoclonus', 0.09002102], ['nasal congestion', 2.019548278], ['nasal polyp', 0.110259522], ['nausea', 2.144965676], ['neck mass', 0.131267464], ['neck pain', 1.490903753], ['neonatal jaundice', 0.199106206], ['nerve injury', 0.288267981], ['neuralgia', 0.22920879], ['neutropenia', 0.157173037], ['night sweats', 0.270489439], ['night terror', 0.10375669], ['nocturnal enuresis', 0.131054101], ['nodule', 0.394560378], ['nosebleed', 0.48963719], ['nystagmus', 0.11970763], ['obesity', 5.017502524], ['onychorrhexis', 0.120384175], ['oral candidiasis', 0.494390735], ['orthostatic hypotension', 0.287504095], ['osteopenia', 0.223992114], ['osteophyte', 0.152686895], ['osteoporosis', 0.889521854], ['otitis', 1.227639743], ['otitis externa', 0.465091968], ['otitis media', 0.789657603], ['pain', 35.68520342], ['palpitations', 0.462005282], ['pancreatitis', 0.369393133], ['panic attack', 1.537092486], ['papule', 0.159559632], ['paranoia', 0.16408071], ['paresthesia', 1.979763305], ['pelvic inflammatory disease', 0.501415433], ['pericarditis', 0.177722824], ['periodontal disease', 0.723823884], ['periorbital puffiness', 0.712694457], ['peripheral neuropathy', 0.844802806], ['perspiration', 1.952250503], ['petechia', 0.126124575], ['phlegm', 0.72192966], ['photodermatitis', 0.1542292], ['photophobia', 0.104134561], ['photopsia', 0.161151642], ['pleural effusion', 0.236986757], ['pleurisy', 0.138546483], ['pneumonia', 1.25201552], ['podalgia', 0.987292691], ['polycythemia', 0.180148121], ['polydipsia', 0.075476056], ['polyneuropathy', 0.171649077], ['polyuria', 0.13772496], ['poor posture', 0.553500586], ['post nasal drip', 0.216352657], ['postural orthostatic tachycardia syndrome', 0.20501532], ['prediabetes', 0.606668256], ['proteinuria', 0.290597402], ['pruritus ani', 0.243040156], ['psychosis', 1.652128583], ['ptosis', 0.140138342], ['pulmonary edema', 0.093415633], ['pulmonary hypertension', 0.324331008], ['purpura', 0.234483602], ['pus', 0.585786828], ['pyelonephritis', 0.466302568], ['radiculopathy', 0.432146399], ['rectal pain', 0.089330739], ['rectal prolapse', 0.138527606], ['red eye', 0.372883148], ['renal colic', 0.14892798], ['restless legs syndrome', 0.540517557], ['rheum', 0.116436095], ['rhinitis', 0.342919704], ['rhinorrhea', 0.472998371], ['rosacea', 0.379651598], ['round ligament pain', 0.144829649], ['rumination', 0.124860954], ['scar', 2.323005983], ['sciatica', 1.177108612], ['scoliosis', 0.323448554], ['seborrheic dermatitis', 0.336346089], ['self harm', 0.268975728], ['sensitivity to sound', 0.147522057], ['sexual dysfunction', 0.601661482], ['shallow breathing', 0.063561064], ['sharp pain', 0.799333443], ['shivering', 0.198858094], ['shortness of breath', 0.762683305], ['shyness', 0.341772236], ['sinusitis', 2.026274477], ['skin condition', 4.119480169], ['skin rash', 7.680095886], ['skin tag', 0.568871516], ['skin ulcer', 1.625123614], ['sleep apnea', 1.241048063], ['sleep deprivation', 0.366385913], ['sleep disorder', 2.156013837], ['snoring', 0.855188125], ['sore throat', 2.107380652], ['spasticity', 0.124732391], ['splenomegaly', 0.14012617], ['sputum', 0.173646268], ['stomach rumble', 0.112872203], ['strabismus', 0.358594115], ['stretch marks', 0.511064524], ['stridor', 0.102556808], ['stroke', 2.613082114], ['stuttering', 0.199526366], ['subdural hematoma', 0.144281418], ['suicidal ideation', 0.397724095], ['swelling', 5.946739619], ['swollen feet', 0.625066102], ['swollen lymph nodes', 0.999639496], ['syncope', 0.715029921], ['tachycardia', 0.901526664], ['tachypnea', 0.119995997], ['telangiectasia', 0.296444214], ['tenderness', 0.142299008], ['testicular pain', 0.240019348], ['throat irritation', 0.273086349], ['thrombocytopenia', 0.461062877], ['thyroid nodule', 0.166063126], ['tic', 0.321565684], ['tinnitus', 0.922496114], ['tonsillitis', 0.698424278], ['toothache', 0.964743858], ['tremor', 0.638182645], ['trichoptilosis', 0.122786651], ['tumor', 1.074930413], ['type 2 diabetes', 4.14807997], ['unconsciousness', 0.224610242], ['underweight', 0.586544639], ['upper respiratory tract infection', 0.196125886], ['urethritis', 0.145814254], ['urinary incontinence', 1.348046577], ['urinary tract infection', 4.314849796], ['urinary urgency', 0.081777145], ['uterine contraction', 0.817222828], ['vaginal bleeding', 0.516991983], ['vaginal discharge', 2.533632712], ['vaginitis', 0.707689629], ['varicose veins', 0.548458693], ['vasculitis', 0.165461261], ['ventricular fibrillation', 0.088476117], ['ventricular tachycardia', 0.214734064], ['vertigo', 1.18716876], ['viral pneumonia', 0.071029538], ['visual acuity', 0.218729869], ['vomiting', 2.87918469], ['wart', 1.349213951], ['water retention', 0.299345399], ['weakness', 0.41342804], ['weight gain', 3.014842467], ['wheeze', 0.262622804], ['xeroderma', 2.025211633], ['xerostomia', 0.413659599], ['yawn', 0.169333365]], [['strain', 'omicron'], ['abdominal obesity', 2.036134922], ['abdominal pain', 4.735536246], ['acne', 6.431971093], ['actinic keratosis', 0.392771845], ['acute bronchitis', 0.401223285], ['adrenal crisis', 0.111829173], ['ageusia', 0.112317289], ['alcoholism', 4.025630655], ['allergic conjunctivitis', 0.08753697], ['allergy', 12.15739166], ['amblyopia', 0.205352415], ['amenorrhea', 0.131558164], ['amnesia', 0.441150105], ['anal fissure', 0.273526192], ['anaphylaxis', 0.4714216], ['anemia', 2.446235601], ['angina pectoris', 0.805218853], ['angioedema', 0.227115895], ['angular cheilitis', 0.081318041], ['anosmia', 0.153226398], ['anxiety', 7.4223595], ['aphasia', 0.942761642], ['aphonia', 0.11194856], ['apnea', 0.490648979], ['arthralgia', 0.326532207], ['arthritis', 4.90985955], ['ascites', 0.189707176], ['asperger syndrome', 1.564945457], ['asphyxia', 0.125058089], ['asthma', 2.073774346], ['astigmatism', 0.310122098], ['ataxia', 0.177733465], ['atheroma', 0.140938144], ['attention deficit hyperactivity disorder', 3.795740069], ['auditory hallucination', 0.095169262], ['autoimmune disease', 1.691203796], ['avoidant personality disorder', 0.319732005], ['back pain', 5.25147536], ['bacterial vaginosis', 1.2311622], ['balance disorder', 0.146355567], ['beaus lines', 0.118630591], ['bells palsy', 0.244417909], ['biliary colic', 0.211100418], ['binge eating', 0.251853288], ['bleeding', 3.759218566], ['bleeding on probing', 0.171788992], ['blepharospasm', 0.371003587], ['bloating', 2.126130395], ['blood in stool', 0.480747396], ['blurred vision', 0.413261905], ['blushing', 0.48475306], ['boil', 0.850081043], ['bone fracture', 3.044803213], ['bone tumor', 0.202209024], ['bowel obstruction', 0.283797253], ['bradycardia', 0.60501986], ['braxton hicks contractions', 0.38043564], ['breakthrough bleeding', 0.609837553], ['breast pain', 0.439919158], ['bronchitis', 0.638921197], ['bruise', 1.686282184], ['bruxism', 0.353191268], ['bunion', 0.477764966], ['burn', 1.974325843], ['burning chest pain', 0.064868421], ['burning mouth syndrome', 0.159303797], ['candidiasis', 2.531954618], ['canker sore', 0.922327158], ['cardiac arrest', 0.479864674], ['carpal tunnel syndrome', 0.840075048], ['cataplexy', 0.108979512], ['cataract', 0.587398308], ['chancre', 0.190417933], ['cheilitis', 0.27215811], ['chest pain', 1.388672344], ['chills', 0.306576149], ['chorea', 0.198781086], ['chronic pain', 0.914132616], ['cirrhosis', 0.739980003], ['cleft lip and cleft palate', 0.141248722], ['clouding of consciousness', 0.145107387], ['cluster headache', 0.210216221], ['colitis', 0.494979869], ['coma', 0.300235562], ['common cold', 10.14170006], ['compulsive behavior', 0.692815061], ['compulsive hoarding', 0.133252436], ['confusion', 0.256458789], ['congenital heart defect', 0.222645207], ['conjunctivitis', 0.989881976], ['constipation', 3.652389405], ['convulsion', 0.315941194], ['cough', 5.805030438], ['crackles', 0.073416909], ['cramp', 2.986450026], ['crepitus', 0.094509529], ['croup', 0.261502892], ['cyanosis', 0.112358673], ['dandruff', 1.112076402], ['delayed onset muscle soreness', 0.496637774], ['dementia', 2.197008904], ['dentin hypersensitivity', 0.28458869], ['depersonalization', 0.122122377], ['depression', 4.308487716], ['dermatitis', 2.37260045], ['desquamation', 0.372911727], ['developmental disability', 0.162531851], ['diabetes', 8.712902925], ['diabetic ketoacidosis', 0.266999322], ['diarrhea', 4.5060319], ['dizziness', 1.787753327], ['dry eye syndrome', 0.703253272], ['dysautonomia', 0.106426481], ['dysgeusia', 0.125560935], ['dysmenorrhea', 1.160638687], ['dyspareunia', 0.104466168], ['dysphagia', 0.333622485], ['dysphoria', 0.229626571], ['dystonia', 0.156856544], ['dysuria', 0.151268547], ['ear pain', 0.769758005], ['eczema', 0.205870018], ['edema', 0.951664238], ['encephalitis', 0.218969755], ['encephalopathy', 0.230693169], ['epidermoid cyst', 0.231673564], ['epilepsy', 2.248036125], ['epiphora', 0.115888137], ['erectile dysfunction', 2.803664972], ['erythema', 0.784125277], ['erythema chronicum migrans', 0.23819584], ['esophagitis', 0.140733226], ['excessive daytime sleepiness', 0.271831983], ['eye pain', 0.167157151], ['eye strain', 0.231793122], ['facial nerve paralysis', 0.472653349], ['facial swelling', 0.141509635], ['fasciculation', 0.705977504], ['fatigue', 4.640957722], ['fatty liver disease', 0.459733903], ['fecal incontinence', 0.17052344], ['fever', 4.216271273], ['fibrillation', 0.533948338], ['fibrocystic breast changes', 0.114140796], ['fibromyalgia', 0.546878887], ['flatulence', 2.104029461], ['floater', 0.249131057], ['focal seizure', 0.127774157], ['folate deficiency', 0.230868908], ['food craving', 0.435360089], ['food intolerance', 0.688129948], ['frequent urination', 0.484482327], ['gastroesophageal reflux disease', 3.870829261], ['gastroparesis', 0.147201575], ['generalized anxiety disorder', 1.035714899], ['genital wart', 0.831649606], ['gingival recession', 0.132425437], ['gingivitis', 0.446965705], ['globus pharyngis', 0.115779235], ['goitre', 0.148587144], ['gout', 0.98560367], ['grandiosity', 0.179952306], ['granuloma', 0.173999867], ['guilt', 0.332420034], ['hair loss', 4.620538225], ['halitosis', 0.510359647], ['hay fever', 1.942818693], ['headache', 4.153397606], ['heart arrhythmia', 2.091336903], ['heart murmur', 0.16764447], ['heartburn', 2.718223848], ['hematochezia', 0.196237807], ['hematoma', 0.38143128], ['hematuria', 0.394575332], ['hemolysis', 0.097471148], ['hemoptysis', 0.118660835], ['hemorrhoids', 1.471772155], ['hepatic encephalopathy', 0.105116491], ['hepatitis', 1.007716534], ['hepatotoxicity', 0.130028156], ['hiccup', 0.493961877], ['hip pain', 0.898291], ['hives', 1.162161955], ['hot flash', 0.667672729], ['hydrocephalus', 0.14575688], ['hypercalcaemia', 0.14147351], ['hypercapnia', 0.080045077], ['hypercholesterolemia', 1.560762923], ['hyperemesis gravidarum', 0.114036032], ['hyperglycemia', 1.176541373], ['hyperhidrosis', 0.536187066], ['hyperkalemia', 0.576482983], ['hyperlipidemia', 0.196730324], ['hypermobility', 0.261058805], ['hyperpigmentation', 0.817052825], ['hypersomnia', 0.104097799], ['hypertension', 7.281888757], ['hyperthermia', 0.389533099], ['hyperthyroidism', 1.113870404], ['hypertriglyceridemia', 0.273787141], ['hypertrophy', 0.31250243], ['hyperventilation', 0.111848986], ['hypocalcaemia', 0.149813261], ['hypochondriasis', 0.129995902], ['hypoglycemia', 0.717466014], ['hypogonadism', 0.706691452], ['hypokalemia', 0.69567949], ['hypomania', 0.143307158], ['hyponatremia', 0.306056788], ['hypotension', 1.268667588], ['hypothyroidism', 1.721466836], ['hypoxemia', 0.365306729], ['hypoxia', 0.211741161], ['impetigo', 0.172114902], ['implantation bleeding', 0.99266231], ['impulsivity', 0.558320496], ['indigestion', 1.48827462], ['infection', 21.81101567], ['inflammation', 5.535830523], ['inflammatory bowel disease', 1.038013128], ['ingrown hair', 0.669875784], ['insomnia', 2.996644481], ['insulin resistance', 0.439723255], ['intermenstrual bleeding', 0.191435788], ['intracranial pressure', 0.276253465], ['iron deficiency', 1.789517748], ['irregular menstruation', 0.399166096], ['itch', 8.012538306], ['jaundice', 0.527455036], ['kidney failure', 1.418139263], ['kidney stone', 1.43659398], ['knee pain', 1.659807839], ['kyphosis', 0.159100449], ['lactose intolerance', 0.791003257], ['laryngitis', 0.157198995], ['leg cramps', 0.442631402], ['lesion', 1.131431767], ['leukorrhea', 0.158777841], ['lightheadedness', 0.527898421], ['low back pain', 2.848257675], ['low grade fever', 0.260619161], ['lymphedema', 0.273346154], ['major depressive disorder', 3.940308657], ['malabsorption', 0.152096709], ['male infertility', 0.143654724], ['manic disorder', 0.651017463], ['melasma', 0.244855181], ['melena', 0.293485848], ['meningitis', 0.519553841], ['menorrhagia', 0.639519347], ['middle back pain', 0.33150726], ['migraine', 4.090811465], ['milium', 0.24386602], ['mitral insufficiency', 0.141784534], ['mood disorder', 1.020239825], ['mood swing', 0.248564498], ['morning sickness', 0.823327684], ['motion sickness', 0.372330562], ['mouth ulcer', 0.762674552], ['muscle atrophy', 0.144148305], ['muscle weakness', 0.265765346], ['myalgia', 0.551433132], ['mydriasis', 0.207446449], ['myocardial infarction', 2.304080183], ['myoclonus', 0.088957924], ['nasal congestion', 2.160943063], ['nasal polyp', 0.1147732], ['nausea', 2.225704697], ['neck mass', 0.130613896], ['neck pain', 1.504559407], ['neonatal jaundice', 0.199769807], ['nerve injury', 0.285880732], ['neuralgia', 0.223201178], ['neutropenia', 0.157560705], ['night sweats', 0.285246288], ['night terror', 0.100543299], ['nocturnal enuresis', 0.13038271], ['nodule', 0.403600875], ['nosebleed', 0.533400859], ['nystagmus', 0.117509608], ['obesity', 5.253688054], ['onychorrhexis', 0.128681742], ['oral candidiasis', 0.493150318], ['orthostatic hypotension', 0.319178503], ['osteopenia', 0.224117448], ['osteophyte', 0.148767595], ['osteoporosis', 0.887268266], ['otitis', 1.228657749], ['otitis externa', 0.453345665], ['otitis media', 0.808854286], ['pain', 35.750378], ['palpitations', 0.466325695], ['pancreatitis', 0.41536273], ['panic attack', 1.458644529], ['papule', 0.15434956], ['paranoia', 0.158840929], ['paresthesia', 1.98960447], ['pelvic inflammatory disease', 0.49786648], ['pericarditis', 0.141268901], ['periodontal disease', 0.731229666], ['periorbital puffiness', 0.751003031], ['peripheral neuropathy', 0.851949511], ['perspiration', 1.934526351], ['petechia', 0.128828314], ['phlegm', 0.770307529], ['photodermatitis', 0.157432393], ['photophobia', 0.105670155], ['photopsia', 0.162084181], ['pleural effusion', 0.23881529], ['pleurisy', 0.13544328], ['pneumonia', 1.202932358], ['podalgia', 0.964514149], ['polycythemia', 0.187629888], ['polydipsia', 0.074702649], ['polyneuropathy', 0.17181326], ['polyuria', 0.133519334], ['poor posture', 0.54668545], ['post nasal drip', 0.228721917], ['postural orthostatic tachycardia syndrome', 0.274756746], ['prediabetes', 0.633671329], ['proteinuria', 0.304294646], ['pruritus ani', 0.22487245], ['psychosis', 1.652047666], ['ptosis', 0.145239533], ['pulmonary edema', 0.094940535], ['pulmonary hypertension', 0.324230206], ['purpura', 0.238236778], ['pus', 0.573723386], ['pyelonephritis', 0.468247778], ['radiculopathy', 0.437718508], ['rectal pain', 0.089750892], ['rectal prolapse', 0.147861489], ['red eye', 0.392679341], ['renal colic', 0.136967474], ['restless legs syndrome', 0.546748389], ['rheum', 0.133331973], ['rhinitis', 0.371940378], ['rhinorrhea', 0.476416863], ['rosacea', 0.655998371], ['round ligament pain', 0.14337299], ['rumination', 0.122594231], ['scar', 2.280165538], ['sciatica', 1.186687389], ['scoliosis', 0.313488366], ['seborrheic dermatitis', 0.352248443], ['self harm', 0.251618909], ['sensitivity to sound', 0.135215586], ['sexual dysfunction', 0.592440034], ['shallow breathing', 0.062033216], ['sharp pain', 0.799399212], ['shivering', 0.21177017], ['shortness of breath', 0.746635638], ['shyness', 0.325048997], ['sinusitis', 2.050523748], ['skin condition', 4.105926049], ['skin rash', 7.432959707], ['skin tag', 0.568937685], ['skin ulcer', 1.649399461], ['sleep apnea', 1.304778292], ['sleep deprivation', 0.350814545], ['sleep disorder', 2.176039123], ['snoring', 0.907835048], ['sore throat', 2.223543651], ['spasticity', 0.125732935], ['splenomegaly', 0.139548182], ['sputum', 0.19219254], ['stomach rumble', 0.116829508], ['strabismus', 0.354227688], ['stretch marks', 0.48396556], ['stridor', 0.100054477], ['stroke', 3.324612191], ['stuttering', 0.191268104], ['subdural hematoma', 0.138951799], ['suicidal ideation', 0.380267843], ['swelling', 5.853343938], ['swollen feet', 0.613050967], ['swollen lymph nodes', 0.986659437], ['syncope', 0.744134866], ['tachycardia', 0.972983001], ['tachypnea', 0.117251641], ['telangiectasia', 0.294519593], ['tenderness', 0.143762519], ['testicular pain', 0.231374509], ['throat irritation', 0.304360401], ['thrombocytopenia', 0.450690231], ['thyroid nodule', 0.166004274], ['tic', 0.305427167], ['tinnitus', 0.95892734], ['tonsillitis', 0.737858488], ['toothache', 0.967299711], ['tremor', 0.641751176], ['trichoptilosis', 0.128980335], ['tumor', 1.076108116], ['type 2 diabetes', 4.457519112], ['unconsciousness', 0.220671362], ['underweight', 0.575071135], ['upper respiratory tract infection', 0.184838625], ['urethritis', 0.138982952], ['urinary incontinence', 1.35497996], ['urinary tract infection', 4.36857522], ['urinary urgency', 0.081771548], ['uterine contraction', 0.769132207], ['vaginal bleeding', 0.509654134], ['vaginal discharge', 2.548060036], ['vaginitis', 0.691590432], ['varicose veins', 0.536336571], ['vasculitis', 0.193162379], ['ventricular fibrillation', 0.089364968], ['ventricular tachycardia', 0.224045659], ['vertigo', 1.194733218], ['viral pneumonia', 0.069323266], ['visual acuity', 0.225619512], ['vomiting', 3.057520989], ['wart', 1.305482446], ['water retention', 0.297571608], ['weakness', 0.429574121], ['weight gain', 3.058576751], ['wheeze', 0.268000514], ['xeroderma', 2.198043343], ['xerostomia', 0.429923512], ['yawn', 0.167840691]], [['strain', 'original'], ['abdominal obesity', 2.357068988], ['abdominal pain', 4.310643599], ['acne', 7.658960211], ['actinic keratosis', 0.34020981], ['acute bronchitis', 0.384175956], ['adrenal crisis', 0.123029982], ['ageusia', 0.150906654], ['alcoholism', 3.991348623], ['allergic conjunctivitis', 0.079334635], ['allergy', 11.04794484], ['amblyopia', 0.198688815], ['amenorrhea', 0.14496173], ['amnesia', 0.425901473], ['anal fissure', 0.265098028], ['anaphylaxis', 0.470991023], ['anemia', 2.116817593], ['angina pectoris', 0.750414894], ['angioedema', 0.19705556], ['angular cheilitis', 0.08092175], ['anosmia', 0.199393531], ['anxiety', 7.447392465], ['aphasia', 0.24803327], ['aphonia', 0.075673427], ['apnea', 0.426343463], ['arthralgia', 0.33851145], ['arthritis', 5.278376537], ['ascites', 0.177083018], ['asperger syndrome', 1.087168922], ['asphyxia', 0.174703128], ['asthma', 2.253160164], ['astigmatism', 0.319877348], ['ataxia', 0.174194763], ['atheroma', 0.139417101], ['attention deficit hyperactivity disorder', 3.009248304], ['auditory hallucination', 0.098306947], ['autoimmune disease', 1.489701934], ['avoidant personality disorder', 0.221530932], ['back pain', 5.207482517], ['bacterial vaginosis', 1.178197524], ['balance disorder', 0.138007909], ['beaus lines', 0.107051086], ['bells palsy', 0.224967497], ['biliary colic', 0.194033505], ['binge eating', 0.28206034], ['bleeding', 3.700756162], ['bleeding on probing', 0.169939303], ['blepharospasm', 0.332212105], ['bloating', 2.029305051], ['blood in stool', 0.44259088], ['blurred vision', 0.399417108], ['blushing', 0.217775418], ['boil', 0.882790935], ['bone fracture', 2.930446893], ['bone tumor', 0.195575746], ['bowel obstruction', 0.263728287], ['bradycardia', 0.542783397], ['braxton hicks contractions', 0.391980924], ['breakthrough bleeding', 0.62807872], ['breast pain', 0.470729301], ['bronchitis', 0.605957586], ['bruise', 1.571269988], ['bruxism', 0.326041468], ['bunion', 0.425758445], ['burn', 1.980921361], ['burning chest pain', 0.072753922], ['burning mouth syndrome', 0.15579405], ['candidiasis', 2.552870951], ['canker sore', 0.909808499], ['cardiac arrest', 0.489885603], ['carpal tunnel syndrome', 0.839851848], ['cataplexy', 0.115972955], ['cataract', 0.508818095], ['chancre', 0.18570933], ['cheilitis', 0.269005905], ['chest pain', 1.445850266], ['chills', 0.342896179], ['chorea', 0.160758504], ['chronic pain', 0.949911229], ['cirrhosis', 0.654878735], ['cleft lip and cleft palate', 0.146206433], ['clouding of consciousness', 0.107365289], ['cluster headache', 0.227268266], ['colitis', 0.490906887], ['coma', 0.305105052], ['common cold', 12.52803698], ['compulsive behavior', 0.664192438], ['compulsive hoarding', 0.162901026], ['confusion', 0.275754267], ['congenital heart defect', 0.230098818], ['conjunctivitis', 0.829157266], ['constipation', 3.240720376], ['convulsion', 0.299980832], ['cough', 5.522946866], ['crackles', 0.074538227], ['cramp', 2.964182892], ['crepitus', 0.097341034], ['croup', 0.192951161], ['cyanosis', 0.111880083], ['dandruff', 1.092210246], ['delayed onset muscle soreness', 0.477873631], ['dementia', 2.170947116], ['dentin hypersensitivity', 0.280790774], ['depersonalization', 0.103193667], ['depression', 4.483711793], ['dermatitis', 2.270481314], ['desquamation', 0.369555987], ['developmental disability', 0.15823047], ['diabetes', 7.862440923], ['diabetic ketoacidosis', 0.24666844], ['diarrhea', 3.954844069], ['dizziness', 1.597023], ['dry eye syndrome', 0.644696302], ['dysautonomia', 0.085383663], ['dysgeusia', 0.134658034], ['dysmenorrhea', 1.163131926], ['dyspareunia', 0.109295771], ['dysphagia', 0.337402441], ['dysphoria', 0.198680187], ['dystonia', 0.143418695], ['dysuria', 0.146520149], ['ear pain', 0.716130741], ['eczema', 0.214015339], ['edema', 0.868084615], ['encephalitis', 0.229931739], ['encephalopathy', 0.210009387], ['epidermoid cyst', 0.246848073], ['epilepsy', 2.091226147], ['epiphora', 0.104500353], ['erectile dysfunction', 2.462385595], ['erythema', 0.521742442], ['erythema chronicum migrans', 0.317762517], ['esophagitis', 0.126186085], ['excessive daytime sleepiness', 0.288892451], ['eye pain', 0.168287945], ['eye strain', 0.349939147], ['facial nerve paralysis', 0.192525956], ['facial swelling', 0.127727172], ['fasciculation', 0.678684022], ['fatigue', 4.503287902], ['fatty liver disease', 0.381424717], ['fecal incontinence', 0.159364048], ['fever', 4.979939134], ['fibrillation', 0.448993668], ['fibrocystic breast changes', 0.113962966], ['fibromyalgia', 0.553369502], ['flatulence', 2.137920101], ['floater', 0.224488014], ['focal seizure', 0.122675169], ['folate deficiency', 0.206376459], ['food craving', 0.455280409], ['food intolerance', 0.613235755], ['frequent urination', 0.464508966], ['gastroesophageal reflux disease', 3.795332123], ['gastroparesis', 0.129756678], ['generalized anxiety disorder', 1.072349489], ['genital wart', 0.851199567], ['gingival recession', 0.126080882], ['gingivitis', 0.428361401], ['globus pharyngis', 0.116542694], ['goitre', 0.139897101], ['gout', 0.951296412], ['grandiosity', 0.150701115], ['granuloma', 0.148356196], ['guilt', 0.344648269], ['hair loss', 4.139518271], ['halitosis', 0.542647886], ['hay fever', 1.846142244], ['headache', 4.220856873], ['heart arrhythmia', 1.862039027], ['heart murmur', 0.167618668], ['heartburn', 2.846010224], ['hematochezia', 0.190711717], ['hematoma', 0.344657333], ['hematuria', 0.359370591], ['hemolysis', 0.097377346], ['hemoptysis', 0.108992179], ['hemorrhoids', 1.40014291], ['hepatic encephalopathy', 0.099209983], ['hepatitis', 0.863686682], ['hepatotoxicity', 0.115173706], ['hiccup', 0.507657003], ['hip pain', 0.854535801], ['hives', 1.075708094], ['hot flash', 0.641317882], ['hydrocephalus', 0.148653984], ['hypercalcaemia', 0.127464779], ['hypercapnia', 0.095509512], ['hypercholesterolemia', 1.298483975], ['hyperemesis gravidarum', 0.11566862], ['hyperglycemia', 1.07944764], ['hyperhidrosis', 0.507736704], ['hyperkalemia', 0.537960745], ['hyperlipidemia', 0.169872519], ['hypermobility', 0.189324112], ['hyperpigmentation', 0.85300856], ['hypersomnia', 0.098321919], ['hypertension', 6.510975518], ['hyperthermia', 0.433375854], ['hyperthyroidism', 1.036062399], ['hypertriglyceridemia', 0.249040957], ['hypertrophy', 0.276830556], ['hyperventilation', 0.127355715], ['hypocalcaemia', 0.143257951], ['hypochondriasis', 0.139780065], ['hypoglycemia', 0.678144483], ['hypogonadism', 0.619410554], ['hypokalemia', 0.670628647], ['hypomania', 0.138253341], ['hyponatremia', 0.277022328], ['hypotension', 1.182742081], ['hypothyroidism', 1.667041117], ['hypoxemia', 0.36486992], ['hypoxia', 0.216477303], ['impetigo', 0.165217452], ['implantation bleeding', 1.010377631], ['impulsivity', 0.434231278], ['indigestion', 1.417737131], ['infection', 26.16449666], ['inflammation', 5.385892146], ['inflammatory bowel disease', 1.037969316], ['ingrown hair', 0.699404201], ['insomnia', 2.988546431], ['insulin resistance', 0.374725042], ['intermenstrual bleeding', 0.198957338], ['intracranial pressure', 0.288124633], ['iron deficiency', 1.530231212], ['irregular menstruation', 0.420611034], ['itch', 7.946947749], ['jaundice', 0.50023171], ['kidney failure', 1.277015326], ['kidney stone', 1.347672713], ['knee pain', 1.551855103], ['kyphosis', 0.147115086], ['lactose intolerance', 0.741489429], ['laryngitis', 0.105567973], ['leg cramps', 0.40104633], ['lesion', 1.006555647], ['leukorrhea', 0.156782173], ['lightheadedness', 0.519376886], ['low back pain', 2.78637573], ['low grade fever', 0.300910977], ['lymphedema', 0.212187853], ['major depressive disorder', 3.851253402], ['malabsorption', 0.141829865], ['male infertility', 0.13633855], ['manic disorder', 0.632799742], ['melasma', 0.245550193], ['melena', 0.257841074], ['meningitis', 0.442362639], ['menorrhagia', 0.630648861], ['middle back pain', 0.34609955], ['migraine', 4.152926759], ['milium', 0.249994778], ['mitral insufficiency', 0.139807889], ['mood disorder', 1.057789507], ['mood swing', 0.233150557], ['morning sickness', 0.83423274], ['motion sickness', 0.260020373], ['mouth ulcer', 0.755661267], ['muscle atrophy', 0.144806421], ['muscle weakness', 0.239207154], ['myalgia', 0.559080536], ['mydriasis', 0.203274532], ['myocardial infarction', 2.255356363], ['myoclonus', 0.084220193], ['nasal congestion', 1.567198631], ['nasal polyp', 0.105745509], ['nausea', 1.986668251], ['neck mass', 0.128113587], ['neck pain', 1.489773748], ['neonatal jaundice', 0.199571949], ['nerve injury', 0.257444234], ['neuralgia', 0.21321906], ['neutropenia', 0.146383176], ['night sweats', 0.279695737], ['night terror', 0.102811284], ['nocturnal enuresis', 0.13169596], ['nodule', 0.355206191], ['nosebleed', 0.486465954], ['nystagmus', 0.114300842], ['obesity', 5.008472752], ['onychorrhexis', 0.118776606], ['oral candidiasis', 0.494229514], ['orthostatic hypotension', 0.260099269], ['osteopenia', 0.188206671], ['osteophyte', 0.143698858], ['osteoporosis', 0.797483432], ['otitis', 1.14354099], ['otitis externa', 0.423807107], ['otitis media', 0.712115179], ['pain', 34.64847713], ['palpitations', 0.432971384], ['pancreatitis', 0.341170873], ['panic attack', 1.543382512], ['papule', 0.153086575], ['paranoia', 0.173407442], ['paresthesia', 1.870983089], ['pelvic inflammatory disease', 0.536556349], ['pericarditis', 0.114159778], ['periodontal disease', 0.696888304], ['periorbital puffiness', 0.756393867], ['peripheral neuropathy', 0.746535609], ['perspiration', 1.894853962], ['petechia', 0.117319179], ['phlegm', 0.670457192], ['photodermatitis', 0.152252752], ['photophobia', 0.098785002], ['photopsia', 0.152881482], ['pleural effusion', 0.234484317], ['pleurisy', 0.156863054], ['pneumonia', 1.407288487], ['podalgia', 0.912871574], ['polycythemia', 0.168441879], ['polydipsia', 0.074114507], ['polyneuropathy', 0.160753601], ['polyuria', 0.133916396], ['poor posture', 0.616186508], ['post nasal drip', 0.20016276], ['postural orthostatic tachycardia syndrome', 0.177052509], ['prediabetes', 0.58417795], ['proteinuria', 0.247725152], ['pruritus ani', 0.23419143], ['psychosis', 1.610544931], ['ptosis', 0.124968941], ['pulmonary edema', 0.098213176], ['pulmonary hypertension', 0.325054791], ['purpura', 0.213199141], ['pus', 0.589285549], ['pyelonephritis', 0.43556806], ['radiculopathy', 0.396481825], ['rectal pain', 0.086509633], ['rectal prolapse', 0.125545859], ['red eye', 0.35761548], ['renal colic', 0.149732547], ['restless legs syndrome', 0.527675182], ['rheum', 0.105615874], ['rhinitis', 0.310767669], ['rhinorrhea', 0.389235228], ['rosacea', 0.386643117], ['round ligament pain', 0.145014801], ['rumination', 0.119985351], ['scar', 2.386595877], ['sciatica', 1.117877515], ['scoliosis', 0.30090583], ['seborrheic dermatitis', 0.338963587], ['self harm', 0.274965868], ['sensitivity to sound', 0.112493509], ['sexual dysfunction', 0.601068225], ['shallow breathing', 0.080881875], ['sharp pain', 0.800212299], ['shivering', 0.213624907], ['shortness of breath', 0.875041273], ['shyness', 0.348575066], ['sinusitis', 1.684591762], ['skin condition', 4.013654628], ['skin rash', 7.293608564], ['skin tag', 0.582776644], ['skin ulcer', 1.635468256], ['sleep apnea', 1.118052564], ['sleep deprivation', 0.382207027], ['sleep disorder', 2.249542169], ['snoring', 0.870440447], ['sore throat', 1.878299029], ['spasticity', 0.114479998], ['splenomegaly', 0.131112311], ['sputum', 0.184155697], ['stomach rumble', 0.118103321], ['strabismus', 0.34966595], ['stretch marks', 0.573817603], ['stridor', 0.091431047], ['stroke', 2.570526596], ['stuttering', 0.263255753], ['subdural hematoma', 0.133738796], ['suicidal ideation', 0.431058005], ['swelling', 5.489071524], ['swollen feet', 0.578005981], ['swollen lymph nodes', 0.923176023], ['syncope', 0.670663326], ['tachycardia', 0.836726467], ['tachypnea', 0.111805639], ['telangiectasia', 0.261862453], ['tenderness', 0.144969037], ['testicular pain', 0.245245179], ['throat irritation', 0.225815368], ['thrombocytopenia', 0.391658222], ['thyroid nodule', 0.14971445], ['tic', 0.317292028], ['tinnitus', 0.847444124], ['tonsillitis', 0.669062953], ['toothache', 0.933316459], ['tremor', 0.611536683], ['trichoptilosis', 0.140467181], ['tumor', 1.052080133], ['type 2 diabetes', 3.873685913], ['unconsciousness', 0.223982094], ['underweight', 0.695044397], ['upper respiratory tract infection', 0.209754602], ['urethritis', 0.150743203], ['urinary incontinence', 1.253823923], ['urinary tract infection', 4.010974276], ['urinary urgency', 0.074946802], ['uterine contraction', 0.80455088], ['vaginal bleeding', 0.518176936], ['vaginal discharge', 2.515407801], ['vaginitis', 0.697920953], ['varicose veins', 0.47997426], ['vasculitis', 0.150748753], ['ventricular fibrillation', 0.084356694], ['ventricular tachycardia', 0.204684216], ['vertigo', 1.100851073], ['viral pneumonia', 0.093032715], ['visual acuity', 0.227175573], ['vomiting', 2.621898142], ['wart', 1.339767195], ['water retention', 0.292978799], ['weakness', 0.408499514], ['weight gain', 3.013939178], ['wheeze', 0.278450784], ['xeroderma', 2.479134187], ['xerostomia', 0.42069471], ['yawn', 0.177529174]], [['strain', 'all'], ['abdominal obesity', 2.198962422], ['abdominal pain', 4.50381549], ['acne', 7.045283908], ['actinic keratosis', 0.358991162], ['acute bronchitis', 0.368933284], ['adrenal crisis', 0.117553414], ['ageusia', 0.146169285], ['alcoholism', 4.004107872], ['allergic conjunctivitis', 0.081262186], ['allergy', 11.50104016], ['amblyopia', 0.204926041], ['amenorrhea', 0.140908083], ['amnesia', 0.437623848], ['anal fissure', 0.271250812], ['anaphylaxis', 0.494057594], ['anemia', 2.297892675], ['angina pectoris', 0.768036672], ['angioedema', 0.205538562], ['angular cheilitis', 0.080605097], ['anosmia', 0.193795291], ['anxiety', 7.504334511], ['aphasia', 0.45163102], ['aphonia', 0.092791539], ['apnea', 0.45677713], ['arthralgia', 0.332367137], ['arthritis', 5.04898914], ['ascites', 0.185813336], ['asperger syndrome', 1.339433856], ['asphyxia', 0.142810798], ['asthma', 2.135278469], ['astigmatism', 0.317459633], ['ataxia', 0.176911239], ['atheroma', 0.140973054], ['attention deficit hyperactivity disorder', 3.490822566], ['auditory hallucination', 0.097481171], ['autoimmune disease', 1.545437311], ['avoidant personality disorder', 0.271968427], ['back pain', 5.257338524], ['bacterial vaginosis', 1.205607147], ['balance disorder', 0.143872989], ['beaus lines', 0.112832178], ['bells palsy', 0.260782665], ['biliary colic', 0.204298882], ['binge eating', 0.274637414], ['bleeding', 3.722680592], ['bleeding on probing', 0.170900654], ['blepharospasm', 0.353609673], ['bloating', 2.07557894], ['blood in stool', 0.46264093], ['blurred vision', 0.408167223], ['blushing', 0.299661805], ['boil', 0.870107416], ['bone fracture', 3.011288812], ['bone tumor', 0.198965632], ['bowel obstruction', 0.272396673], ['bradycardia', 0.576985402], ['braxton hicks contractions', 0.392226743], ['breakthrough bleeding', 0.615646923], ['breast pain', 0.455027699], ['bronchitis', 0.590579285], ['bruise', 1.642887564], ['bruxism', 0.345383295], ['bunion', 0.448694814], ['burn', 1.965097988], ['burning chest pain', 0.068511015], ['burning mouth syndrome', 0.16096717], ['candidiasis', 2.542191928], ['canker sore', 0.911873555], ['cardiac arrest', 0.46811369], ['carpal tunnel syndrome', 0.849130563], ['cataplexy', 0.109980446], ['cataract', 0.555352466], ['chancre', 0.18969383], ['cheilitis', 0.268056769], ['chest pain', 1.414419015], ['chills', 0.311004017], ['chorea', 0.176266333], ['chronic pain', 0.944240341], ['cirrhosis', 0.704513893], ['cleft lip and cleft palate', 0.145354401], ['clouding of consciousness', 0.12767824], ['cluster headache', 0.217884312], ['colitis', 0.493668043], ['coma', 0.307835212], ['common cold', 10.5685577], ['compulsive behavior', 0.686728358], ['compulsive hoarding', 0.14858993], ['confusion', 0.26631006], ['congenital heart defect', 0.224568155], ['conjunctivitis', 0.866169037], ['constipation', 3.456632231], ['convulsion', 0.307700278], ['cough', 5.430602031], ['crackles', 0.072890589], ['cramp', 2.99437006], ['crepitus', 0.097056082], ['croup', 0.23927089], ['cyanosis', 0.111427966], ['dandruff', 1.109827665], ['delayed onset muscle soreness', 0.489562932], ['dementia', 2.175764004], ['dentin hypersensitivity', 0.289886916], ['depersonalization', 0.124062536], ['depression', 4.467265807], ['dermatitis', 2.301016333], ['desquamation', 0.370711348], ['developmental disability', 0.16098742], ['diabetes', 8.267245679], ['diabetic ketoacidosis', 0.259265356], ['diarrhea', 4.195889851], ['dizziness', 1.692971145], ['dry eye syndrome', 0.666990883], ['dysautonomia', 0.096457248], ['dysgeusia', 0.133173011], ['dysmenorrhea', 1.165297152], ['dyspareunia', 0.106878477], ['dysphagia', 0.336233376], ['dysphoria', 0.224032597], ['dystonia', 0.157109608], ['dysuria', 0.148779447], ['ear pain', 0.726128449], ['eczema', 0.207393608], ['edema', 0.911529199], ['encephalitis', 0.215819079], ['encephalopathy', 0.216785849], ['epidermoid cyst', 0.240753312], ['epilepsy', 2.156890802], ['epiphora', 0.108440638], ['erectile dysfunction', 2.57820397], ['erythema', 0.601083386], ['erythema chronicum migrans', 0.267598664], ['esophagitis', 0.133874042], ['excessive daytime sleepiness', 0.278338959], ['eye pain', 0.168492834], ['eye strain', 0.29383362], ['facial nerve paralysis', 0.299078337], ['facial swelling', 0.135133593], ['fasciculation', 0.699766723], ['fatigue', 4.574843541], ['fatty liver disease', 0.426097251], ['fecal incontinence', 0.167177141], ['fever', 4.333864764], ['fibrillation', 0.49477919], ['fibrocystic breast changes', 0.115797544], ['fibromyalgia', 0.556117145], ['flatulence', 2.123442329], ['floater', 0.239451479], ['focal seizure', 0.125353896], ['folate deficiency', 0.219387927], ['food craving', 0.440806956], ['food intolerance', 0.667929813], ['frequent urination', 0.47724984], ['gastroesophageal reflux disease', 3.832533832], ['gastroparesis', 0.139659294], ['generalized anxiety disorder', 1.065877212], ['genital wart', 0.842451408], ['gingival recession', 0.131502085], ['gingivitis', 0.437032084], ['globus pharyngis', 0.115450005], ['goitre', 0.14479028], ['gout', 0.964264015], ['grandiosity', 0.16843466], ['granuloma', 0.160622272], ['guilt', 0.346806975], ['hair loss', 4.300282318], ['halitosis', 0.52390419], ['hay fever', 1.858082561], ['headache', 4.187563185], ['heart arrhythmia', 1.992328476], ['heart murmur', 0.170004334], ['heartburn', 2.772449829], ['hematochezia', 0.195231989], ['hematoma', 0.374243247], ['hematuria', 0.379821179], ['hemolysis', 0.098170968], ['hemoptysis', 0.110454754], ['hemorrhoids', 1.445290627], ['hepatic encephalopathy', 0.102333039], ['hepatitis', 0.929645476], ['hepatotoxicity', 0.124641277], ['hiccup', 0.505154188], ['hip pain', 0.882371195], ['hives', 1.099094365], ['hot flash', 0.652872431], ['hydrocephalus', 0.14755879], ['hypercalcaemia', 0.136398951], ['hypercapnia', 0.086837494], ['hypercholesterolemia', 1.451228148], ['hyperemesis gravidarum', 0.11616746], ['hyperglycemia', 1.138276567], ['hyperhidrosis', 0.518779411], ['hyperkalemia', 0.563758167], ['hyperlipidemia', 0.184584598], ['hypermobility', 0.224178708], ['hyperpigmentation', 0.836870905], ['hypersomnia', 0.101204521], ['hypertension', 6.898910581], ['hyperthermia', 0.391874667], ['hyperthyroidism', 1.076278992], ['hypertriglyceridemia', 0.265910167], ['hypertrophy', 0.296198628], ['hyperventilation', 0.121160125], ['hypocalcaemia', 0.147926979], ['hypochondriasis', 0.132895932], ['hypoglycemia', 0.70252884], ['hypogonadism', 0.660165176], ['hypokalemia', 0.69281408], ['hypomania', 0.141026207], ['hyponatremia', 0.29196624], ['hypotension', 1.227041903], ['hypothyroidism', 1.705536828], ['hypoxemia', 0.382413826], ['hypoxia', 0.211367648], ['impetigo', 0.165188983], ['implantation bleeding', 1.002936637], ['impulsivity', 0.513538185], ['indigestion', 1.448593601], ['infection', 23.20030696], ['inflammation', 5.504638344], ['inflammatory bowel disease', 1.047525605], ['ingrown hair', 0.682869732], ['insomnia', 2.987336618], ['insulin resistance', 0.406632105], ['intermenstrual bleeding', 0.195152872], ['intracranial pressure', 0.28316149], ['iron deficiency', 1.668802404], ['irregular menstruation', 0.411742935], ['itch', 7.850241323], ['jaundice', 0.508307844], ['kidney failure', 1.355273651], ['kidney stone', 1.400222143], ['knee pain', 1.617893882], ['kyphosis', 0.153928692], ['lactose intolerance', 0.769600028], ['laryngitis', 0.128636206], ['leg cramps', 0.429646747], ['lesion', 1.066274339], ['leukorrhea', 0.158636978], ['lightheadedness', 0.523989843], ['low back pain', 2.83041869], ['low grade fever', 0.260724383], ['lymphedema', 0.244716291], ['major depressive disorder', 3.933755533], ['malabsorption', 0.148616597], ['male infertility', 0.143380093], ['manic disorder', 0.642277044], ['melasma', 0.247712709], ['melena', 0.276789879], ['meningitis', 0.467536036], ['menorrhagia', 0.636123298], ['middle back pain', 0.339885064], ['migraine', 4.130006121], ['milium', 0.246471287], ['mitral insufficiency', 0.141742211], ['mood disorder', 1.044812164], ['mood swing', 0.242755082], ['morning sickness', 0.839791076], ['motion sickness', 0.311781454], ['mouth ulcer', 0.75655631], ['muscle atrophy', 0.145745625], ['muscle weakness', 0.249342535], ['myalgia', 0.556148334], ['mydriasis', 0.207418721], ['myocardial infarction', 2.278708574], ['myoclonus', 0.087446303], ['nasal congestion', 1.841022078], ['nasal polyp', 0.109814106], ['nausea', 2.10180826], ['neck mass', 0.129321181], ['neck pain', 1.502851394], ['neonatal jaundice', 0.198601846], ['nerve injury', 0.275649102], ['neuralgia', 0.221903589], ['neutropenia', 0.152455188], ['night sweats', 0.279564991], ['night terror', 0.103011832], ['nocturnal enuresis', 0.131125328], ['nodule', 0.381513041], ['nosebleed', 0.50907695], ['nystagmus', 0.117057566], ['obesity', 5.163835443], ['onychorrhexis', 0.123551942], ['oral candidiasis', 0.49004143], ['orthostatic hypotension', 0.284201389], ['osteopenia', 0.210612266], ['osteophyte', 0.146501945], ['osteoporosis', 0.857447452], ['otitis', 1.158920811], ['otitis externa', 0.426684877], ['otitis media', 0.745016362], ['pain', 35.23879102], ['palpitations', 0.457944379], ['pancreatitis', 0.370937702], ['panic attack', 1.52293136], ['papule', 0.155185767], ['paranoia', 0.166783143], ['paresthesia', 1.953493112], ['pelvic inflammatory disease', 0.512648915], ['pericarditis', 0.138064172], ['periodontal disease', 0.720449993], ['periorbital puffiness', 0.756051225], ['peripheral neuropathy', 0.806531487], ['perspiration', 1.890197716], ['petechia', 0.123413885], ['phlegm', 0.69305748], ['photodermatitis', 0.148585961], ['photophobia', 0.103110559], ['photopsia', 0.157943056], ['pleural effusion', 0.236137273], ['pleurisy', 0.145554585], ['pneumonia', 1.255710501], ['podalgia', 0.943077896], ['polycythemia', 0.178374466], ['polydipsia', 0.075385921], ['polyneuropathy', 0.166917516], ['polyuria', 0.134961467], ['poor posture', 0.579419782], ['post nasal drip', 0.209525868], ['postural orthostatic tachycardia syndrome', 0.21404391], ['prediabetes', 0.607773815], ['proteinuria', 0.278018431], ['pruritus ani', 0.232613302], ['psychosis', 1.638253403], ['ptosis', 0.137078124], ['pulmonary edema', 0.095211776], ['pulmonary hypertension', 0.325345757], ['purpura', 0.227137416], ['pus', 0.579335278], ['pyelonephritis', 0.453138608], ['radiculopathy', 0.420238576], ['rectal pain', 0.088669889], ['rectal prolapse', 0.135982749], ['red eye', 0.369148025], ['renal colic', 0.14593246], ['restless legs syndrome', 0.535899807], ['rheum', 0.114644269], ['rhinitis', 0.335496344], ['rhinorrhea', 0.430850133], ['rosacea', 0.466296815], ['round ligament pain', 0.145968293], ['rumination', 0.123008845], ['scar', 2.360673203], ['sciatica', 1.155520016], ['scoliosis', 0.311484557], ['seborrheic dermatitis', 0.343238127], ['self harm', 0.267918002], ['sensitivity to sound', 0.129052032], ['sexual dysfunction', 0.597930173], ['shallow breathing', 0.070130509], ['sharp pain', 0.801117127], ['shivering', 0.21128618], ['shortness of breath', 0.797401679], ['shyness', 0.340162489], ['sinusitis', 1.867207639], ['skin condition', 4.030590652], ['skin rash', 7.19867369], ['skin tag', 0.571253584], ['skin ulcer', 1.634758175], ['sleep apnea', 1.209405923], ['sleep deprivation', 0.370779164], ['sleep disorder', 2.220624395], ['snoring', 0.882177491], ['sore throat', 1.98250554], ['spasticity', 0.121169788], ['splenomegaly', 0.136895176], ['sputum', 0.179024777], ['stomach rumble', 0.118489314], ['strabismus', 0.355597529], ['stretch marks', 0.536681893], ['stridor', 0.096100782], ['stroke', 2.799003453], ['stuttering', 0.224290873], ['subdural hematoma', 0.137835737], ['suicidal ideation', 0.405935896], ['swelling', 5.689193178], ['swollen feet', 0.590693491], ['swollen lymph nodes', 0.968058793], ['syncope', 0.706722683], ['tachycardia', 0.904468146], ['tachypnea', 0.114899395], ['telangiectasia', 0.279695821], ['tenderness', 0.144017468], ['testicular pain', 0.242379992], ['throat irritation', 0.255480383], ['thrombocytopenia', 0.438600355], ['thyroid nodule', 0.159070198], ['tic', 0.320297396], ['tinnitus', 0.931687812], ['tonsillitis', 0.685357995], ['toothache', 0.956137215], ['tremor', 0.63363045], ['trichoptilosis', 0.133588019], ['tumor', 1.075773566], ['type 2 diabetes', 4.140799366], ['unconsciousness', 0.223933218], ['underweight', 0.639660398], ['upper respiratory tract infection', 0.18804779], ['urethritis', 0.145615596], ['urinary incontinence', 1.312477282], ['urinary tract infection', 4.188307321], ['urinary urgency', 0.078759769], ['uterine contraction', 0.798763476], ['vaginal bleeding', 0.515511901], ['vaginal discharge', 2.529257622], ['vaginitis', 0.695993617], ['varicose veins', 0.511750829], ['vasculitis', 0.166431734], ['ventricular fibrillation', 0.087334618], ['ventricular tachycardia', 0.213383754], ['vertigo', 1.157829773], ['viral pneumonia', 0.075676621], ['visual acuity', 0.225511933], ['vomiting', 2.811082883], ['wart', 1.321245363], ['water retention', 0.29490502], ['weakness', 0.417220358], ['weight gain', 3.055484414], ['wheeze', 0.268530525], ['xeroderma', 2.308396338], ['xerostomia', 0.423209358], ['yawn', 0.172605305]]]
+  
+      console.log(words)
+      all = words[4]
+      alpha = words[0]
+      delta = words[1]
+      omicron = words[2]
+  
+      d3.layout.cloud()
+      .size([1200, 600])
+      .words((all)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw1)
+          .start();
+      
+      
+      
+      function draw1(words) {
+      d3.select("#whole_wc").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+  
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((alpha)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw2)
+          .start();
+      
+      
+      
+      function draw2(words) {
+      d3.select("#alpha").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((delta)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw3)
+          .start();
+      
+      
+      
+      function draw3(words) {
+      d3.select("#delta").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+
+
+  d3.layout.cloud()
+      .size([1200, 600])
+      .words((omicron)
+          .map(function(d) {
+              return {text: d[0], size: (d[1])*10}}))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 0) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw4)
+          .start();
+      
+      
+      
+      function draw4(words) {
+      d3.select("#omicron").append("svg")
+      .attr("width", 1200)
+      .attr("height", 600)
+      .append("g")
+      .attr("transform", "translate(600,300)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .attr("fill",function(d,i){return color(i);})
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+  }
+    </script>
+
+      
+    <script>
+    
+    both = [[{'date': '1/1/2020', 'pain': 37.07339747, 'infection': 27.56843719, 'allergy': 9.922249773, 'common cold': 17.92421038, 'diabetes': 8.573461966, 'itch': 6.798007469, 'anxiety': 7.655673232, 'skin rash': 7.182677411, 'acne': 7.785173095, 'hypertension': 7.176660758, 'swelling': 5.42968297, 'inflammation': 5.941021188, 'cough': 8.610847651, 'back pain': 5.606572784, 'obesity': 5.504123351, 'arthritis': 5.20518444, 'fatigue': 4.911601765, 'abdominal pain': 4.72050418, 'depression': 4.753806452, 'fever': 4.936400672}, {'date': '2/1/2020', 'pain': 36.23648589, 'infection': 29.15974745, 'allergy': 10.05949012, 'common cold': 19.51337884, 'diabetes': 8.55204647, 'itch': 6.719442885, 'anxiety': 7.755217748, 'skin rash': 6.457634834, 'acne': 7.469291895, 'hypertension': 7.232520882, 'swelling': 5.444051632, 'inflammation': 5.872343639, 'cough': 8.690287538, 'back pain': 5.520636958, 'obesity': 5.409156024, 'arthritis': 5.14598884, 'fatigue': 4.956096369, 'abdominal pain': 4.634584849, 'depression': 4.870096264, 'fever': 5.327107457}, {'date': '3/1/2020', 'pain': 33.24719084, 'infection': 53.36638406, 'allergy': 11.90523679, 'common cold': 30.30017485, 'diabetes': 7.1607568, 'itch': 6.547123253, 'anxiety': 7.30174857, 'skin rash': 6.443358476, 'acne': 7.283796491, 'hypertension': 6.373190065, 'swelling': 4.915650159, 'inflammation': 5.689489878, 'cough': 10.49352069, 'back pain': 4.60844412, 'obesity': 4.486241716, 'arthritis': 5.873986433, 'fatigue': 4.392943592, 'abdominal pain': 4.15182559, 'depression': 4.019283122, 'fever': 9.699145049}, {'date': '4/1/2020', 'pain': 32.06077319, 'infection': 27.09411772, 'allergy': 11.51461647, 'common cold': 12.91410899, 'diabetes': 6.725506752, 'itch': 7.409710298, 'anxiety': 7.020619256, 'skin rash': 6.919722304, 'acne': 9.112433477, 'hypertension': 5.93447279, 'swelling': 4.846456239, 'inflammation': 4.980340808, 'cough': 4.866594837, 'back pain': 4.807606757, 'obesity': 4.790157269, 'arthritis': 5.688344479, 'fatigue': 4.031357562, 'abdominal pain': 4.005829685, 'depression': 4.130759588, 'fever': 5.510514671}, {'date': '5/1/2020', 'pain': 33.74251198, 'infection': 21.12176315, 'allergy': 11.50400098, 'common cold': 7.295259774, 'diabetes': 7.232291289, 'itch': 8.867910605, 'anxiety': 6.910627896, 'skin rash': 8.418051996, 'acne': 8.332575615, 'hypertension': 5.860952714, 'swelling': 5.567719369, 'inflammation': 4.971681363, 'cough': 3.200723539, 'back pain': 5.067877926, 'obesity': 5.061105475, 'arthritis': 5.38492969, 'fatigue': 4.128788507, 'abdominal pain': 4.05884375, 'depression': 4.17076865, 'fever': 4.69364629}, {'date': '6/1/2020', 'pain': 35.92160468, 'infection': 21.52703316, 'allergy': 12.22618926, 'common cold': 6.442915497, 'diabetes': 7.895969471, 'itch': 10.41749139, 'anxiety': 7.055465996, 'skin rash': 9.406968273, 'acne': 7.993317673, 'hypertension': 6.452393778, 'swelling': 6.200318698, 'inflammation': 5.245971012, 'cough': 3.718639596, 'back pain': 5.373491843, 'obesity': 5.207798171, 'arthritis': 5.103326658, 'fatigue': 4.505649532, 'abdominal pain': 4.293297574, 'depression': 4.319518466, 'fever': 3.812869145}, {'date': '7/1/2020', 'pain': 36.24169405, 'infection': 23.78447417, 'allergy': 12.5701768, 'common cold': 8.090157361, 'diabetes': 7.982702135, 'itch': 10.37871862, 'anxiety': 7.272390664, 'skin rash': 9.130248654, 'acne': 7.798288786, 'hypertension': 6.613849309, 'swelling': 6.281890897, 'inflammation': 5.414953399, 'cough': 3.728540714, 'back pain': 5.375809229, 'obesity': 5.15481289, 'arthritis': 6.034537583, 'fatigue': 4.614009795, 'abdominal pain': 4.460421697, 'depression': 4.364886784, 'fever': 4.529834491}, {'date': '8/1/2020', 'pain': 34.84245498, 'infection': 21.21680448, 'allergy': 11.72629539, 'common cold': 7.010310462, 'diabetes': 8.671407505, 'itch': 9.14720723, 'anxiety': 7.354107156, 'skin rash': 7.801883112, 'acne': 7.473252227, 'hypertension': 6.397220902, 'swelling': 5.856515734, 'inflammation': 5.350465003, 'cough': 3.441627243, 'back pain': 5.355862791, 'obesity': 4.818040982, 'arthritis': 5.231636091, 'fatigue': 4.472731802, 'abdominal pain': 4.418263088, 'depression': 4.287396048, 'fever': 3.873032526}, {'date': '9/1/2020', 'pain': 34.26298737, 'infection': 20.551244, 'allergy': 10.98349249, 'common cold': 7.353935732, 'diabetes': 7.910144873, 'itch': 7.696542134, 'anxiety': 7.618336785, 'skin rash': 6.693522272, 'acne': 7.018532324, 'hypertension': 6.514657972, 'swelling': 5.441030483, 'inflammation': 5.408145974, 'cough': 3.663323267, 'back pain': 5.237851902, 'obesity': 4.981329015, 'arthritis': 4.821080025, 'fatigue': 4.535628367, 'abdominal pain': 4.30097623, 'depression': 4.512189819, 'fever': 3.73531397}, {'date': '10/1/2020', 'pain': 33.94449464, 'infection': 20.46089035, 'allergy': 9.861600503, 'common cold': 8.161555346, 'diabetes': 8.163685787, 'itch': 6.649377506, 'anxiety': 7.659395164, 'skin rash': 5.892074044, 'acne': 6.937617434, 'hypertension': 6.670496578, 'swelling': 5.21787032, 'inflammation': 5.234425428, 'cough': 4.167588114, 'back pain': 5.168248513, 'obesity': 5.13919966, 'arthritis': 4.88664576, 'fatigue': 4.56613481, 'abdominal pain': 4.18380922, 'depression': 4.614225527, 'fever': 3.86958383}, {'date': '11/1/2020', 'pain': 33.58348263, 'infection': 20.4432084, 'allergy': 9.028244964, 'common cold': 8.93572572, 'diabetes': 7.544221581, 'itch': 6.242107466, 'anxiety': 8.292486278, 'skin rash': 5.534757907, 'acne': 6.984933098, 'hypertension': 6.371856616, 'swelling': 5.110299744, 'inflammation': 5.123375842, 'cough': 4.53884635, 'back pain': 5.136556784, 'obesity': 4.491896676, 'arthritis': 4.64360023, 'fatigue': 4.405274465, 'abdominal pain': 4.180381099, 'depression': 5.23127314, 'fever': 4.103451568}, {'date': '12/1/2020', 'pain': 33.57485912, 'infection': 19.95521613, 'allergy': 9.162620738, 'common cold': 9.135167101, 'diabetes': 7.34689578, 'itch': 6.063469455, 'anxiety': 7.444937206, 'skin rash': 5.358205549, 'acne': 7.189990006, 'hypertension': 6.364863214, 'swelling': 5.142487905, 'inflammation': 5.214832122, 'cough': 4.607921454, 'back pain': 5.171488565, 'obesity': 4.45999934, 'arthritis': 4.602179565, 'fatigue': 4.326348226, 'abdominal pain': 4.269661355, 'depression': 4.628269167, 'fever': 3.992910274}, {'date': '1/1/2021', 'pain': 34.81940341, 'infection': 19.27853694, 'allergy': 9.455239117, 'common cold': 8.120448041, 'diabetes': 8.269996411, 'itch': 6.09397136, 'anxiety': 7.67567685, 'skin rash': 5.383998651, 'acne': 7.624684195, 'hypertension': 6.935263716, 'swelling': 5.195075283, 'inflammation': 5.3255554, 'cough': 4.260895912, 'back pain': 5.354810437, 'obesity': 5.459244435, 'arthritis': 4.819260267, 'fatigue': 4.555117848, 'abdominal pain': 4.452667695, 'depression': 4.482805512, 'fever': 3.741124868}, {'date': '2/1/2021', 'pain': 35.2756209, 'infection': 19.34316194, 'allergy': 9.282176886, 'common cold': 7.156466521, 'diabetes': 8.900901176, 'itch': 6.309249205, 'anxiety': 7.943503505, 'skin rash': 5.561242952, 'acne': 7.464731419, 'hypertension': 7.23478728, 'swelling': 5.416020819, 'inflammation': 5.413004854, 'cough': 3.88610993, 'back pain': 5.38521086, 'obesity': 5.776853059, 'arthritis': 4.984677169, 'fatigue': 4.632847714, 'abdominal pain': 4.485470609, 'depression': 4.834237341, 'fever': 3.424333775}, {'date': '3/1/2021', 'pain': 35.23704029, 'infection': 19.12951802, 'allergy': 10.66953622, 'common cold': 6.757114116, 'diabetes': 8.664976619, 'itch': 6.362167221, 'anxiety': 8.429627354, 'skin rash': 5.756721872, 'acne': 7.292807434, 'hypertension': 7.215213411, 'swelling': 5.597364186, 'inflammation': 5.293138538, 'cough': 3.820435759, 'back pain': 5.368627908, 'obesity': 6.501010455, 'arthritis': 4.992286997, 'fatigue': 4.676561725, 'abdominal pain': 4.435377083, 'depression': 5.201070467, 'fever': 3.299177128}, {'date': '4/1/2021', 'pain': 35.87812491, 'infection': 19.95909485, 'allergy': 12.35758918, 'common cold': 7.532015893, 'diabetes': 8.538731744, 'itch': 7.121750597, 'anxiety': 7.899160704, 'skin rash': 6.719343922, 'acne': 7.088366751, 'hypertension': 7.163271465, 'swelling': 5.825864287, 'inflammation': 5.477992007, 'cough': 4.216710628, 'back pain': 5.408147712, 'obesity': 5.556819737, 'arthritis': 5.077740934, 'fatigue': 4.762207588, 'abdominal pain': 4.516665775, 'depression': 4.816310843, 'fever': 3.646291027}, {'date': '5/1/2021', 'pain': 35.72104909, 'infection': 20.3059873, 'allergy': 12.84256553, 'common cold': 7.750375154, 'diabetes': 8.14405534, 'itch': 8.407064737, 'anxiety': 7.633876837, 'skin rash': 8.100693561, 'acne': 6.883492233, 'hypertension': 6.820143865, 'swelling': 6.123968937, 'inflammation': 5.461461254, 'cough': 4.488139361, 'back pain': 5.306984264, 'obesity': 5.131484468, 'arthritis': 5.039149856, 'fatigue': 4.604236496, 'abdominal pain': 4.491938598, 'depression': 4.488132434, 'fever': 3.463868943}, {'date': '6/1/2021', 'pain': 37.72861087, 'infection': 21.88855208, 'allergy': 13.23061691, 'common cold': 7.707485749, 'diabetes': 8.721888562, 'itch': 10.29577431, 'anxiety': 7.432039193, 'skin rash': 9.493977633, 'acne': 7.191031421, 'hypertension': 7.153556377, 'swelling': 6.670392228, 'inflammation': 5.894535573, 'cough': 4.510048457, 'back pain': 5.579084704, 'obesity': 5.640191128, 'arthritis': 5.258580103, 'fatigue': 4.691242823, 'abdominal pain': 4.68298701, 'depression': 4.357915587, 'fever': 3.360248649}, {'date': '7/1/2021', 'pain': 37.91028691, 'infection': 24.21259675, 'allergy': 13.20618862, 'common cold': 8.724160792, 'diabetes': 8.567875699, 'itch': 10.55401991, 'anxiety': 7.389107189, 'skin rash': 9.235807543, 'acne': 7.246768495, 'hypertension': 7.145354472, 'swelling': 6.642323653, 'inflammation': 5.759603844, 'cough': 4.834738549, 'back pain': 5.608090042, 'obesity': 5.085722172, 'arthritis': 5.262774373, 'fatigue': 4.720946648, 'abdominal pain': 4.849720296, 'depression': 4.320625057, 'fever': 3.642742431}, {'date': '8/1/2021', 'pain': 36.54856932, 'infection': 25.2479985, 'allergy': 13.40757741, 'common cold': 10.6202694, 'diabetes': 8.284650946, 'itch': 9.497214131, 'anxiety': 7.471154882, 'skin rash': 8.309586798, 'acne': 6.97916203, 'hypertension': 7.0040463, 'swelling': 6.223729023, 'inflammation': 6.001362713, 'cough': 5.637612164, 'back pain': 5.428700813, 'obesity': 4.854503115, 'arthritis': 5.180502917, 'fatigue': 4.812297242, 'abdominal pain': 4.709871781, 'depression': 4.221045011, 'fever': 4.438137104}, {'date': '9/1/2021', 'pain': 34.92351138, 'infection': 24.03773095, 'allergy': 12.62396384, 'common cold': 11.13351406, 'diabetes': 8.20042323, 'itch': 8.002148988, 'anxiety': 7.561640711, 'skin rash': 7.213100321, 'acne': 6.275190982, 'hypertension': 6.892378799, 'swelling': 5.706760949, 'inflammation': 5.906704785, 'cough': 6.124270438, 'back pain': 5.148777331, 'obesity': 4.951602554, 'arthritis': 4.875007906, 'fatigue': 4.631346418, 'abdominal pain': 4.495191931, 'depression': 4.475154067, 'fever': 4.405701559}, {'date': '10/1/2021', 'pain': 34.25880972, 'infection': 22.1962701, 'allergy': 10.74566313, 'common cold': 10.24566631, 'diabetes': 8.043490701, 'itch': 6.851736516, 'anxiety': 7.409024337, 'skin rash': 6.372935242, 'acne': 6.061307734, 'hypertension': 7.019399034, 'swelling': 5.414438848, 'inflammation': 5.680200774, 'cough': 5.955383249, 'back pain': 5.035287222, 'obesity': 4.885857122, 'arthritis': 4.755255546, 'fatigue': 4.452194266, 'abdominal pain': 4.362245344, 'depression': 4.480704037, 'fever': 3.891307776}, {'date': '11/1/2021', 'pain': 33.80238243, 'infection': 22.24056547, 'allergy': 10.26239944, 'common cold': 12.17562977, 'diabetes': 8.097810649, 'itch': 6.200100678, 'anxiety': 7.226210162, 'skin rash': 5.837024793, 'acne': 6.208967894, 'hypertension': 6.697388509, 'swelling': 5.185675413, 'inflammation': 5.630944057, 'cough': 7.085053652, 'back pain': 5.006595799, 'obesity': 4.729761731, 'arthritis': 4.643208197, 'fatigue': 4.32552215, 'abdominal pain': 4.356081099, 'depression': 4.524881479, 'fever': 4.098563809}, {'date': '12/1/2021', 'pain': 34.04340622, 'infection': 23.14106507, 'allergy': 10.39523785, 'common cold': 14.69570556, 'diabetes': 7.640696166, 'itch': 6.131708066, 'anxiety': 6.947968269, 'skin rash': 5.572166892, 'acne': 6.274659991, 'hypertension': 6.613135142, 'swelling': 5.237451411, 'inflammation': 5.518852136, 'cough': 8.27226054, 'back pain': 5.068850335, 'obesity': 4.555711639, 'arthritis': 4.574892149, 'fatigue': 4.33765983, 'abdominal pain': 4.559191459, 'depression': 4.189087499, 'fever': 5.080581829}, {'date': '1/1/2022', 'pain': 35.15288628, 'infection': 22.85430782, 'allergy': 10.86388678, 'common cold': 15.50408935, 'diabetes': 8.384122608, 'itch': 6.40554422, 'anxiety': 7.311648373, 'skin rash': 5.793565385, 'acne': 6.469874276, 'hypertension': 7.040801706, 'swelling': 5.209308385, 'inflammation': 5.817574078, 'cough': 8.466659744, 'back pain': 5.173991726, 'obesity': 5.13574802, 'arthritis': 4.723204585, 'fatigue': 4.650450017, 'abdominal pain': 4.6114025, 'depression': 4.246509302, 'fever': 5.869824615}, {'date': '2/1/2022', 'pain': 34.54258384, 'infection': 20.19401566, 'allergy': 9.862750042, 'common cold': 9.18329637, 'diabetes': 8.713942852, 'itch': 6.162403856, 'anxiety': 7.70442128, 'skin rash': 5.638294661, 'acne': 6.365123542, 'hypertension': 7.408118172, 'swelling': 5.30631639, 'inflammation': 5.47798681, 'cough': 5.173763026, 'back pain': 5.114089592, 'obesity': 5.412258565, 'arthritis': 4.758420958, 'fatigue': 4.541523194, 'abdominal pain': 4.634930611, 'depression': 4.477399357, 'fever': 3.648213873}, {'date': '3/1/2022', 'pain': 35.19798062, 'infection': 20.35202736, 'allergy': 11.37806981, 'common cold': 9.377243899, 'diabetes': 8.902582953, 'itch': 6.391133085, 'anxiety': 8.64725996, 'skin rash': 5.972804352, 'acne': 6.501880505, 'hypertension': 7.66643426, 'swelling': 5.510083619, 'inflammation': 5.452598585, 'cough': 5.351061211, 'back pain': 5.191270856, 'obesity': 5.522436161, 'arthritis': 4.938298413, 'fatigue': 4.641706326, 'abdominal pain': 4.823422907, 'depression': 4.455848673, 'fever': 3.519804361}, {'date': '4/1/2022', 'pain': 35.4772586, 'infection': 20.96660934, 'allergy': 12.57410115, 'common cold': 9.489987032, 'diabetes': 8.918510803, 'itch': 7.022105091, 'anxiety': 7.690909973, 'skin rash': 6.69752385, 'acne': 6.37833154, 'hypertension': 7.494638911, 'swelling': 5.714983245, 'inflammation': 5.472454278, 'cough': 5.555423721, 'back pain': 5.202230181, 'obesity': 5.340070772, 'arthritis': 4.966285966, 'fatigue': 4.670339024, 'abdominal pain': 4.773592959, 'depression': 4.445798844, 'fever': 3.700466366}, {'date': '5/1/2022', 'pain': 35.49842846, 'infection': 22.02083988, 'allergy': 13.86073402, 'common cold': 9.247620922, 'diabetes': 8.51529692, 'itch': 8.760272421, 'anxiety': 7.239107526, 'skin rash': 8.587925043, 'acne': 6.236249412, 'hypertension': 7.263265508, 'swelling': 6.05036673, 'inflammation': 5.358166964, 'cough': 5.580465072, 'back pain': 5.154822756, 'obesity': 5.143474499, 'arthritis': 4.95530238, 'fatigue': 4.630362692, 'abdominal pain': 4.629617106, 'depression': 4.568809232, 'fever': 3.991304587}, {'date': '6/1/2022', 'pain': 37.31515962, 'infection': 22.23184431, 'allergy': 13.79547553, 'common cold': 8.369939282, 'diabetes': 9.166712135, 'itch': 10.27502957, 'anxiety': 7.044034759, 'skin rash': 9.716656247, 'acne': 6.461343298, 'hypertension': 7.360437061, 'swelling': 6.513506126, 'inflammation': 5.681854349, 'cough': 5.068160526, 'back pain': 5.394498001, 'obesity': 5.637025428, 'arthritis': 5.104912318, 'fatigue': 4.725548358, 'abdominal pain': 4.884273472, 'depression': 4.246548138, 'fever': 3.932525335}, {'date': '7/1/2022', 'pain': 37.47476262, 'infection': 22.52831908, 'allergy': 12.81842996, 'common cold': 7.847197049, 'diabetes': 8.950212562, 'itch': 10.0919052, 'anxiety': 7.147912043, 'skin rash': 9.194755038, 'acne': 6.536203056, 'hypertension': 7.30484911, 'swelling': 6.550846648, 'inflammation': 5.523839117, 'cough': 4.639729802, 'back pain': 5.459235876, 'obesity': 5.259106745, 'arthritis': 5.040477735, 'fatigue': 4.788477507, 'abdominal pain': 4.922769459, 'depression': 4.225240283, 'fever': 4.134402348}, {'date': '8/1/2022', 'pain': 36.23520402, 'infection': 22.16360274, 'allergy': 12.4013427, 'common cold': 8.017411394, 'diabetes': 9.009490816, 'itch': 9.184964895, 'anxiety': 7.145755813, 'skin rash': 8.32042889, 'acne': 6.521427347, 'hypertension': 7.328859277, 'swelling': 6.175460947, 'inflammation': 5.577527494, 'cough': 4.664121437, 'back pain': 5.424009656, 'obesity': 5.164906145, 'arthritis': 5.020310563, 'fatigue': 4.713340491, 'abdominal pain': 4.677990803, 'depression': 4.10023104, 'fever': 3.932931738}, {'date': '9/1/2022', 'pain': 34.66728708, 'infection': 21.32945806, 'allergy': 12.32517764, 'common cold': 9.085118307, 'diabetes': 8.330271722, 'itch': 8.487442113, 'anxiety': 6.963723247, 'skin rash': 7.37194111, 'acne': 6.171711048, 'hypertension': 6.826435998, 'swelling': 5.876026694, 'inflammation': 5.302213133, 'cough': 5.300384878, 'back pain': 5.145738714, 'obesity': 4.809539496, 'arthritis': 4.775759788, 'fatigue': 4.434975502, 'abdominal pain': 4.525611482, 'depression': 4.01876506, 'fever': 3.800533701}], ['date', 'pain', 'infection', 'allergy', 'common cold', 'diabetes', 'itch', 'anxiety', 'skin rash', 'acne', 'hypertension', 'swelling', 'inflammation', 'cough', 'back pain', 'obesity', 'arthritis', 'fatigue', 'abdominal pain', 'depression', 'fever']]
+    top20 = both[0]
+    both[1].shift()
+    symptom_list = both[1]
+    console.log(top20)
+    console.log(symptom_list)
+    
+    const parseTime = d3.timeParse("%m/%d/%Y")
+    var color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    date = []
+    for (i in top20){
+      top20[i].date = parseTime(top20[i].date)
+      date[i] = top20[i].date
+    }
+
+    console.log(date)
+
+    var svg1 = d3.select("#symptom_line")
+    .append("svg")
+    .attr("width", 600)
+    .attr("height", 800)
+    .append("g")
+    .attr("transform",
+          "translate(" + 50 + "," + 30 + ")");
+
+    
+
+    d3.select("#symptom_dropdown")
+      .selectAll('myOptions')
+     	.data(symptom_list)
+      .enter()
+    	.append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; })
+
+
+
+    var x = d3.scaleTime()
+      .domain(d3.extent(date))
+      .range([ 0, 520 ]);
+
+    var xaxis = d3.axisBottom(x).tickFormat(d3.timeFormat('%b %y')).tickSize(10)
+
+    svg1.append("g")
+      .attr("transform",
+          "translate(" + 0 + "," + 400 + ")")
+      .style("stroke", "black")
+      .call(xaxis).attr("stroke", "black")
+      .selectAll('path')
+      .style("stroke", "black")
+      
+      
+
+    var y = d3.scaleLinear()
+      .domain([0,100])
+      .range([ 400, 0 ]);
+    
+    svg1.append("g")
+      .attr("transform",
+          "translate(" + 0 + "," + 0 + ")")
+      .call(d3.axisLeft(y))
+      .attr("id","y-axis")
+      .attr('stroke', 'black')
+      .selectAll('path')
+      .attr('stroke', 'black').style("stroke", "black")
+      
+
+      var line = svg1.append('g')
+        .append("path")
+        .datum(top20)
+        .attr("d", d3.line()
+          .x(function(d) { console.log(d.date)
+            return x(d.date) })
+          .y(function(d) { console.log(d.pain)
+            return y(d.pain * 1.82) })
+        )
+        .attr("stroke", 'red')
+        .style("stroke-width", 4)
+        .style("fill", "none")
+
+      function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = top20.map(function(d){return {time: d.date, value:d[selectedGroup]} })
+
+      line
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("d", d3.line()
+            .x(function(d) { return x(+d.time) })
+            .y(function(d) { return y(+d.value*1.82) })
+          )
+          .attr("stroke", color(Math.floor(Math.random() * 10)))
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#symptom_dropdown").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
+
+    svg1.append("text")
+      .attr("transform", "translate(-35, 200)rotate(-90)")
+            .attr("x", 15)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'line_y_axis_label')
+            .text("Relative search frequency %").attr("style","bold")
+
+      svg1.append("text")
+      .attr("transform", "translate(150, 440)")
+            .attr("x", 100)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'line_x_axis_label')
+            .text("Time").attr("style","bold")
+            
+    </script>
+
+    <script>
+
+     all = [[{'strain': 'alpha', 'confirmed': 85425246, 'deceased': 1730742, 'recovered': 53361866}, {'strain': 'delta', 'confirmed': 120187494, 'deceased': 2019200, 'recovered': 114733289}, {'strain': 'omicron', 'confirmed': 338125778, 'deceased': 1152976, 'recovered': 128661163}, {'strain': 'original', 'confirmed': 64703941, 'deceased': 1558604, 'recovered': 30299213}], ['strain', 'confirmed', 'deceased', 'recovered'], ['alpha', 'delta', 'omicron', 'original']]
+     strain_dict = all[0]
+     all[1].shift()
+     bar_label = all[1]
+     strains = all[2]
+     console.log(strain_dict)
+     console.log(bar_label)
+     console.log(strains)
+
+     var svg2 = d3.select("#bar_plot")
+     .append("svg")
+     .attr("width", 600)
+     .attr("height", 400)
+     .append("g")
+     .attr("transform",
+          "translate(" + 50 + "," + 30 + ")");
+
+
+     var x2 = d3.scaleBand()
+      .domain(strains)
+      .range([0, 520])
+     
+     svg2.append("g")
+     .attr("transform",
+          "translate(" + 0 + "," + -10 + ")")
+    .call(d3.axisBottom(x2)).attr("id","x-axis")
+      .attr('stroke', 'white').style("font-size", "13px")
+      .selectAll('path')
+      .attr('stroke', 'white').style("stroke", "white")
+
+  // Add Y axis
+  var y2 = d3.scaleLog()
+    .domain([100000, 350000000])
+    .range([ 400, 0 ]);
+  svg2.append("g")
+  .attr("transform",
+          "translate(" + 0 + "," + 0 + ")")
+    .call(d3.axisLeft(y2))
+    .attr("id","y-axis")
+    .attr('stroke', 'white')
+    .selectAll('path')
+    .attr('stroke', 'white').style("stroke", "white");
+
+  // Another scale for subgroup position?
+  const x_sublabel = d3.scaleBand()
+    .domain(bar_label)
+    .range([0, x2.bandwidth()])
+    .padding([0.05])
+
+  // color palette = one color per subgroup
+ 
+  var colors = d3.scaleOrdinal()
+    .domain(bar_label)
+    .range(['#377eb8','#e41a1c','#4daf4a'])
+     
+
+  // Show the bars
+  svg2.append("g")
+    .selectAll("g")
+    // Enter in data = loop group per group
+    .data(strain_dict)
+    .enter()
+    .append("g")
+    .attr("transform", function(d) { return "translate(" + x2(d.strain) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return bar_label.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) {  console.log(x_sublabel(d.key))
+        return x_sublabel(d.key); })
+      .attr("y", function(d) { return y2(+d.value); })
+      //.attr("y", function(d) { return console.log(d.value)
+      //  800 - y2(+d.value); })
+      .attr("width", x_sublabel.bandwidth()-2)
+      .attr("height", function(d) { return 800 - y2(+d.value); })
+     // .attr("height", function(d) { return y2(+d.value); })
+      .attr("fill", function(d) { return colors(d.key); });
+
+      svg2.append("text")
+      .attr("transform", "translate(-35, 70)rotate(-90)")
+            .attr("x", 15)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'bar_y_axis_label')
+            .text("No. of cases").attr("style","bold")
+            .style("fill", "white");
+
+      var svg3 = d3.select("#bar_plot")
+     .append("svg")
+     .attr("width", 400)
+     .attr("height", 80)
+     //.attr("transform",
+     //     "translate(" + 50 + "," + 450 + ")");
+
+     svg3.append("text")
+      .attr("transform", "translate(120, 15)")
+            .attr("x", 100)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+            .attr("id",'bar_x_axis_label')
+            .text("Covid Variants").attr("style","bold")
+            .style("fill", "white")
+
+    var cols = ['#377eb8','#e41a1c','#4daf4a']
+      
+        svg3.append("circle").attr("cx", 10).attr("cy",70).attr("r", 7).style("fill", cols[0])
+        svg3.append("circle").attr("cx",160 ).attr("cy",70).attr("r", 7).style("fill", cols[1])
+        svg3.append("circle").attr("cx",310 ).attr("cy",70).attr("r", 7).style("fill", cols[2])
+        svg3.append("text").attr("x",20 ).attr("y",70).text("Confirmed").style("font-size", "15px").style("fill", cols[0]).attr("alignment-baseline","middle")
+        svg3.append("text").attr("x",170 ).attr("y",70).text("Deceased").style("font-size", "15px").style("fill", cols[1]).attr("alignment-baseline","middle")
+        svg3.append("text").attr("x",320).attr("y", 70).text("Recovered").style("font-size", "15px").style("fill", cols[2]).attr("alignment-baseline","middle")
+
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>
